@@ -1,20 +1,23 @@
 import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing/Pricing";
 import FAQ from "@/components/FAQ";
-import MainVideo from "@/components/MainVideo";
-import Benefits from "@/components/Benefits/Benefits";
+import MainVideo from "@/components/home/MainVideo";
+import Introduction from "@/components/home/Introduction";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Stats from "@/components/Stats";
 import CTA from "@/components/CTA";
+import WhatWeDo from "@/components/home/WhatWeDo";
+import OurSolutions from "@/components/home/OurSolutions";
 
 const HomePage: React.FC = () => {
   return (
     <>
+      <MainVideo />
       <Container>
-        <MainVideo />
-        <Benefits />
-
+        <Introduction />
+        <WhatWeDo />
+        <OurSolutions />
         <Section
           id="pricing"
           title="Pricing"

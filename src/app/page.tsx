@@ -4,6 +4,7 @@ import Container from "@/components/Container";
 import WhatWeDo from "@/components/home/WhatWeDo";
 import OurSolutions from "@/components/home/OurSolutions";
 import Media from "@/components/home/Media";
+import Partner from "@/components/home/Partner";
 
 const HomePage: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const HomePage: React.FC = () => {
         <WhatWeDo />
         <OurSolutions />
         <Media />
+        <Partner />
       </Container>
     </>
   );

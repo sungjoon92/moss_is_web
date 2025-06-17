@@ -58,8 +58,8 @@ export default function OurServicesSection() {
   }, [inView, controls]);
 
   return (
-    <section ref={ref} className="py-20 bg-orange-50">
-      <div className="container mx-auto px-4">
+    <section ref={ref} className="w-full py-16 bg-orange-50">
+      <div className="container mx-auto">
         <motion.div
           initial="hidden"
           animate={controls}
@@ -67,7 +67,7 @@ export default function OurServicesSection() {
           className="text-center mb-12"
         >
           <p className="text-green-600 font-semibold">＊ Our Solutions</p>
-          <h2 className="text-4xl font-bold leading-tight mt-2">
+          <h2 className="text-4xl font-bold leading-tight mt-5">
             코드오브네이처의
             <br />
             저비용 고효율 솔루션을 <br />

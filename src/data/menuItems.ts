@@ -6,7 +6,7 @@ export const menuItems: IMenuItem[] = [
     url: "/",
   },
   {
-    text: "기업소개",
+    text: "기업",
     url: "/enterprise",
   },
   {

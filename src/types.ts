@@ -7,6 +7,13 @@ export interface SampleData {
   description: string;
 }
 
+export interface HistoryType {
+  year: number;
+  title: string;
+  descriptions: string[];
+  highlights?: string[];
+}
+
 export interface ISocials {
   facebook?: string;
   github?: string;

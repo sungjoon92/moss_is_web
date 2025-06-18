@@ -14,6 +14,12 @@ export interface HistoryType {
   highlights?: string[];
 }
 
+export interface AwardsType {
+  year: number;
+  items: string[];
+  highlight?: boolean;
+}
+
 export interface ISocials {
   facebook?: string;
   github?: string;

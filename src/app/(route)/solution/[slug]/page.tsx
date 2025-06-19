@@ -16,7 +16,7 @@ export default function SolutionDetailPage({ params }: Props) {
   if (!solution) return notFound();
 
   return (
-    <Container className="flex items-center mt-10">
+    <div className="flex items-center mt-10">
       <h1 className="text-3xl font-bold mb-10">{solution.title}</h1>
       <span className="text-sm text-gray-500">{solution.categoryTag}</span>
       <p className="mt-4 text-gray-700">{solution.content}</p>
@@ -25,6 +25,6 @@ export default function SolutionDetailPage({ params }: Props) {
         alt={solution.title}
         className="mt-6 rounded-lg w-full object-cover"
       />
-    </Container>
+    </div>
   );
 }

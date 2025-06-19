@@ -15,9 +15,9 @@ export const SolutionCard: React.FC<props> = ({ data }) => {
         return (
           <div
             key={index}
-            className="h-full flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+            className="h-full flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 bg-white rounded-lg transition-shadow duration-300"
           >
-            <div className="h-full flex flex-col md:flex-row items-center md:space-y-0 md:space-x-6">
+            <div className="w-full h-full flex flex-col justify-between  md:flex-row items-center md:space-y-0 md:space-x-6">
               <div className="w-full h-full flex flex-col justify-between md:w-1/2 space-y-8">
                 {categoryTag && (
                   <span className="text-sm text-gray-500">{categoryTag}</span>
@@ -30,7 +30,7 @@ export const SolutionCard: React.FC<props> = ({ data }) => {
                   더 알아보기 →
                 </Link>
               </div>
-              <Link href={link} className="w-full md:w-1/2">
+              <Link href={link} className="">
                 <Image
                   src={imageUrl}
                   alt={title}

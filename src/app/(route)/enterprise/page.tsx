@@ -7,7 +7,8 @@ import { historyData } from "@/data/historyData";
 import { awardsData } from "@/data/awardsData";
 import Certificates from "@/components/enterprise/Certificates";
 import Container from "@/components/Container";
-const EnterprisePage: React.FC = () => {
+
+export default function EnterprisePage() {
   return (
     <Container>
       <IntroSection />
@@ -18,6 +19,4 @@ const EnterprisePage: React.FC = () => {
       <Certificates />
     </Container>
   );
-};
-
-export default EnterprisePage;
+}

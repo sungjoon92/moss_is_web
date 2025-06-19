@@ -28,7 +28,7 @@ const Header: React.FC = () => {
   return (
     <header className="bg-transparent   w-full">
       <Container className="block md:flex items-center !px-0">
-        <nav className="w-full md:w-[70%] text-center flex md:block shadow-md md:shadow-none bg-white md:bg-transparent mx-auto justify-between items-center py-2 px-5 ">
+        <nav className="w-full md:w-[70%] text-center flex md:block shadow-md md:shadow-none bg-white md:bg-transparent mx-auto justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center justify-center gap-2">
             <img

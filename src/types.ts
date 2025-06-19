@@ -29,6 +29,17 @@ export interface SolutionType {
   link: string;
 }
 
+export interface ProjectType {
+  id: number;
+  category: string;
+  title: string;
+  description: string;
+  location: string;
+  date: string;
+  link: string;
+  imageUrl: string;
+}
+
 export interface ISocials {
   facebook?: string;
   github?: string;

@@ -20,6 +20,15 @@ export interface AwardsType {
   highlight?: boolean;
 }
 
+export interface SolutionType {
+  categoryTag: string;
+  category: string;
+  title: string;
+  content: string;
+  imageUrl: string;
+  link: string;
+}
+
 export interface ISocials {
   facebook?: string;
   github?: string;

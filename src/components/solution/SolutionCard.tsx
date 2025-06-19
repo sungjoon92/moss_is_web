@@ -22,15 +22,21 @@ export const SolutionCard: React.FC<props> = ({ data }) => {
                 {categoryTag && (
                   <span className="text-sm text-gray-500">{categoryTag}</span>
                 )}
-                <Link href={link} className="text-xl font-semibold">
+                <Link
+                  href={`/solution/${link}`}
+                  className="text-xl font-semibold"
+                >
                   {title}
                 </Link>
                 <p className="text-gray-700">{content}</p>
-                <Link href={link} className="text-blue-500 hover:underline">
+                <Link
+                  href={`/solution/${link}`}
+                  className="text-blue-500 hover:underline"
+                >
                   더 알아보기 →
                 </Link>
               </div>
-              <Link href={link} className="">
+              <Link href={`/solution/${link}`} className="">
                 <Image
                   src={imageUrl}
                   alt={title}

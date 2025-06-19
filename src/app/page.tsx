@@ -10,7 +10,7 @@ const HomePage: React.FC = () => {
   return (
     <>
       <MainVideo />
-      <Container>
+      <Container className="items-center">
         <Introduction />
         <WhatWeDo />
         <OurSolutions />

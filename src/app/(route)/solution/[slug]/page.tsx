@@ -9,9 +9,7 @@ interface Props {
 }
 
 export default function SolutionDetailPage({ params }: Props) {
-  const solution = solutionData.find(
-    (item) => item.link === `/solution/${params.slug}`
-  );
+  const solution = solutionData.find((item) => item.link === params.slug);
 
   if (!solution) return notFound();
 

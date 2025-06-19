@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { siteDetails } from "@/data/siteDetails";
 import "./reset.css";
 import "./globals.css";
+import FloatingButton from "@/components/FloatingButton ";
 
 const manrope = Manrope({ subsets: ["latin"] });
 const sourceSans = Source_Sans_3({ subsets: ["latin"] });
@@ -52,6 +53,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <FloatingButton />
       </body>
     </html>
   );

@@ -38,6 +38,9 @@ export interface ProjectType {
   date: string;
   link: string;
   imageUrl: string;
+  contentTitle?: string;
+  contentText?: string;
+  contentImages?: string[];
 }
 
 export interface ISocials {

@@ -1,98 +1,43 @@
-import Link from "next/link";
+// components/Footer.tsx
 import React from "react";
-import { FaFingerprint } from "react-icons/fa";
 
-import { siteDetails } from "@/data/siteDetails";
-import { footerDetails } from "@/data/footer";
-import { getPlatformIconByName } from "@/utils";
-
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
-    <footer className="w-full bg-hero-background text-foreground py-10">
-      <div className="max-w-7xl w-full mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div>
-          <Link href="/" className="flex items-center gap-2">
-            <FaFingerprint className="min-w-fit w-5 h-5 md:w-7 md:h-7" />
-            <h3 className="manrope text-xl font-semibold cursor-pointer">
-              {siteDetails.siteName}
-            </h3>
-          </Link>
-          <p className="mt-3.5 text-foreground-accent">
-            {footerDetails.subheading}
+    <footer className="border-t mt-20 text-sm text-gray-800">
+      {/* 상단 정보 영역 */}
+      <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between text-center md:text-left space-y-6 md:space-y-0">
+        <div className="w-full md:w-auto">
+          <p className="text-xs text-gray-500 mb-1">Email Us</p>
+          <p className="font-semibold">codeofnature@c-of-n.com</p>
+        </div>
+        <div className="w-full md:w-auto">
+          <p className="text-xs text-gray-500 mb-1">Yangsan Office</p>
+          <p className="font-semibold">
+            경남 양산시 물금읍 부산대학로 <strong>144, 209호</strong>
           </p>
         </div>
-        <div>
-          <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-          <ul className="text-foreground-accent">
-            {footerDetails.quickLinks.map((link) => (
-              <li key={link.text} className="mb-2">
-                <Link href={link.url} className="hover:text-foreground">
-                  {link.text}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
-
-          {footerDetails.email && (
-            <a
-              href={`mailto:${footerDetails.email}`}
-              className="block text-foreground-accent hover:text-foreground"
-            >
-              Email: {footerDetails.email}
-            </a>
-          )}
-
-          {footerDetails.telephone && (
-            <a
-              href={`tel:${footerDetails.telephone}`}
-              className="block text-foreground-accent hover:text-foreground"
-            >
-              Phone: {footerDetails.telephone}
-            </a>
-          )}
-
-          {footerDetails.socials && (
-            <div className="mt-5 flex items-center gap-5 flex-wrap">
-              {Object.keys(footerDetails.socials).map((platformName) => {
-                if (platformName && footerDetails.socials[platformName]) {
-                  return (
-                    <Link
-                      href={footerDetails.socials[platformName]}
-                      key={platformName}
-                      aria-label={platformName}
-                    >
-                      {getPlatformIconByName(platformName)}
-                    </Link>
-                  );
-                }
-              })}
-            </div>
-          )}
+        <div className="w-full md:w-auto">
+          <p className="text-xs text-gray-500 mb-1">Seoul Office</p>
+          <p className="font-semibold">
+            서울 관악구 남부순환로 <strong>2072 2층, 6B</strong>
+          </p>
         </div>
       </div>
-      <div className="mt-8 md:text-center text-foreground-accent px-6">
-        <p>
-          Copyright &copy; {new Date().getFullYear()} {siteDetails.siteName}.
-          All rights reserved.
-        </p>
-        <p className="text-sm mt-2 text-gray-500">
-          Made with &hearts; by{" "}
-          <a href="https://nexilaunch.com" target="_blank">
-            Nexi Launch
-          </a>
-        </p>
-        <p className="text-sm mt-2 text-gray-500">
-          UI kit by{" "}
-          <a
-            href="https://ui8.net/youthmind/products/fintech-finance-mobile-app-ui-kit"
-            target="_blank"
-          >
-            Youthmind
-          </a>
-        </p>
+
+      {/* 하단 정보 영역 */}
+      <div className="max-w-6xl mx-auto px-4 py-6 border rounded-lg text-center md:text-left text-xs space-y-1 md:space-y-0 flex flex-col md:flex-row justify-between items-center md:items-start">
+        <div className="space-y-1">
+          <p>대표자 : 박재홍</p>
+          <p>사업자등록번호 : 817-86-02036</p>
+          <p>개인정보 처리방침</p>
+        </div>
+
+        <div className="flex flex-col items-center md:items-end mt-4 md:mt-0 text-center md:text-right">
+          <p className="text-green-600 font-semibold">Code of {`{Nature.}`}</p>
+          <p className="text-gray-400 text-[11px]">
+            Copyright © Code of Nature. All Rights Reserved.
+          </p>
+        </div>
       </div>
     </footer>
   );

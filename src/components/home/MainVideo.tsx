@@ -1,8 +1,8 @@
 import Link from "next/link";
 const MainVideo: React.FC = () => {
   return (
-    <section className="py-5 px-5 bg-background">
-      <div className="aspect-video w-full max-h-[60vh] mx-auto relative overflow-hidden rounded-lg shadow-lg">
+    <section>
+      <div className="aspect-video w-full max-h-[60vh] mx-auto mt-10 relative overflow-hidden rounded-lg shadow-lg">
         <Link
           href="https://cdn.prod.website-files.com/67e4d1513dd414300ed0cb02%2F681dca92deecb58c406a6a47_COFN_bg-transcode.mp4"
           className="w-full h-full block  "

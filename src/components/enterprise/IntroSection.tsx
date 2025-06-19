@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function IntroSection() {
   return (
-    <section className="w-full m-auto flex justify-center py-16 px-4">
+    <section className="w-full m-auto flex justify-center">
       <div className="w-full flex flex-col items-center relative ">
         {/* 카드 */}
         <div className="bg-white p-10 rounded-2xl shadow-lg text-center max-w-3xl lg:absolute lg:left-0 lg:top-1/2 lg:translate-y-[-50%]">

@@ -31,8 +31,7 @@ export const SolutionCard: React.FC<props> = ({ data }) => {
                 href={`/solution/${link}`}
                 className="text-green-400 hover:underline"
               >
-                {" "}
-                min-w-[300px] 더 알아보기 →
+                더 알아보기 →
               </Link>
             </div>
 

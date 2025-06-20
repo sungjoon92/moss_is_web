@@ -31,8 +31,8 @@ export default function ProjectDetailPage({ params }: Props) {
             key={index}
             src={img}
             alt={`${project.title} 상세 이미지 ${index + 1}`}
-            width={1200}
-            height={600}
+            width={1000}
+            height={1000}
             className="rounded-lg object-cover w-full"
             priority={index === 0}
           />

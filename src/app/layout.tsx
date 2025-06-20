@@ -51,7 +51,7 @@ export default function RootLayout({
           <GoogleAnalytics gaId={siteDetails.googleAnalyticsId} />
         )}
         <Header />
-        <main>{children}</main>
+        <main className="pt-[80px] md:pt-[200px]">{children}</main>
         <Footer />
         <FloatingButton />
       </body>

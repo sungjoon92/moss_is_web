@@ -15,34 +15,36 @@ export const SolutionCard: React.FC<props> = ({ data }) => {
         return (
           <div
             key={index}
-            className="h-full flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 bg-white rounded-lg transition-shadow duration-300"
+            className="flex flex-col md:flex-row items-start  justify-between bg-white rounded-lg overflow-hidden"
           >
-            <div className="w-full h-full flex flex-col justify-between  md:flex-row items-center md:space-y-0 md:space-x-6">
-              <div className="w-full h-full flex flex-col justify-between md:w-1/2 space-y-8">
-                {categoryTag && (
-                  <span className="text-sm text-gray-500">{categoryTag}</span>
-                )}
-                <Link
-                  href={`/solution/${link}`}
-                  className="text-xl font-semibold"
-                >
-                  {title}
-                </Link>
-                <p className="text-gray-700">{content}</p>
-                <Link
-                  href={`/solution/${link}`}
-                  className="text-green-400 hover:underline"
-                >
-                  더 알아보기 →
-                </Link>
-              </div>
-              <Link href={`/solution/${link}`} className="">
+            {/* 텍스트 영역 */}
+            <div className="w-full md:w-[50%] flex flex-col space-y-4">
+              <span className="text-sm text-gray-500">{categoryTag}</span>
+              <Link
+                href={`/solution/${link}`}
+                className="text-xl font-semibold"
+              >
+                {title}
+              </Link>
+              <p className="text-gray-700">{content}</p>
+              <Link
+                href={`/solution/${link}`}
+                className="text-green-400 hover:underline"
+              >
+                {" "}
+                min-w-[300px] 더 알아보기 →
+              </Link>
+            </div>
+
+            {/* 이미지 영역 */}
+            <div className="w-full md:w-[30%] h-[300px] relative min-w-[300px]">
+              <Link href={`/solution/${link}`}>
                 <Image
                   src={imageUrl}
                   alt={title}
-                  width={500}
-                  height={300}
-                  className="rounded-lg object-cover"
+                  fill
+                  className="object-cover rounded-lg"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </Link>
             </div>

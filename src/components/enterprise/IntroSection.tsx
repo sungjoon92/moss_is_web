@@ -27,8 +27,8 @@ export default function IntroSection() {
             <Image
               src="https://cdn.prod.website-files.com/67e4d1513dd414300ed0cb02/67ebb422d490701d8de4afb9_symbol_%EB%8C%80%EC%A7%80%201.png"
               alt="symbol"
-              width={20}
-              height={20}
+              width={30}
+              height={100}
               className="inline-block"
             />
             <Link
@@ -46,8 +46,8 @@ export default function IntroSection() {
           <Image
             src="https://cdn.prod.website-files.com/67e4d1513dd414300ed0cb02/681b2b87de49e36db04cce82_%EC%9D%B4%EB%81%BC%202.jpg"
             alt="복원 이미지"
-            width={1280}
-            height={720}
+            width={1000}
+            height={1000}
             className="w-full h-auto object-cover"
             sizes="(max-width: 768px) 100vw, 1280px"
           />

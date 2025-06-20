@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
+import Image from "next/image";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -29,9 +30,11 @@ const ServiceCard = ({
       variants={fadeUp}
       className="rounded-2xl shadow-lg bg-white overflow-hidden flex flex-col md:flex-row"
     >
-      <img
+      <Image
         src={imageUrl}
         alt={name}
+        width={1000}
+        height={1000}
         className="w-full md:w-1/3 h-auto object-cover"
       />
       <div className="p-6 flex flex-col justify-center">
@@ -59,14 +62,14 @@ export default function OurServicesSection() {
 
   return (
     <section ref={ref} className="w-full py-16 bg-orange-50">
-      <div className="container mx-auto">
+      <div className="mx-auto">
         <motion.div
           initial="hidden"
           animate={controls}
           variants={fadeUp}
           className="text-center mb-12"
         >
-          <p className="text-green-600 font-semibold">＊ Our Solutions</p>
+          <p className="text-green-600 font-semibold my-4">＊ Our Solutions</p>
           <h2 className="text-4xl font-bold leading-tight mt-5">
             코드오브네이처의
             <br />

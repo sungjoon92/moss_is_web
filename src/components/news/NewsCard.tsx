@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { NewsType } from "@/types";
+import Image from "next/image";
 
 interface Props {
   data: NewsType[];
@@ -43,9 +44,11 @@ const NewsCard: React.FC<Props> = ({ data }) => {
               href={link}
               className="w-full min-w-[250px] lg:w-1/3 block rounded-lg overflow-hidden shadow-lg"
             >
-              <img
+              <Image
                 src={imageUrl}
                 alt={title}
+                width={1000}
+                height={1000}
                 className="w-full h-64 object-cover rounded-lg"
               />
             </Link>

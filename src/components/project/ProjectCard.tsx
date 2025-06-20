@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { ProjectType } from "@/types";
+import Image from "next/image";
 
 interface Props {
   data: ProjectType[];
@@ -49,9 +50,11 @@ const ProjectCard: React.FC<Props> = ({ data }) => {
               href={`/project/${link}`}
               className="min-w-[250px] lg:w-1/3 block rounded-lg overflow-hidden shadow-lg"
             >
-              <img
+              <Image
                 src={imageUrl}
                 alt={title}
+                width={1000}
+                height={1000}
                 className="w-full h-64 object-cover rounded-lg"
               />
             </Link>

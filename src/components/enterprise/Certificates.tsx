@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React from "react";
 
 interface Certificate {
@@ -46,9 +47,11 @@ const Certificates: React.FC = () => {
         {certificates.map((cert, idx) => (
           <div key={idx} className="flex flex-col items-center text-center">
             <div className="overflow-hidden rounded-lg shadow-md w-full aspect-square bg-white">
-              <img
+              <Image
                 src={cert.imageUrl}
                 alt={cert.title}
+                width={1000}
+                height={1000}
                 className="object-cover w-full h-full hover:scale-105 transition-transform duration-700"
               />
             </div>

@@ -3,6 +3,7 @@ import { solutionData } from "@/data/solutionData";
 import { notFound } from "next/navigation";
 import Container from "@/components/Container";
 import { SolutionType } from "@/types";
+import Image from "next/image";
 interface Props {
   params: {
     slug: string;
@@ -21,9 +22,11 @@ export default function SolutionDetailPage({ params }: Props) {
       <h1 className="text-3xl font-bold mb-10">{solution.title}</h1>
       <span className="text-sm text-gray-500">{solution.categoryTag}</span>
       <p className="mt-4 text-gray-700">{solution.content}</p>
-      <img
+      <Image
         src={solution.imageUrl}
         alt={solution.title}
+        width={1000}
+        height={1000}
         className="mt-6 rounded-lg w-full object-cover"
       />
     </Container>

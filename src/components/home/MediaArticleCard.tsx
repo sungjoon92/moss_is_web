@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface MediaArticleCardProps {
@@ -10,7 +11,9 @@ interface MediaArticleCardProps {
 const MediaArticleCard: React.FC<MediaArticleCardProps> = ({ data }) => {
   return (
     <article className="flex flex-col gap-3 shadow-md rounded-md overflow-hidden">
-      <img
+      <Image
+        width={1000}
+        height={1000}
         src={data.imageUrl}
         alt="media"
         className="w-full h-auto rounded-md hover:scale-110 transition-transform duration-1000"

@@ -20,7 +20,8 @@ const MainNewsCard: React.FC<Props> = ({ data }) => {
               <Image
                 src={imageUrl}
                 alt="뉴스룸 메인 이미지"
-                fill
+                width={1000}
+                height={1000}
                 className="object-cover"
                 priority
               />

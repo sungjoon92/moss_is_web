@@ -35,10 +35,10 @@ const ServiceCard = ({
         className="w-full md:w-1/3 h-auto object-cover"
       />
       <div className="p-6 flex flex-col justify-center">
-        <span className="text-sm text-green-600 font-medium mb-1">{title}</span>
+        <span className="text-sm text-green-400 font-medium mb-1">{title}</span>
         <h3 className="text-2xl font-bold mb-2">{name}</h3>
         <p className="text-gray-700 mb-4">{description}</p>
-        <a href={link} className="text-blue-600 font-medium hover:underline">
+        <a href={link} className="text-green-400 font-medium hover:underline">
           더 알아보기 &rarr;
         </a>
       </div>

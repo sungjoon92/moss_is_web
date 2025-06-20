@@ -31,7 +31,7 @@ export const SolutionCard: React.FC<props> = ({ data }) => {
                 <p className="text-gray-700">{content}</p>
                 <Link
                   href={`/solution/${link}`}
-                  className="text-blue-500 hover:underline"
+                  className="text-green-400 hover:underline"
                 >
                   더 알아보기 →
                 </Link>

@@ -10,7 +10,7 @@ const Media: React.FC = () => {
         <p className="text-4xl font-bold leading-tight">
           코드오브네이처가 축적해 온 이야기들
         </p>
-        <Link href={"/news"} className="text-blue-600 hover:underline">
+        <Link href={"/news"} className="text-green-400 hover:underline">
           <span>더 알아보기</span>
         </Link>
       </div>

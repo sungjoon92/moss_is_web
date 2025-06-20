@@ -2,6 +2,7 @@
 import { solutionData } from "@/data/solutionData";
 import { notFound } from "next/navigation";
 import Container from "@/components/Container";
+import { SolutionType } from "@/types";
 interface Props {
   params: {
     slug: string;
@@ -9,7 +10,9 @@ interface Props {
 }
 
 export default function SolutionDetailPage({ params }: Props) {
-  const solution = solutionData.find((item) => item.link === params.slug);
+  const solution: SolutionType | undefined = solutionData.find(
+    (item) => item.link === params.slug
+  );
 
   if (!solution) return notFound();
 

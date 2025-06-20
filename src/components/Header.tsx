@@ -27,7 +27,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-sm">
+    <header className="fixed md:static top-0 left-0 w-full z-50 bg-white shadow-sm">
       <Container className="w-full block md:flex items-center !px-0">
         <nav className="w-full p-5 md:p-0 md:w-[70%] text-center flex md:block  bg-white md:bg-transparent mx-auto justify-between items-center">
           {/* Logo */}

@@ -43,6 +43,16 @@ export interface ProjectType {
   contentImages?: string[];
 }
 
+export interface NewsType {
+  id: number;
+  category: string;
+  title: string;
+  imageUrl: string;
+  content: string;
+  date: string;
+  link: string;
+  isMainNews?: boolean;
+}
 export interface ISocials {
   facebook?: string;
   github?: string;

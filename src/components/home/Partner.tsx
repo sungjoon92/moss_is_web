@@ -1,5 +1,6 @@
 import React from "react";
 import { Investors, Partners } from "@/data/partners";
+import Image from "next/image";
 
 const Partner = () => {
   return (
@@ -9,12 +10,14 @@ const Partner = () => {
       </h2>
       <article>
         <h3>＊ 주요 투자사</h3>
-        <div className="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="mt-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {Investors.map((investor, index) => (
             <div key={index} className="flex justify-center">
-              <img
+              <Image
                 src={investor}
                 alt={`Investor ${index + 1}`}
+                width={1000}
+                height={1000}
                 className="object-contain"
               />
             </div>
@@ -23,12 +26,14 @@ const Partner = () => {
       </article>
       <article>
         <h3>＊ 주요 파트너사</h3>
-        <div className="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="mt-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {Partners.map((partner, index) => (
             <div key={index} className="flex justify-center">
-              <img
+              <Image
                 src={partner}
                 alt={`Investor ${index + 1}`}
+                width={1000}
+                height={1000}
                 className="object-contain"
               />
             </div>

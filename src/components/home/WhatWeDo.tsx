@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 
 const WhatWeDo: React.FC = () => {
@@ -6,7 +7,7 @@ const WhatWeDo: React.FC = () => {
     <section className="w-[70%] py-16 bg-white flex flex-col items-center  text-center gap-5">
       <div className="max-w-5xl mx-auto px-4">
         <p className="text-green-600 font-semibold my-4">＊ WHAT WE DO</p>
-        <h1 className="text-3xl md:text-4xl font-semibold leading-snug mb-6">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold leading-snug mb-6">
           연구가 기술을 만들고,
           <br />
           기술이 토양을 되살립니다.
@@ -22,14 +23,18 @@ const WhatWeDo: React.FC = () => {
       </div>
 
       <div className=" flex flex-col md:flex-row justify-center items-center gap-6 px-4">
-        <img
+        <Image
           src="https://cdn.prod.website-files.com/67e4d1513dd414300ed0cb02/67e51af625ec994f6136a8e7_%EB%B3%B5%EC%9B%90%20%EB%B9%84%EA%B5%90%EC%82%AC%EC%A7%84_%EC%A0%84.JPG"
           alt="Before Restoration"
+          width={1000}
+          height={1000}
           className="w-full md:w-1/2 rounded shadow-lg object-cover"
         />
-        <img
+        <Image
           src="https://cdn.prod.website-files.com/67e4d1513dd414300ed0cb02/67e51af7670da7138565ba47_%EB%B3%B5%EC%9B%90%20%EB%B9%84%EA%B5%90%EC%82%AC%EC%A7%84_%ED%9B%84.JPG"
           alt="After Restoration"
+          width={1000}
+          height={1000}
           className="w-full md:w-1/2 rounded shadow-lg object-cover"
         />
       </div>

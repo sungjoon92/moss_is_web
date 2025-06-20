@@ -7,6 +7,7 @@ import { HiOutlineXMark, HiBars3 } from "react-icons/hi2";
 import Container from "./Container";
 import { menuItems } from "@/data/menuItems";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Header: React.FC = () => {
   // 메뉴 상태 관리
@@ -26,34 +27,40 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-transparent w-full">
+    <header className="fixed md:static top-0 left-0 w-full z-50 bg-white shadow-sm">
       <Container className="w-full block md:flex items-center !px-0">
-        <nav className="w-full px-5 md:px-0 md:w-[70%] text-center flex md:block shadow-md md:shadow-none bg-white md:bg-transparent mx-auto justify-between items-center">
+        <nav className="w-full p-5 md:p-0 md:w-[70%] text-center flex md:block  bg-white md:bg-transparent mx-auto justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center justify-center gap-2">
-            <img
+          <Link
+            href="/"
+            onClick={() => handleClickChangeMenu("/", 0)}
+            className="flex items-center justify-center gap-2"
+          >
+            <Image
               src="/images/mossis_logo.png"
+              width={128}
+              height={128}
               alt="로고"
               className="text-foreground min-w-fit w-10 h-10 md:w-32 md:h-32 "
             />
           </Link>
 
           {/* Desktop Menu */}
-          <ul className="w-full hidden md:flex  border-black border-b-2 ">
+          <ul className="w-full hidden md:flex border-black border-b-2">
             {menuItems.map((item, index) => (
               <li
+                key={item.text}
                 className={`w-[20%] cursor-pointer transition-colors ${
                   active === index
                     ? "border-b-2 border-black font-semibold"
                     : ""
                 }`}
-                key={item.text}
-                onClick={() => handleClickChangeMenu(item.url, index)}
               >
                 <Link
                   href={item.url}
-                  onClick={() => setActive(index)}
+                  onClick={() => handleClickChangeMenu(item.url, index)}
                   aria-current={active === index ? "page" : undefined}
+                  className="block w-full h-full text-center py-4"
                 >
                   {item.text}
                 </Link>
@@ -66,7 +73,7 @@ const Header: React.FC = () => {
             <button
               onClick={toggleMenu}
               type="button"
-              className="bg-primary text-black focus:outline-none rounded-full w-10 h-10 flex items-center justify-center"
+              className="bg-primary text-black focus:outline-none rounded-full flex items-center justify-center"
               aria-controls="mobile-menu"
               aria-expanded={isOpen}
             >
@@ -92,27 +99,18 @@ const Header: React.FC = () => {
         leaveTo="opacity-0 scale-95"
       >
         <div id="mobile-menu" className="md:hidden bg-white shadow-lg">
-          <ul className="flex flex-col space-y-4 pt-1 pb-6 px-6">
+          <ul className="flex flex-col ">
             {menuItems.map((item) => (
-              <li key={item.text}>
+              <li key={item.text} className="items-center hover:bg-green-100">
                 <Link
                   href={item.url}
-                  className="text-foreground hover:text-primary block"
+                  className="py-2 text-center text-foreground hover:text-primary block w-full"
                   onClick={toggleMenu}
                 >
                   {item.text}
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                href="#cta"
-                className="text-black bg-primary hover:bg-primary-accent px-5 py-2 rounded-full block w-fit"
-                onClick={toggleMenu}
-              >
-                Get Started
-              </Link>
-            </li>
           </ul>
         </div>
       </Transition>

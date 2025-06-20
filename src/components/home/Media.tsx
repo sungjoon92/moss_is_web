@@ -15,7 +15,7 @@ const Media: React.FC = () => {
           href={"/news"}
           className="text-green-500 hover:text-green-600 transition-colors font-semibold text-sm md:text-base"
         >
-          더 알아보기 &rarr;
+          더 알아보기
         </Link>
       </div>
 

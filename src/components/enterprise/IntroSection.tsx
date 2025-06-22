@@ -8,8 +8,8 @@ export default function IntroSection() {
     <section className="w-full m-auto flex justify-center">
       <div className="w-full flex flex-col items-center relative ">
         {/* 카드 */}
-        <div className="bg-white p-10 rounded-2xl shadow-lg text-center max-w-3xl lg:absolute lg:left-0 lg:top-1/2 lg:translate-y-[-50%]">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4 leading-snug">
+        <div className="bg-white w-full p-10 rounded-2xl shadow-lg text-center max-w-3xl lg:absolute lg:left-0 lg:top-1/2 lg:translate-y-[-50%]">
+          <h2 className=" text-3xl lg:text-4xl font-bold text-gray-800 mb-4 ">
             전 세계 어디라도 <br />
             <strong className="text-green-400 font-bold">복원할 땅</strong>이
             있는 곳이라면
@@ -42,14 +42,13 @@ export default function IntroSection() {
         </div>
 
         {/* 이미지 */}
-        <div className="rounded-2xl overflow-hidden shadow-lg lg:w-[90%] max-w-5xl ml-auto">
+        <div className="rounded-2xl overflow-hidden shadow-lg ml-auto">
           <Image
             src="https://cdn.prod.website-files.com/67e4d1513dd414300ed0cb02/681b2b87de49e36db04cce82_%EC%9D%B4%EB%81%BC%202.jpg"
             alt="복원 이미지"
             width={1000}
             height={1000}
             className="w-full h-auto object-cover"
-            sizes="(max-width: 768px) 100vw, 1280px"
           />
         </div>
       </div>

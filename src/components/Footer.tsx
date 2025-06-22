@@ -3,9 +3,9 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="border-t mt-20 text-sm text-gray-800">
+    <footer className="m-auto max-w-[1280px] border-t mt-20 text-sm text-gray-800">
       {/* 상단 정보 영역 */}
-      <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between text-center md:text-left space-y-6 md:space-y-0">
+      <div className="max-w-6xl mx-auto py-8 flex flex-col md:flex-row justify-between text-center md:text-left space-y-6 md:space-y-0">
         <div className="w-full md:w-auto">
           <p className="text-xs text-gray-500 mb-1">Email Us</p>
           <p className="font-semibold">codeofnature@c-of-n.com</p>

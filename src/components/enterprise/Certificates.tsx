@@ -37,7 +37,7 @@ const certificates: Certificate[] = [
 
 const Certificates: React.FC = () => {
   return (
-    <section className="w-full max-w-5xl mx-auto mt-20 px-4">
+    <section className="w-full max-w-5xl mx-auto mt-20">
       <h2 className="text-3xl font-semibold text-center mb-2">인증서</h2>
       <p className="text-lg text-center text-gray-600 mb-10">
         ＊ 2023년 신품종 관련 보유 지적 재산권

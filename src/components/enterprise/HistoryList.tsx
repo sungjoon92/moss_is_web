@@ -7,18 +7,18 @@ interface Props {
 
 const HistoryList: React.FC<Props> = ({ data }) => {
   return (
-    <section className="w-full mx-auto mt-16 mb-16 px-4">
+    <section className="w-full mx-auto mt-16 mb-16">
       <h2 className="w-full mb-12 text-center text-3xl sm:text-4xl font-medium leading-tight">
         코드오브네이쳐가
         <br className="hidden sm:block" />
         걸어온 길
       </h2>
 
-      <div className="w-[80%] max-w-4xl mx-auto flex flex-col space-y-8">
+      <div className="max-w-4xl mx-auto flex flex-col space-y-8">
         {data.map(({ year, title, descriptions, highlights }) => (
           <div
             key={year}
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 p-4 sm:p-6"
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5"
           >
             {/* 연도 */}
             <div className="min-w-[60px] sm:min-w-[80px] text-green-600 text-2xl sm:text-3xl font-bold">

@@ -61,7 +61,7 @@ export default function OurServicesSection() {
   }, [inView, controls]);
 
   return (
-    <section ref={ref} className="w-full py-16 bg-orange-50">
+    <section ref={ref} className="w-full py-16">
       <div className="mx-auto">
         <motion.div
           initial="hidden"

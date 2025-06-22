@@ -5,7 +5,7 @@ import { sampleData } from "@/data/sampleData";
 
 const Media: React.FC = () => {
   return (
-    <section className="w-full flex flex-col items-center mx-auto py-16 px-4 md:px-0 bg-gray-50">
+    <section className="w-full flex flex-col items-center mx-auto py-16 md:px-0 bg-gray-50">
       <div className="w-full max-w-5xl flex flex-col md:flex-row items-center justify-between mb-10 gap-4 md:gap-0">
         <div className="text-green-600 font-semibold my-4">＊ Media</div>
         <p className="text-3xl md:text-4xl leading-tight text-gray-900 text-center md:text-left">

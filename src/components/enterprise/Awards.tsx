@@ -10,7 +10,7 @@ const Awards: React.FC<Props> = ({ data }) => {
   const [hoveredYear, setHoveredYear] = useState<number | null>(null);
 
   return (
-    <section className="p-8">
+    <section>
       <h2 className="text-2xl font-bold text-center mb-8">＊ 수상내역</h2>
       <div>
         {data.map(({ year, items }) => (
@@ -22,8 +22,8 @@ const Awards: React.FC<Props> = ({ data }) => {
               hoveredYear === year ? "bg-green-400 text-white" : ""
             }`}
           >
-            <div className="flex justify-between items-start mb-2">
-              <ul className="list-disc ml-4 space-y-1">
+            <div className="flex justify-between items-start">
+              <ul className="space-y-1">
                 {items.map((item, index) => (
                   <li key={index}>＊ {item}</li>
                 ))}

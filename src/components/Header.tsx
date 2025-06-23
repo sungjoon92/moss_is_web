@@ -4,7 +4,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
 import { HiOutlineXMark, HiBars3 } from "react-icons/hi2";
-import Container from "./Container";
 import { menuItems } from "@/data/menuItems";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -27,23 +26,23 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="fixed md:static top-0 left-0 w-full z-50 bg-white shadow-sm">
-      <Container className="w-full block md:flex items-center !px-0">
-        <nav className="w-full p-5 md:p-0 md:w-[70%] text-center flex md:block  bg-white md:bg-transparent mx-auto justify-between items-center">
+    <header className="w-full max-w-[1280px] md:pb-[50px] m-auto fixed md:static top-0 left-0 z-50 bg-white p-4">
+      <div className="w-full flex justify-between flex-row md:flex md:flex-col items-center">
+        <Link
+          href="/"
+          onClick={() => handleClickChangeMenu("/", 0)}
+          className="flex items-center justify-center "
+        >
+          <Image
+            src="/images/moss_is_logo.png"
+            width={128}
+            height={128}
+            alt="로고"
+            className="text-foreground min-w-fit w-10 h-10 md:w-32 md:h-32 "
+          />
+        </Link>
+        <nav className="md:p-0 md:w-[70%] bg-white md:bg-transparent   items-center">
           {/* Logo */}
-          <Link
-            href="/"
-            onClick={() => handleClickChangeMenu("/", 0)}
-            className="flex items-center justify-center gap-2"
-          >
-            <Image
-              src="/images/mossis_logo.png"
-              width={128}
-              height={128}
-              alt="로고"
-              className="text-foreground min-w-fit w-10 h-10 md:w-32 md:h-32 "
-            />
-          </Link>
 
           {/* Desktop Menu */}
           <ul className="w-full hidden md:flex border-black border-b-2">
@@ -60,7 +59,7 @@ const Header: React.FC = () => {
                   href={item.url}
                   onClick={() => handleClickChangeMenu(item.url, index)}
                   aria-current={active === index ? "page" : undefined}
-                  className="block w-full h-full text-center py-4"
+                  className="block w-full h-full text-center py-1"
                 >
                   {item.text}
                 </Link>
@@ -86,7 +85,7 @@ const Header: React.FC = () => {
             </button>
           </div>
         </nav>
-      </Container>
+      </div>
 
       {/* Mobile Menu with Transition */}
       <Transition

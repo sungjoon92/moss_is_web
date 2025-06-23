@@ -10,7 +10,9 @@ const Container: React.FC<React.PropsWithChildren<Props>> = ({
 }: React.PropsWithChildren<Props>) => {
   return (
     <section
-      className={`w-[70%] mx-auto flex flex-col ${className ? className : ""}`}
+      className={`w-full mx-auto flex flex-col mt-[72px] md:mt-0 px-4 ${
+        className ?? ""
+      }`}
     >
       {children}
     </section>

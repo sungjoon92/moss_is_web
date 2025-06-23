@@ -5,7 +5,7 @@ import NewsCard from "@/components/news/NewsCard";
 import { NewsData } from "@/data/newsData";
 import { useState } from "react";
 
-const category = ["전체", "언론보도", "보도자료"];
+const category = ["전체", "미디어", "언론보도", "보도자료"];
 
 const NewsPage = () => {
   const [activeCategory, setActiveCategory] = useState("전체");
@@ -15,8 +15,8 @@ const NewsPage = () => {
       : NewsData.filter((item) => item.category === activeCategory);
 
   return (
-    <Container className="flex flex-col items-center">
-      <div className="w-full md:w-[70%] max-w-5xl">
+    <Container className=" flex flex-col items-center">
+      <div className="w-full text-center">
         <h1 className="text-4xl font-bold mb-5">COFN 뉴스룸</h1>
         <p className="text-gray-600 mb-10">
           코드오브네이처의 새로운 소식들을 <br />
@@ -28,7 +28,7 @@ const NewsPage = () => {
       <MainNewsCard data={filteredData} />
 
       {/* 카테고리 버튼 */}
-      <div className="flex gap-4 mb-10">
+      <div className="flex gap-2 mb-10">
         {category.map((category) => (
           <button
             key={category}
@@ -36,7 +36,7 @@ const NewsPage = () => {
               e.preventDefault();
               setActiveCategory(category);
             }}
-            className={` px-4 py-2 rounded-full border text-sm font-medium ${
+            className={`px-4 py-2 rounded-full border text-sm font-medium ${
               activeCategory === category
                 ? "bg-green-400 text-white"
                 : "bg-white text-gray-400 border-gray-300"

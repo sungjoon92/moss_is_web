@@ -15,14 +15,14 @@ const MainNewsCard: React.FC<Props> = ({ data }) => {
           return (
             <div
               key={id}
-              className="w-full md:w-[70%] max-w-5xl mx-auto relative overflow-hidden aspect-[16/9] mb-[5rem]"
+              className="w-full mx-auto relative overflow-hidden aspect-[16/9] mb-[5rem]"
             >
               <Image
                 src={imageUrl}
                 alt="뉴스룸 메인 이미지"
                 width={1000}
                 height={1000}
-                className="object-cover"
+                className="w-full object-cover"
                 priority
               />
               {/* 텍스트 오버레이 */}

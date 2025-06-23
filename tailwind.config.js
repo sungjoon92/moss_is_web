@@ -7,7 +7,11 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["'Manrope'", "'Source Sans 3'", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

@@ -10,7 +10,7 @@ interface MediaArticleCardProps {
 
 const MediaArticleCard: React.FC<MediaArticleCardProps> = ({ data }) => {
   return (
-    <article className="flex flex-col gap-3 shadow-md rounded-md overflow-hidden">
+    <article className="flex flex-col gap-3 rounded-md overflow-hidden">
       <Image
         width={1000}
         height={1000}

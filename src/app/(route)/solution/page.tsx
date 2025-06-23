@@ -17,7 +17,7 @@ const SolutionPage: React.FC = () => {
   return (
     <Container>
       {/* 카테고리 메뉴 */}
-      <div className="flex gap-4 mb-10">
+      <div className="flex flex-wrap gap-2 mb-10">
         {category.map((category) => (
           <button
             key={category}

@@ -9,7 +9,7 @@ interface Props {
 
 const NewsCard: React.FC<Props> = ({ data }) => {
   return (
-    <div className="space-y-10">
+    <div className="w-full space-y-10">
       {data.map((item) => {
         const { id, category, title, imageUrl, date, link } = item;
         return (
@@ -23,7 +23,7 @@ const NewsCard: React.FC<Props> = ({ data }) => {
                 {category}
               </span>
               <Link
-                href={link}
+                href={`/news/${link}`}
                 className="text-2xl font-semibold leading-snug whitespace-pre-line"
               >
                 {title}
@@ -32,7 +32,7 @@ const NewsCard: React.FC<Props> = ({ data }) => {
                 <span>{date}</span>
               </div>
               <Link
-                href={link}
+                href={`/news/${link}`}
                 className="text-green-400 text-sm font-semibold hover:underline flex items-center gap-1"
               >
                 더 알아보기 →
@@ -41,7 +41,7 @@ const NewsCard: React.FC<Props> = ({ data }) => {
 
             {/* 이미지 영역 */}
             <Link
-              href={link}
+              href={`/news/${link}`}
               className="w-full min-w-[250px] lg:w-1/3 block rounded-lg overflow-hidden shadow-lg"
             >
               <Image

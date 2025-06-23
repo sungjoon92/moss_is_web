@@ -47,10 +47,12 @@ export interface NewsType {
   id: number;
   category: string;
   title: string;
-  imageUrl: string;
   content: string;
   date: string;
   link: string;
+  pageUrl: string;
+  imageUrl: string;
+  videoUrl: string;
   isMainNews?: boolean;
 }
 export interface ISocials {

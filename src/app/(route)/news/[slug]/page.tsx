@@ -25,12 +25,12 @@ export default function NewsPage({ params }: Props) {
     date,
     category,
     content,
-    id,
-    link,
+    // id,
+    // link,
     imageUrl,
     pageUrl,
     videoUrl,
-    isMainNews,
+    // isMainNews,
   } = news;
 
   return (

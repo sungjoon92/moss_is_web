@@ -15,7 +15,7 @@ const NewsPage = () => {
       : NewsData.filter((item) => item.category === activeCategory);
 
   return (
-    <Container className="flex flex-col items-center">
+    <Container className="t-[80px] md:mt-0 flex flex-col items-center">
       <div className="w-full md:w-[70%] max-w-5xl">
         <h1 className="text-4xl font-bold mb-5">COFN 뉴스룸</h1>
         <p className="text-gray-600 mb-10">

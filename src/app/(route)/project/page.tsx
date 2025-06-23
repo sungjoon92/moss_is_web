@@ -5,7 +5,7 @@ import Container from "@/components/Container";
 
 export default function ProjectPage() {
   return (
-    <Container>
+    <Container className="t-[80px] md:mt-0 ">
       <ProjectCard data={projectData} />
     </Container>
   );

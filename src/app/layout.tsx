@@ -7,6 +7,7 @@ import { siteDetails } from "@/data/siteDetails";
 import "./reset.css";
 import "./globals.css";
 import FloatingButton from "@/components/FloatingButton ";
+import MainVideo from "@/components/home/MainVideo";
 
 const manrope = Manrope({ subsets: ["latin"] });
 const sourceSans = Source_Sans_3({ subsets: ["latin"] });
@@ -46,11 +47,14 @@ export default function RootLayout({
       <body
         className={`${manrope.className} ${sourceSans.className} antialiased`}
       >
+        {/* Google Analytics 방문자 수 측정 */}
         {siteDetails.googleAnalyticsId && (
           <GoogleAnalytics gaId={siteDetails.googleAnalyticsId} />
         )}
+
         <Header />
-        <main className="max-w-[1280px] m-auto pt-200px md:pt-5 pt-[80px]">{children}</main>
+        <MainVideo />
+        <main className="max-w-[1280px] m-auto">{children}</main>
         <Footer />
         <FloatingButton />
       </body>

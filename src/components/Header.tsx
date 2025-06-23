@@ -26,7 +26,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="max-w-[1280px] md:mb-3 m-auto fixed md:static top-0 left-0 w-full z-50 bg-white">
+    <header className="max-w-[1280px] md:pb-[50px] m-auto fixed md:static top-0 left-0 w-full z-50 bg-white">
       <div className="w-full flex justify-between flex-row md:flex md:flex-col items-center !px-0">
         <Link
           href="/"

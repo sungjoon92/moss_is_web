@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: "/images/moss-is-logo.png",
         width: 1200,
         height: 675,
         alt: siteDetails.siteName,

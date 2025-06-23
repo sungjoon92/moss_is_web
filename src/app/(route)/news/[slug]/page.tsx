@@ -34,15 +34,17 @@ export default function NewsPage({ params }: Props) {
   } = news;
 
   return (
-    <Container className="flex flex-col md:flex-row gap-5  mx-auto my-16 px-4">
+    <Container className="flex flex-col md:flex-row gap-12 mx-auto my-12 md:my-20 px-4 pt-4">
       {/* Left - 미디어 메뉴 */}
-      <div className="flex flex-row items-center justify-center md:flex-col gap-6 text-sm text-gray-700 min-w-[80px]">
-        <span className="text-green-600 font-semibold">미디어</span>
-        <div className="rounded-full border w-10 h-10 flex items-center justify-center">
-          <Link href={pageUrl} target="_blank">
-            <span className="text-xl">in</span>
-          </Link>
-        </div>
+      <div className="flex flex-row items-center justify-center md:flex-col gap-6 text-sm text-gray-700 min-w-[100px]">
+        <span className="px-3 py-1 bg-green-100 text-green-600 rounded-full font-semibold text-xs">
+          {category}
+        </span>
+        <Link href={pageUrl} target="_blank">
+          <span className="text-base font-medium hover:underline transition-all">
+            기사 더보기
+          </span>
+        </Link>
       </div>
 
       {/* Right - 콘텐츠 */}
@@ -51,7 +53,7 @@ export default function NewsPage({ params }: Props) {
         <div className="text-sm text-gray-400 text-right mb-2">{date}</div>
 
         {/* 제목 */}
-        <h2 className="text-2xl md:text-3xl font-semibold leading-snug mb-4">
+        <h2 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
           {title}
         </h2>
 
@@ -69,13 +71,13 @@ export default function NewsPage({ params }: Props) {
         ) : (
           <>
             {/* 미디어가 아니면 일반 글 + 이미지 노출 */}
-            <div className="prose max-w-none">
-              <p>{content}</p>
+            <div className="max-w-none leading-relaxed text-gray-800 text-base">
+              <p className="whitespace-pre-line">{content}</p>
               {imageUrl && (
                 <img
                   src={imageUrl}
                   alt={title}
-                  className="w-full rounded-lg mt-4"
+                  className="w-full rounded-xl mt-6 shadow-md"
                 />
               )}
             </div>

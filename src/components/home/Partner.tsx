@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Partner = () => {
   return (
-    <section className="w-[70%] flex flex-col items-center bg-white py-16 gap-10">
+    <section className="flex flex-col items-center bg-white py-16 gap-10">
       <h2 className="text-4xl font-bold leading-tight">
         COFN과 함께하는 파트너
       </h2>

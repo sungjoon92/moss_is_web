@@ -26,22 +26,22 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="max-w-[1280px] md:pb-[50px] m-auto fixed md:static top-0 left-0 w-full z-50 bg-white">
-      <div className="w-full flex justify-between flex-row md:flex md:flex-col items-center !px-0">
+    <header className="w-full max-w-[1280px] md:pb-[50px] m-auto fixed md:static top-0 left-0 z-50 bg-white p-4">
+      <div className="w-full flex justify-between flex-row md:flex md:flex-col items-center">
         <Link
           href="/"
           onClick={() => handleClickChangeMenu("/", 0)}
           className="flex items-center justify-center "
         >
           <Image
-            src="/images/mossis_logo.png"
+            src="/images/moss_is_logo.png"
             width={128}
             height={128}
             alt="로고"
             className="text-foreground min-w-fit w-10 h-10 md:w-32 md:h-32 "
           />
         </Link>
-        <nav className="p-5 md:p-0 md:w-[70%] bg-white md:bg-transparent   items-center">
+        <nav className="md:p-0 md:w-[70%] bg-white md:bg-transparent   items-center">
           {/* Logo */}
 
           {/* Desktop Menu */}

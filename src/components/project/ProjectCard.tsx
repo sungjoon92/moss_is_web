@@ -16,10 +16,10 @@ const ProjectCard: React.FC<Props> = ({ data }) => {
         return (
           <div
             key={index}
-            className="flex flex-col justify-between lg:flex-row items-center bg-white rounded-lg shadow-sm"
+            className="flex flex-col justify-between md:flex-row items-start bg-white rounded-md"
           >
             {/* 텍스트 영역 */}
-            <div className="flex flex-col lg:w-1/2 space-y-4">
+            <div className="flex flex-col md:w-1/2 space-y-4">
               <span className="inline-block bg-green-500 text-white text-xs font-semibold rounded-full px-3 py-1 w-max">
                 {category}
               </span>
@@ -48,7 +48,7 @@ const ProjectCard: React.FC<Props> = ({ data }) => {
             {/* 이미지 영역 */}
             <Link
               href={`/project/${link}`}
-              className="min-w-[250px] lg:w-1/3 block rounded-lg overflow-hidden shadow-lg"
+              className="w-full md:w-1/3 block rounded-lg overflow-hidden shadow-lg"
             >
               <Image
                 src={imageUrl}

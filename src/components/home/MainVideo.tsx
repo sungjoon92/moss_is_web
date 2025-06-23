@@ -10,7 +10,7 @@ const MainVideo: React.FC = () => {
   if (pathname !== "/") return null;
 
   return (
-    <section className="mt-[80px] md:mt-0 w-full aspect-video max-h-[50vh] min-h-[300px] sm:min-h-[250px] md:min-h-[300px] relative overflow-hidden">
+    <section className="mt-[72px] md:mt-0 w-full aspect-video max-h-[50vh] min-h-[300px] sm:min-h-[250px] md:min-h-[300px] relative overflow-hidden">
       <Link
         href="https://cdn.prod.website-files.com/67e4d1513dd414300ed0cb02%2F681dca92deecb58c406a6a47_COFN_bg-transcode.mp4"
         className="w-full h-full block"

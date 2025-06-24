@@ -1,18 +1,15 @@
-import type { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import { Source_Sans_3, Manrope } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { siteDetails } from "@/data/siteDetails";
-import "./reset.css";
+// app/layout.tsx
+
 import "./globals.css";
-import FloatingButton from "@/components/FloatingButton ";
-import MainVideo from "@/components/home/MainVideo";
+import "./reset.css";
+import { Manrope, Source_Sans_3 } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { siteDetails } from "@/data/siteDetails";
 
 const manrope = Manrope({ subsets: ["latin"] });
 const sourceSans = Source_Sans_3({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: siteDetails.metadata.title,
   description: siteDetails.metadata.description,
   openGraph: {
@@ -39,24 +36,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body
         className={`${manrope.className} ${sourceSans.className} antialiased`}
       >
-        {/* Google Analytics 방문자 수 측정 */}
+        {/* Google Analytics */}
         {siteDetails.googleAnalyticsId && (
           <GoogleAnalytics gaId={siteDetails.googleAnalyticsId} />
         )}
-
-        <Header />
-        <MainVideo />
-        <main className="max-w-[1280px] m-auto">{children}</main>
-        <Footer />
-        <FloatingButton />
+        {children}
       </body>
     </html>
   );

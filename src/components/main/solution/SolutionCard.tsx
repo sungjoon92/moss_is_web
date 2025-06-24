@@ -15,18 +15,20 @@ export const SolutionCard: React.FC<props> = ({ data }) => {
         return (
           <div
             key={index}
-            className="flex flex-col md:flex-row items-start  justify-between bg-white rounded-lg overflow-hidden"
+            className="flex flex-col md:flex-row items-start justify-between bg-white rounded-lg overflow-hidden"
           >
             {/* 텍스트 영역 */}
-            <div className="w-full md:w-[50%] flex flex-col space-y-4">
-              <span className="text-sm text-gray-500">{categoryTag}</span>
-              <Link
-                href={`/solution/${link}`}
-                className="text-xl font-semibold"
-              >
-                {title}
-              </Link>
-              <p className="text-gray-700">{content}</p>
+            <div className="w-full md:w-[50%] flex flex-col justify-between min-h-[280px]">
+              <div className="w-full flex flex-col justify-between space-y-4">
+                <span className="text-sm text-gray-500">{categoryTag}</span>
+                <Link
+                  href={`/solution/${link}`}
+                  className="text-xl font-semibold"
+                >
+                  {title}
+                </Link>
+                <p className="text-gray-700 leading-relaxed">{content}</p>
+              </div>
               <Link
                 href={`/solution/${link}`}
                 className="text-green-400 hover:underline"

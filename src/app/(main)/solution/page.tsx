@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Container from "@/components/Container";
-import SolutionCard from "@/components/solution/SolutionCard";
+import SolutionCard from "@/components/main/solution/SolutionCard";
 import { solutionData } from "@/data/solutionData";
 const category = ["전체", "녹화시스템", "산림복원", "이끼정원"];
 

@@ -6,6 +6,7 @@ import { NewsType } from "@/types";
 import { NewsData } from "@/data/newsData";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Props {
   params: {
@@ -74,7 +75,9 @@ export default function NewsPage({ params }: Props) {
             <div className="max-w-none leading-relaxed text-gray-800 text-base">
               <p className="whitespace-pre-line">{content}</p>
               {imageUrl && (
-                <img
+                <Image
+                  width={1000}
+                  height={1000}
                   src={imageUrl}
                   alt={title}
                   className="w-full rounded-xl mt-6 shadow-md"

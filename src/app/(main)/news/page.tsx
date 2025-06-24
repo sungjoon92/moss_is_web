@@ -1,7 +1,7 @@
 "use client";
 import Container from "@/components/Container";
-import MainNewsCard from "@/components/news/MainNewsCard ";
-import NewsCard from "@/components/news/NewsCard";
+import MainNewsCard from "@/components/main/news/MainNewsCard ";
+import NewsCard from "@/components/main/news/NewsCard";
 import { NewsData } from "@/data/newsData";
 import { useState } from "react";
 

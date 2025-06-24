@@ -55,6 +55,13 @@ export interface NewsType {
   videoUrl: string;
   isMainNews?: boolean;
 }
+
+export interface AdminCategory {
+  name: string;
+  key: string;
+  children?: string[];
+}
+
 export interface ISocials {
   facebook?: string;
   github?: string;

@@ -1,11 +1,11 @@
-import Awards from "@/components/enterprise/Awards";
-import HistoryList from "@/components/enterprise/HistoryList";
-import IntroSection from "@/components/enterprise/IntroSection";
-import Mission from "@/components/enterprise/Mission";
-import Vision from "@/components/enterprise/Vision";
+import Awards from "@/components/main/enterprise/Awards";
+import HistoryList from "@/components/main/enterprise/HistoryList";
+import IntroSection from "@/components/main/enterprise/IntroSection";
+import Mission from "@/components/main/enterprise/Mission";
+import Vision from "@/components/main/enterprise/Vision";
 import { historyData } from "@/data/historyData";
 import { awardsData } from "@/data/awardsData";
-import Certificates from "@/components/enterprise/Certificates";
+import Certificates from "@/components/main/enterprise/Certificates";
 import Container from "@/components/Container";
 
 export default function EnterprisePage() {

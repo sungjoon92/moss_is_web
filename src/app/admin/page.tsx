@@ -1,38 +1,53 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/admin/Sidebar";
 import { adminCategories } from "@/data/adminCategories";
 import AdminVideoSettings from "@/components/admin/category/home/AdminVideoSettings";
 import AdminSolutionManager from "@/components/admin/category/solution/AdminSolutionManager";
 import AdminProjectManager from "@/components/admin/category/project/AdminProjectManager";
 import AdminNewsManager from "@/components/admin/category/news/AdminNewsManager";
-import { LoginForm } from "@/components/admin/auth/LoginForm";
 import { solutionData } from "@/data/solutionData";
 import { projectData } from "@/data/projectData";
 import { NewsData } from "@/data/newsData";
+import { useRouter } from "next/navigation";
+import { checkAuth } from "@/lib/api/auth";
+import { useAutoLogout } from "@/hooks/AutoLogout";
+import AutoLogoutModal from "@/hooks/AutoLogoutModal";
 
 export default function AdminPage() {
   const [selected, setSelected] = useState("dashboard");
   const [subSelected, setSubSelected] = useState("홈"); // 기본값은 '홈'
+  const [authenticated, setAuthenticated] = useState(false);
+  const router = useRouter();
+  const { showAlert, setShowAlert, resetMainTimer, modalCountdown } =
+    useAutoLogout();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  useEffect(() => {
+    const fetchAuth = async () => {
+      try {
+        await checkAuth();
+        setAuthenticated(true);
+      } catch (error) {
+        console.error("에러로그:", error);
+        setAuthenticated(false);
+        router.replace("/admin/login");
+      }
+    };
 
-  // 로그인정보 backend에서 받을시에 사용
-  // const [loading, setLoading] = useState(true);
+    fetchAuth();
+  }, [router]);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("adminToken");
-  //   setIsLoggedIn(!!token);
-  //   setLoading(false);
-  // }, []);
-
-  // if (loading) return <div className="p-8 text-gray-500">로딩 중...</div>;
-
-  if (!isLoggedIn) {
-    return <LoginForm onLoginSuccess={() => setIsLoggedIn(true)} />;
+  if (authenticated === null) {
+    return <div className="text-center py-10">로딩 중...</div>;
   }
 
+  if (authenticated === false) {
+    // 인증 실패 시 로그인 페이지로 이동했으므로 여기서는 아무 UI도 보여주지 않아도 됨
+    return null;
+  }
+
+  // setAuthenticated(true) 면 adminPage return
   return (
     <div className="flex min-h-screen">
       <Sidebar
@@ -40,7 +55,7 @@ export default function AdminPage() {
         setSelected={setSelected}
         subSelected={subSelected}
         setSubSelected={setSubSelected}
-      />  
+      />
       <main className="flex-1 p-8 bg-gray-50">
         <h1 className="text-3xl font-bold text-lime-700 mb-4">
           {adminCategories.find((c) => c.key === selected)?.name ?? selected}
@@ -68,6 +83,15 @@ export default function AdminPage() {
           {selected === "settings" && <p>설정 페이지입니다.</p>}
         </div>
       </main>
+      {showAlert && (
+        <AutoLogoutModal
+          countdown={modalCountdown}
+          onConfirm={() => {
+            setShowAlert(false);
+            resetMainTimer();
+          }}
+        />
+      )}
     </div>
   );
 }

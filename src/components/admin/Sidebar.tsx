@@ -1,6 +1,8 @@
 "use client";
 
 import { adminCategories } from "@/data/adminCategories";
+import { logout } from "@/lib/api/auth";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface SidebarProps {
@@ -17,7 +19,16 @@ export default function Sidebar({
   setSubSelected,
 }: SidebarProps) {
   const [categoryOpen, setCategoryOpen] = useState(false);
+  const router = useRouter();
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.replace("/admin/login");
+    } catch (error) {
+      console.error("로그아웃 실패:", error);
+    }
+  };
   return (
     <aside className="w-64 bg-lime-100 border-r border-lime-300 p-6">
       <h2 className="text-2xl font-bold text-lime-700 mb-6">관리자 메뉴</h2>
@@ -72,10 +83,7 @@ export default function Sidebar({
       </nav>
 
       <button
-        onClick={() => {
-          localStorage.removeItem("adminToken");
-          location.reload();
-        }}
+        onClick={() => handleLogout()}
         className="mt-10 px-4 py-2 w-full rounded hover:bg-red-500 hover:text-white transition"
       >
         로그아웃

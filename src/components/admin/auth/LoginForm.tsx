@@ -1,36 +1,44 @@
-import React, { useState } from "react";
+"use client";
 
+import { login } from "@/lib/api/auth";
+import React, { useState } from "react";
 interface LoginFormProps {
   onLoginSuccess?: () => void;
 }
 
 export function LoginForm({ onLoginSuccess }: LoginFormProps): JSX.Element {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!email || !password) {
-      setError("이메일과 비밀번호를 모두 입력해주세요.");
+      setError("이메일과 비밀번호를 입력해주세요.");
       return;
     }
 
-    setError("");
-    localStorage.setItem("adminToken", "dummy-token");
-    onLoginSuccess?.();
+    try {
+      const response = await login(email, password);
+      console.log("로그인 성공:", response.data);
+      setError("");
+      onLoginSuccess?.();
+    } catch (error) {
+      console.error("인증 실패:", error);
+      setError("로그인 실패: 이메일 또는 비밀번호를 확인하세요.");
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-green-400 via-green-300 to-emerald-300 p-6">
+    <div className="w-full min-h-screen flex items-center justify-center bg-gradient-to-tr from-green-400 via-green-300 to-emerald-300 p-6">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         <h2 className="text-3xl font-bold text-emerald-800 mb-6 text-center">
           moss is 관리자 로그인
         </h2>
 
-        <form onSubmit={onSubmit} className="space-y-5">
-          <div>
+        <form onSubmit={onSubmit} className="space-y-5 flex flex-col items-end">
+          <div className="w-full">
             <label
               htmlFor="email"
               className="block mb-1 text-emerald-700 font-semibold"
@@ -49,19 +57,14 @@ export function LoginForm({ onLoginSuccess }: LoginFormProps): JSX.Element {
             />
           </div>
 
-          <div>
+          <div className="w-full">
             <label
               htmlFor="password"
               className="mb-1 text-emerald-700 font-semibold flex justify-between items-center"
             >
               비밀번호
-              <a
-                href="/auth/forgot-password"
-                className="text-sm text-green-600 hover:underline"
-              >
-                비밀번호 찾기
-              </a>
             </label>
+
             <input
               type="password"
               id="password"
@@ -86,6 +89,12 @@ export function LoginForm({ onLoginSuccess }: LoginFormProps): JSX.Element {
           >
             로그인
           </button>
+          <a
+            href="/auth/forgot-password"
+            className="text-sm  text-green-600 hover:underline"
+          >
+            비밀번호 찾기
+          </a>
         </form>
 
         {/* <p className="mt-6 text-center text-emerald-700 text-sm">

@@ -28,6 +28,6 @@
     ".next/types/**/*.ts",
     "postcss.config.js",
     "tailwind.config.js"
-, "src/app/admin/AdminSolutionPage.tsx"  ],
+  ],
   "exclude": ["node_modules"]
 }

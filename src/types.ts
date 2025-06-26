@@ -65,7 +65,7 @@ export interface AdminCategory {
   id: number;
   name: string;
   key: string;
-  children?: string[];
+  children?: { label: string; path: string }[]; 
 }
 
 export interface ISocials {

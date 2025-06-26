@@ -1,19 +1,16 @@
+// app/admin/(side)/category/news/page.tsx
 "use client";
 
 import React, { useState } from "react";
 import { NewsType } from "@/types";
-import NewsForm from "./AdminNewsForm";
-import AdminNewsList from "./AdminNewsList";
+import AdminNewsList from "@/components/admin/category/news/AdminNewsList";
+import NewsForm from "@/components/admin/category/news/AdminNewsForm";
+import { NewsData } from "@/data/newsData";
 
-interface Props {
-  data: NewsType[];
-}
-
-const AdminNewsManager: React.FC<Props> = ({ data }) => {
-  const [newsList, setNewsList] = useState<NewsType[]>(data);
+export default function AdminNewsPage() {
+  const [newsList, setNewsList] = useState<NewsType[]>(NewsData);
 
   const handleAddNews = (newData: Omit<NewsType, "id">) => {
-    // id는 임시로 배열 길이 + 1, 실제론 서버에서 생성
     const newNews: NewsType = {
       id: newsList.length + 1,
       ...newData,
@@ -35,6 +32,4 @@ const AdminNewsManager: React.FC<Props> = ({ data }) => {
       <NewsForm onSubmit={handleAddNews} />
     </div>
   );
-};
-
-export default AdminNewsManager;
+}

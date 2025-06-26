@@ -2,18 +2,19 @@
 
 import React, { useEffect, useState } from "react";
 import { SolutionType, SolutionCreateInput } from "@/types";
-import SolutionForm from "./SolutionForm";
-import AdminSolutionList from "./AdminSolutionList";
-import { createSolution, getSolutions } from "@/lib/api/solution";
+import SolutionForm from "@/components/admin/category/solution/SolutionForm";
+import AdminSolutionList from "@/components/admin/category/solution/AdminSolutionList";
+import {
+  createSolution,
+  deleteSolution,
+  getSolutions,
+} from "@/lib/api/solution";
 import { toCamelCase } from "@/utils/caseConverter";
 
-interface props {
-  data: SolutionType[];
-}
-const AdminSolutionManager: React.FC<props> = ({ data }) => {
-  const [solutions, setSolutions] = useState<SolutionType[]>(data);
+const AdminSolutionPage: React.FC = () => {
+  const [solutions, setSolutions] = useState<SolutionType[]>([]);
 
-  // 최신 데이터 불러오기
+  // ✅ 최신 데이터 불러오기
   const fetchSolutions = async () => {
     try {
       const response = await getSolutions();
@@ -28,7 +29,7 @@ const AdminSolutionManager: React.FC<props> = ({ data }) => {
     fetchSolutions();
   }, []);
 
-  // 솔루션 생성
+  // ✅ 솔루션 생성
   const handleAddSolution = async (data: SolutionCreateInput) => {
     try {
       const response = await createSolution(data);
@@ -39,10 +40,11 @@ const AdminSolutionManager: React.FC<props> = ({ data }) => {
     }
   };
 
-  //솔루션 삭제
-  const handleDelete = (index: number) => {
+  // ✅ 솔루션 삭제
+  const handleDelete = async (id: number) => {
     if (confirm("정말 삭제하시겠습니까?")) {
-      setSolutions((prev) => prev.filter((_, i) => i !== index));
+      await deleteSolution(id);
+      await fetchSolutions();
     }
   };
 
@@ -57,4 +59,4 @@ const AdminSolutionManager: React.FC<props> = ({ data }) => {
   );
 };
 
-export default AdminSolutionManager;
+export default AdminSolutionPage;

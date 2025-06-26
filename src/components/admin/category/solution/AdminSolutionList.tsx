@@ -1,4 +1,3 @@
-// components/AdminSolutionList.tsx
 import React from "react";
 import Link from "next/link";
 import { SolutionType } from "@/types";
@@ -9,6 +8,8 @@ interface Props {
 }
 
 const AdminSolutionList: React.FC<Props> = ({ data, onDelete }) => {
+  console.log(data);
+
   return (
     <table className="w-full table-auto border-collapse border border-gray-200">
       <thead>
@@ -25,7 +26,7 @@ const AdminSolutionList: React.FC<Props> = ({ data, onDelete }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((item, index) => (
+        {data?.map((item, index) => (
           <tr key={index} className="hover:bg-gray-50">
             <td className="border border-gray-300 px-4 py-2">
               {item.categoryTag}
@@ -42,7 +43,7 @@ const AdminSolutionList: React.FC<Props> = ({ data, onDelete }) => {
             <td className="border border-gray-300 px-4 py-2 text-center">
               <button
                 onClick={() => {
-                  onDelete(index);
+                  onDelete(item.id);
                 }}
                 className="text-red-600 hover:text-red-800"
               >

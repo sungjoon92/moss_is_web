@@ -2,14 +2,12 @@
 
 import React, { useState } from "react";
 import { ProjectType } from "@/types";
-import ProjectForm from "./AdminProjectForm";
-import AdminProjectList from "./AdminProjectList";
+import ProjectForm from "@/components/admin/category/project/AdminProjectForm";
+import AdminProjectList from "@/components/admin/category/project/AdminProjectList";
+import { projectData } from "@/data/projectData";
 
-interface props {
-  data: ProjectType[];
-}
-const AdminProjectManager: React.FC<props> = ({ data }) => {
-  const [projects, setProjects] = useState<ProjectType[]>(data);
+const AdminProjectPage: React.FC = () => {
+  const [projects, setProjects] = useState<ProjectType[]>(projectData);
 
   const handleAddProject = (newProject: ProjectType) => {
     console.log("등록된 프로젝트:", newProject);
@@ -33,4 +31,4 @@ const AdminProjectManager: React.FC<props> = ({ data }) => {
   );
 };
 
-export default AdminProjectManager;
+export default AdminProjectPage;

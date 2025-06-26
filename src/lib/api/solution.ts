@@ -15,7 +15,7 @@ export const getSolutions = () => {
 
 // 단일 아이템 조회용
 export const getSolution = (id: number | string) => {
-  return axios.get(`/solution/${id}`, { withCredentials: true });
+  return axios.get(`/solution`, { data: { id }, withCredentials: true });
 };
 // 수정
 export const updateSolution = (
@@ -26,6 +26,6 @@ export const updateSolution = (
 };
 
 // 삭제
-export const deleteSolution = (id: number | string) => {
-  return axios.delete(`/solution/${id}`, { withCredentials: true });
+export const deleteSolution = (id: number) => {
+  return axios.delete(`/solution`, { data: { id }, withCredentials: true });
 };

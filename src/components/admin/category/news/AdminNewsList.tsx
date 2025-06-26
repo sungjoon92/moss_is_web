@@ -23,7 +23,7 @@ const AdminNewsList: React.FC<Props> = ({ data, onDelete }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((item, index) => (
+        {data?.map((item, index) => (
           <tr key={item.id} className="hover:bg-gray-50">
             <td className="border border-gray-300 px-4 py-2">
               {item.category}

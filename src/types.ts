@@ -31,7 +31,6 @@ export interface SolutionType {
   imageUrl: string;
   link: string;
 }
-// 솔루션 생성 시 사용하는 타입 (id 제외)
 export type SolutionCreateInput = Omit<SolutionType, "id">;
 
 export interface ProjectType {
@@ -47,6 +46,7 @@ export interface ProjectType {
   contentText?: string;
   contentImages?: string[];
 }
+export type ProjectCreateInput = Omit<ProjectType, "id">;
 
 export interface NewsType {
   id: number;
@@ -60,12 +60,31 @@ export interface NewsType {
   videoUrl: string;
   isMainNews?: boolean;
 }
+export type NewsCreateInput = Omit<NewsType, "id">;
 
 export interface AdminCategory {
   id: number;
   name: string;
   key: string;
-  children?: { label: string; path: string }[]; 
+  children?: { label: string; path: string }[];
+}
+
+export interface PaginationParams {
+  page?: number;
+  limit?: number;
+  sort?: string;
+  order?: "asc" | "desc";
+}
+
+export interface ListProps<T> {
+  data: T[];
+  onDelete: (id: number) => void;
+  page: number;
+  onPageChange: (newPage: number) => void;
+  sort: string;
+  order: "asc" | "desc";
+  onSortChange: (field: string) => void;
+  onOrderChange: (order: "asc" | "desc") => void;
 }
 
 export interface ISocials {

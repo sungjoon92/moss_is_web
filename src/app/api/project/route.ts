@@ -14,7 +14,7 @@ export async function GET(request: Request) {
   const to = from + limit - 1;
 
   const { data, error } = await supabase
-    .from("t_solution")
+    .from("t_project")
     .select("*")
     .order(sort, { ascending: order === "asc" })
     .range(from, to);
@@ -28,7 +28,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const body = await request.json();
   const { data, error } = await supabase
-    .from("t_solution")
+    .from("t_project")
     .insert([body])
     .select();
 
@@ -46,7 +46,7 @@ export async function PATCH(request: Request) {
     return NextResponse.json({ error: "id is required" }, { status: 400 });
 
   const { data, error } = await supabase
-    .from("t_solution")
+    .from("t_project")
     .update(updates)
     .eq("id", id);
   if (error)
@@ -62,7 +62,7 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ error: "id is required" }, { status: 400 });
 
   const { data, error } = await supabase
-    .from("t_solution")
+    .from("t_project")
     .delete()
     .eq("id", id);
   if (error)

@@ -14,7 +14,7 @@ export async function GET(request: Request) {
   const to = from + limit - 1;
 
   const { data, error } = await supabase
-    .from("t_solution")
+    .from("t_news")
     .select("*")
     .order(sort, { ascending: order === "asc" })
     .range(from, to);
@@ -27,10 +27,7 @@ export async function GET(request: Request) {
 // 데이터 생성
 export async function POST(request: Request) {
   const body = await request.json();
-  const { data, error } = await supabase
-    .from("t_solution")
-    .insert([body])
-    .select();
+  const { data, error } = await supabase.from("t_news").insert([body]).select();
 
   if (error)
     return NextResponse.json({ error: error.message }, { status: 500 });
@@ -46,7 +43,7 @@ export async function PATCH(request: Request) {
     return NextResponse.json({ error: "id is required" }, { status: 400 });
 
   const { data, error } = await supabase
-    .from("t_solution")
+    .from("t_news")
     .update(updates)
     .eq("id", id);
   if (error)
@@ -61,10 +58,7 @@ export async function DELETE(request: Request) {
   if (!id)
     return NextResponse.json({ error: "id is required" }, { status: 400 });
 
-  const { data, error } = await supabase
-    .from("t_solution")
-    .delete()
-    .eq("id", id);
+  const { data, error } = await supabase.from("t_news").delete().eq("id", id);
   if (error)
     return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json(data);

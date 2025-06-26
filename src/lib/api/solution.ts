@@ -1,5 +1,5 @@
 import axios from "@/lib/axios";
-import { SolutionCreateInput, SolutionType } from "@/types";
+import { PaginationParams, SolutionCreateInput, SolutionType } from "@/types";
 import { toSnakeCase } from "@/utils/caseConverter";
 
 // 생성
@@ -9,8 +9,22 @@ export const createSolution = (data: SolutionCreateInput) => {
 };
 
 // 전체 리스트 조회용
-export const getSolutions = () => {
-  return axios.get("/solution", { withCredentials: true });
+export const getSolutions = ({
+  page = 1,
+  limit = 10,
+  sort = "created_at",
+  order = "desc",
+}: PaginationParams = {}) => {
+  const params = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+    sort,
+    order,
+  });
+
+  return axios.get(`/solution?${params.toString()}`, {
+    withCredentials: true,
+  });
 };
 
 // 단일 아이템 조회용

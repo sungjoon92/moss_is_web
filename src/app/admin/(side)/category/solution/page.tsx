@@ -14,10 +14,15 @@ import { toCamelCase } from "@/utils/caseConverter";
 const AdminSolutionPage: React.FC = () => {
   const [solutions, setSolutions] = useState<SolutionType[]>([]);
 
-  // ✅ 최신 데이터 불러오기
+  const [page, setPage] = useState(1);
+  const [limit] = useState(10);
+  const [sort, setSort] = useState("created_at");
+  const [order, setOrder] = useState<"asc" | "desc">("desc");
+
+  // 솔루션 데이터 불러오기
   const fetchSolutions = async () => {
     try {
-      const response = await getSolutions();
+      const response = await getSolutions({ page, limit, sort, order });
       const data = response.data.map(toCamelCase);
       setSolutions(data);
     } catch (error) {
@@ -27,9 +32,9 @@ const AdminSolutionPage: React.FC = () => {
 
   useEffect(() => {
     fetchSolutions();
-  }, []);
+  }, [page, sort, order]);
 
-  // ✅ 솔루션 생성
+  // 솔루션 생성
   const handleAddSolution = async (data: SolutionCreateInput) => {
     try {
       const response = await createSolution(data);
@@ -40,7 +45,7 @@ const AdminSolutionPage: React.FC = () => {
     }
   };
 
-  // ✅ 솔루션 삭제
+  // 솔루션 삭제
   const handleDelete = async (id: number) => {
     if (confirm("정말 삭제하시겠습니까?")) {
       await deleteSolution(id);
@@ -51,7 +56,16 @@ const AdminSolutionPage: React.FC = () => {
   return (
     <div className="space-y-8">
       <h1 className="text-xl font-bold">현재 솔루션 목록</h1>
-      <AdminSolutionList data={solutions} onDelete={handleDelete} />
+      <AdminSolutionList
+        data={solutions}
+        onDelete={handleDelete}
+        page={page}
+        onPageChange={setPage}
+        sort={sort}
+        order={order}
+        onSortChange={setSort}
+        onOrderChange={setOrder}
+      />
 
       <h1 className="text-xl font-bold">솔루션 등록</h1>
       <SolutionForm onSubmit={handleAddSolution} />

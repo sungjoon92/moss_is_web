@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { NewsType } from "@/types";
+import { NewsCreateInput, NewsType } from "@/types";
 import Image from "next/image";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const NewsForm: React.FC<Props> = ({ onSubmit }) => {
-  const [form, setForm] = useState<Omit<NewsType, "id">>({
+  const [form, setForm] = useState<NewsCreateInput>({
     category: "",
     title: "",
     content: "",
@@ -29,7 +29,7 @@ const NewsForm: React.FC<Props> = ({ onSubmit }) => {
     const { name, value, type } = e.target;
 
     if (type === "checkbox") {
-      const target = e.target as HTMLInputElement; // ✅ 여기서 확실하게 체크
+      const target = e.target as HTMLInputElement;
       setForm((prev) => ({ ...prev, [name]: target.checked }));
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));

@@ -8,6 +8,7 @@ export interface SampleData {
 }
 
 export interface HistoryType {
+  id: number;
   year: number;
   title: string;
   descriptions: string[];
@@ -15,12 +16,14 @@ export interface HistoryType {
 }
 
 export interface AwardsType {
+  id: number;
   year: number;
   items: string[];
   highlight?: boolean;
 }
 
 export interface SolutionType {
+  id: number;
   categoryTag: string;
   category: string;
   title: string;
@@ -28,6 +31,8 @@ export interface SolutionType {
   imageUrl: string;
   link: string;
 }
+// 솔루션 생성 시 사용하는 타입 (id 제외)
+export type SolutionCreateInput = Omit<SolutionType, "id">;
 
 export interface ProjectType {
   id: number;
@@ -57,6 +62,7 @@ export interface NewsType {
 }
 
 export interface AdminCategory {
+  id: number;
   name: string;
   key: string;
   children?: string[];

@@ -14,6 +14,9 @@ const AdminSolutionList: React.FC<Props> = ({ data, onDelete }) => {
       <thead>
         <tr className="bg-gray-100">
           <th className="border border-gray-300 px-4 py-2 text-left">
+            카테고리 태그
+          </th>
+          <th className="border border-gray-300 px-4 py-2 text-left">
             카테고리
           </th>
           <th className="border border-gray-300 px-4 py-2 text-left">제목</th>
@@ -26,6 +29,9 @@ const AdminSolutionList: React.FC<Props> = ({ data, onDelete }) => {
           <tr key={index} className="hover:bg-gray-50">
             <td className="border border-gray-300 px-4 py-2">
               {item.categoryTag}
+            </td>
+            <td className="border border-gray-300 px-4 py-2">
+              {item.category}
             </td>
             <td className="border border-gray-300 px-4 py-2 text-blue-600 hover:underline">
               <Link href={`/solution/${item.link}`}>{item.title}</Link>

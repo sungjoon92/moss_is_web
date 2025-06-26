@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
-import { SolutionType } from "@/types";
+import { SolutionCreateInput } from "@/types";
 import Image from "next/image";
 
 interface Props {
-  onSubmit: (data: SolutionType) => void;
+  onSubmit: (data: SolutionCreateInput) => void;
 }
 
 const SolutionForm: React.FC<Props> = ({ onSubmit }) => {
-  const [form, setForm] = useState<SolutionType>({
+  const [form, setForm] = useState<SolutionCreateInput>({
     categoryTag: "",
     category: "",
     title: "",

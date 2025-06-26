@@ -2,6 +2,7 @@ import { SolutionType } from "@/types";
 
 export const solutionData: SolutionType[] = [
   {
+    id: 1,
     categoryTag: "황폐화 토양 복원 솔루션",
     category: "산림복원",
     title: "모스비",
@@ -12,6 +13,7 @@ export const solutionData: SolutionType[] = [
     link: "mosby",
   },
   {
+    id: 2,
     categoryTag: "이끼 전용 올인원 솔루션",
     category: "이끼정원",
     title: "몬스",
@@ -22,6 +24,7 @@ export const solutionData: SolutionType[] = [
     link: "mons",
   },
   {
+    id: 3,
     categoryTag: "도심형 자연 복원 솔루션",
     category: "녹화시스템",
     title: "모그린",

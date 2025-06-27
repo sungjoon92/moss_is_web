@@ -11,6 +11,7 @@ import {
 } from "@/lib/api/solution";
 import { toCamelCase } from "@/utils/caseConverter";
 import SolutionFormModal from "@/components/admin/category/solution/SolutionFormModal";
+import { uploadImage } from "@/lib/supabase/upload";
 
 const AdminSolutionPage: React.FC = () => {
   const [solutions, setSolutions] = useState<SolutionType[]>([]);
@@ -41,12 +42,26 @@ const AdminSolutionPage: React.FC = () => {
   }, [fetchSolutions]);
 
   // 생성 또는 수정
-  const handleSubmit = async (data: SolutionCreateInput | SolutionType) => {
+  const handleSubmit = async (
+    data: SolutionCreateInput | SolutionType,
+    imageFile: File | null
+  ) => {
     try {
+      let imageUrl = data.imageUrl;
+
+      // 업로드된 이미지 URL로 데이터 생성/수정
+      const submitData = { ...data, imageUrl };
+
+      if (imageFile) {
+        imageUrl = await uploadImage(imageFile, {
+          bucket: "solution",
+          folder: "solution-images",
+        });
+      }
       if (editMode === "create") {
         await createSolution(data);
-      } else if (editMode === "edit" && "id" in data) {
-        await updateSolution(data.id, data);
+      } else if (editMode === "edit" && "id" in submitData) {
+        await updateSolution(submitData.id, submitData);
       }
       setModalOpen(false);
       await fetchSolutions();

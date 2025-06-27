@@ -8,7 +8,10 @@ interface Props {
   mode: "create" | "edit";
   data: SolutionType | null;
   onClose: () => void;
-  onSubmit: (data: SolutionCreateInput | SolutionType) => void;
+  onSubmit: (
+    data: SolutionCreateInput | SolutionType,
+    imageFile: File | null
+  ) => void;
 }
 
 const SolutionFormModal: React.FC<Props> = ({
@@ -28,6 +31,8 @@ const SolutionFormModal: React.FC<Props> = ({
     createdAt: "",
     updatedAt: "",
   });
+
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   useEffect(() => {
     if (mode === "edit" && data) {
@@ -55,17 +60,19 @@ const SolutionFormModal: React.FC<Props> = ({
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const localUrl = URL.createObjectURL(file);
-      setForm((prev) => ({ ...prev, imageUrl: localUrl }));
-    }
+    if (!file) return;
+
+    // 로컬 미리보기용 URL 생성
+    const localUrl = URL.createObjectURL(file);
+    setImageFile(file);
+    setForm((prev) => ({ ...prev, imageUrl: localUrl }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(form);
+    onSubmit(form, imageFile);
   };
 
   return (

@@ -49,15 +49,16 @@ const AdminSolutionPage: React.FC = () => {
     try {
       let imageUrl = data.imageUrl;
 
-      // 업로드된 이미지 URL로 데이터 생성/수정
-      const submitData = { ...data, imageUrl };
-
       if (imageFile) {
         imageUrl = await uploadImage(imageFile, {
           bucket: "solution",
           folder: "solution-images",
         });
       }
+
+      // 업로드된 이미지 URL로 데이터 생성/수정
+      const submitData = { ...data, imageUrl };
+
       if (editMode === "create") {
         await createSolution(data);
       } else if (editMode === "edit" && "id" in submitData) {

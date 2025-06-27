@@ -1,10 +1,16 @@
 import React from "react";
 import Link from "next/link";
 import { SolutionType, ListProps } from "@/types";
+import { formatDateTime } from "@/utils/formatDate";
 
-const AdminSolutionList: React.FC<ListProps<SolutionType>> = ({
+interface Props extends ListProps<SolutionType> {
+  onEdit?: (solution: SolutionType) => void;
+}
+
+const AdminSolutionList: React.FC<Props> = ({
   data,
   onDelete,
+  onEdit,
   page,
   onPageChange,
   sort,
@@ -25,6 +31,15 @@ const AdminSolutionList: React.FC<ListProps<SolutionType>> = ({
             </th>
             <th className="border border-gray-300 px-4 py-2 text-left">제목</th>
             <th className="border border-gray-300 px-4 py-2 text-left">요약</th>
+            <th className="border border-gray-300 px-4 py-2 text-left">
+              생성일
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left">
+              수정일
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-center">
+              수정
+            </th>
             <th className="border border-gray-300 px-4 py-2 text-center">
               삭제
             </th>
@@ -40,10 +55,24 @@ const AdminSolutionList: React.FC<ListProps<SolutionType>> = ({
                 {item.category}
               </td>
               <td className="border border-gray-300 px-4 py-2 text-blue-600 hover:underline">
-                <Link href={`/solution/${item.link}`}>{item.title}</Link>
+                <Link href={`/solution/${item.id}`}>{item.title}</Link>
               </td>
               <td className="border border-gray-300 px-4 py-2 truncate max-w-xs">
                 {item.content}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {formatDateTime(item.createdAt)}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {formatDateTime(item.updatedAt)}
+              </td>
+              <td className="border border-gray-300 px-4 py-2 text-center">
+                <button
+                  onClick={() => onEdit?.(item)}
+                  className="text-blue-600 hover:text-blue-800"
+                >
+                  수정
+                </button>
               </td>
               <td className="border border-gray-300 px-4 py-2 text-center">
                 <button
@@ -68,6 +97,7 @@ const AdminSolutionList: React.FC<ListProps<SolutionType>> = ({
             className="border rounded px-2 py-1"
           >
             <option value="created_at">생성일</option>
+            <option value="updated_at">수정일</option>
             <option value="title">제목</option>
             <option value="category">카테고리</option>
           </select>

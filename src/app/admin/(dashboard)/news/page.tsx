@@ -15,7 +15,7 @@ export default function AdminNewsPage() {
   const [order, setOrder] = useState<"asc" | "desc">("desc");
 
   // 뉴스 목록 불러오기
-  const fetchNews = async () => {
+  const fetchNews = React.useCallback(async () => {
     try {
       const response = await getNewsList({ page, limit, sort, order });
       const data = response.data.map(toCamelCase);
@@ -23,11 +23,11 @@ export default function AdminNewsPage() {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [page, sort, order, limit]);
 
   useEffect(() => {
     fetchNews();
-  }, [page, sort, order]);
+  }, [fetchNews]);
 
   // 뉴스 등록
   const handleAddNews = async (data: NewsCreateInput) => {

@@ -30,6 +30,8 @@ export interface SolutionType {
   content: string;
   imageUrl: string;
   link: string;
+  createdAt: string;
+  updatedAt: string;
 }
 export type SolutionCreateInput = Omit<SolutionType, "id">;
 
@@ -62,11 +64,10 @@ export interface NewsType {
 }
 export type NewsCreateInput = Omit<NewsType, "id">;
 
-export interface AdminCategory {
+export interface AdminCategoryType {
   id: number;
   name: string;
-  key: string;
-  children?: { label: string; path: string }[];
+  path: string;
 }
 
 export interface PaginationParams {

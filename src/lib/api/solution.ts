@@ -1,10 +1,12 @@
 import axios from "@/lib/axios";
 import { PaginationParams, SolutionCreateInput, SolutionType } from "@/types";
 import { toSnakeCase } from "@/utils/caseConverter";
+import { removeTimestamps } from "@/utils/removeTimestamps";
 
 // 생성
 export const createSolution = (data: SolutionCreateInput) => {
-  const payload = toSnakeCase(data);
+  const cleanedData = removeTimestamps(data); // createdAt, updatedAt 제거
+  const payload = toSnakeCase(cleanedData);
   return axios.post("/solution", payload, { withCredentials: true });
 };
 
@@ -28,15 +30,17 @@ export const getSolutions = ({
 };
 
 // 단일 아이템 조회용
-export const getSolution = (id: number | string) => {
+export const getSolution = (id: number) => {
   return axios.get(`/solution`, { data: { id }, withCredentials: true });
 };
 // 수정
-export const updateSolution = (
-  id: number | string,
-  data: Partial<SolutionType>
-) => {
-  return axios.patch(`/solution/${id}`, data, { withCredentials: true });
+export const updateSolution = (id: number, data: Partial<SolutionType>) => {
+  const payload = toSnakeCase(data);
+  return axios.patch(
+    `/solution`,
+    { id, ...payload },
+    { withCredentials: true }
+  );
 };
 
 // 삭제

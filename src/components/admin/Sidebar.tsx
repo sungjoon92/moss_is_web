@@ -7,29 +7,12 @@ export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
 
-  let selected = "dashboard";
-  let subSelectedPath = "";
+  // 현재 경로에서 마지막 부분을 기준으로 selected 체크
+  // 예: /admin/solution -> selectedPath = 'solution'
+  const selectedPath = pathname.split("/")[2] || "";
 
-  if (pathname.startsWith("/admin/category")) {
-    selected = "category";
-    const parts = pathname.split("/");
-    subSelectedPath = parts[3] || "";
-  } else if (pathname === "/admin") {
-    selected = "dashboard";
-  } else if (pathname.startsWith("/admin/users")) {
-    selected = "users";
-  } else if (pathname.startsWith("/admin/settings")) {
-    selected = "settings";
-  }
-
-  const handleClick = (key: string, path?: string) => {
-    if (key === "category" && path) {
-      router.push(`/admin/category/${path}`);
-    } else if (key === "dashboard") {
-      router.push("/admin");
-    } else {
-      router.push(`/admin/${key}`);
-    }
+  const handleClick = (path: string) => {
+    router.push(`/admin/${path}`);
   };
 
   const handleLogout = async () => {
@@ -46,47 +29,20 @@ export default function Sidebar() {
       <h2 className="text-2xl font-bold text-lime-700 mb-6">관리자 메뉴</h2>
       <nav className="space-y-2">
         {adminCategories.map((item) => {
-          const isCategory = item.key === "category";
-          const isSelected = selected === item.key;
+          const isSelected = selectedPath === item.path;
 
           return (
-            <div key={item.key} className="relative">
-              <button
-                onClick={() => {
-                  if (isCategory) {
-                    const first = item.children?.[0];
-                    if (first) handleClick(item.key, first.path);
-                  } else {
-                    handleClick(item.key);
-                  }
-                }}
-                className={`block w-full text-left px-4 py-2 rounded-lg font-medium ${
-                  isSelected
-                    ? "bg-lime-500 text-white"
-                    : "text-lime-800 hover:bg-lime-200"
-                }`}
-              >
-                {item.name}
-              </button>
-
-              {isCategory && isSelected && item.children && (
-                <ul className="ml-4 mt-1 space-y-1">
-                  {item.children.map((child) => (
-                    <li
-                      key={child.path}
-                      className={`text-lime-800 text-sm cursor-pointer px-2 py-1 rounded hover:underline hover:bg-lime-200 ${
-                        subSelectedPath === child.path
-                          ? "font-semibold bg-lime-300"
-                          : ""
-                      }`}
-                      onClick={() => handleClick(item.key, child.path)}
-                    >
-                      {child.label}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+            <button
+              key={item.id}
+              onClick={() => handleClick(item.path)}
+              className={`block w-full text-left px-4 py-2 rounded-lg font-medium ${
+                isSelected
+                  ? "bg-lime-500 text-white"
+                  : "text-lime-800 hover:bg-lime-200"
+              }`}
+            >
+              {item.name}
+            </button>
           );
         })}
       </nav>

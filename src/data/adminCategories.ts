@@ -1,19 +1,8 @@
-import type { AdminCategory } from "@/types";
+import type { AdminCategoryType } from "@/types";
 
-export const adminCategories: AdminCategory[] = [
-  { id: 1, name: "대시보드", key: "dashboard" },
-  {
-    id: 2,
-    name: "카테고리",
-    key: "category",
-    children: [
-      { label: "홈", path: "home" },
-      { label: "기업소개", path: "enterprise" },
-      { label: "솔루션", path: "solution" },
-      { label: "프로젝트", path: "project" },
-      { label: "소식", path: "news" },
-    ],
-  },
-  { id: 3, name: "사용자 관리", key: "users" },
-  { id: 4, name: "설정", key: "settings" },
+export const adminCategories: AdminCategoryType[] = [
+  { id: 1, name: "홈", path: "home" },
+  { id: 2, name: "솔루션", path: "solution" },
+  { id: 3, name: "프로젝트", path: "project" },
+  { id: 4, name: "소식", path: "news" },
 ];

@@ -15,7 +15,7 @@ const AdminProjectPage: React.FC = () => {
   const [order, setOrder] = useState<"asc" | "desc">("desc");
 
   // 프로젝트 데이터 불러오기
-  const fetchProjects = async () => {
+  const fetchProjects = React.useCallback(async () => {
     try {
       const response = await getProjects({ page, limit, sort, order });
       const data = response.data.map(toCamelCase);
@@ -23,11 +23,11 @@ const AdminProjectPage: React.FC = () => {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [page, sort, order, limit]);
 
   useEffect(() => {
     fetchProjects();
-  }, [page, sort, order]);
+  }, [fetchProjects]);
 
   // 프로젝트 등록
   const handleAddProject = async (data: ProjectType) => {

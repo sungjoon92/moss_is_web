@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { LoginForm } from "@/components/admin/auth/LoginForm";
-import AdminPage from "@/app/admin/(side)/page";
+import AdminPage from "@/app/admin/(dashboard)/page";
 
 export default function AdminGate() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);

@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "postcss.config.js",
-    "tailwind.config.js"
+    "tailwind.config.js",
+    "src/components/admin/category/news/NewsFormModal.tsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -54,7 +54,6 @@ export async function PATCH(request: Request) {
     .from("t_solution")
     .update(updateData)
     .eq("id", id);
-
   if (error)
     return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json(data);

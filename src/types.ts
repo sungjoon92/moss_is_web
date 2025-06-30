@@ -47,6 +47,8 @@ export interface ProjectType {
   contentTitle?: string;
   contentText?: string;
   contentImages?: string[];
+  createdAt: string;
+  updatedAt: string;
 }
 export type ProjectCreateInput = Omit<ProjectType, "id">;
 
@@ -61,6 +63,8 @@ export interface NewsType {
   imageUrl: string;
   videoUrl: string;
   isMainNews?: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 export type NewsCreateInput = Omit<NewsType, "id">;
 

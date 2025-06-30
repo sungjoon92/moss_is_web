@@ -1,10 +1,12 @@
 import axios from "@/lib/axios";
 import { NewsCreateInput, NewsType, PaginationParams } from "@/types";
 import { toSnakeCase } from "@/utils/caseConverter";
+import { removeTimestamps } from "@/utils/removeTimestamps";
 
 // 생성
 export const createNews = (data: NewsCreateInput) => {
-  const payload = toSnakeCase(data);
+  const cleanedData = removeTimestamps(data); // createdAt, updatedAt 제거
+  const payload = toSnakeCase(cleanedData);
   return axios.post("/news", payload, { withCredentials: true });
 };
 
@@ -28,9 +30,11 @@ export const getNewsList = ({
 export const getNews = (id: number | string) => {
   return axios.get(`/news`, { data: { id }, withCredentials: true });
 };
+
 // 수정
 export const updateNews = (id: number | string, data: Partial<NewsType>) => {
-  return axios.patch(`/news/${id}`, data, { withCredentials: true });
+  const payload = toSnakeCase(data);
+  return axios.patch(`/news`, { id, ...payload }, { withCredentials: true });
 };
 
 // 삭제

@@ -1,10 +1,23 @@
 import React from "react";
 import Link from "next/link";
 import { ProjectType, ListProps } from "@/types";
+import { formatDateTime } from "@/utils/formatDate";
 
-const AdminProjectList: React.FC<ListProps<ProjectType>> = ({
+interface Props extends ListProps<ProjectType> {
+  onEdit?: (project: ProjectType) => void;
+  onDelete: (id: number) => void;
+  onPageChange: (page: number) => void;
+  onSortChange: (sort: string) => void;
+  onOrderChange: (order: "asc" | "desc") => void;
+  page: number;
+  sort: string;
+  order: "asc" | "desc";
+}
+
+const AdminProjectList: React.FC<Props> = ({
   data,
   onDelete,
+  onEdit,
   page,
   onPageChange,
   sort,
@@ -22,6 +35,15 @@ const AdminProjectList: React.FC<ListProps<ProjectType>> = ({
             </th>
             <th className="border border-gray-300 px-4 py-2 text-left">제목</th>
             <th className="border border-gray-300 px-4 py-2 text-left">요약</th>
+            <th className="border border-gray-300 px-4 py-2 text-left">
+              생성일
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left">
+              수정일
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-center">
+              수정
+            </th>
             <th className="border border-gray-300 px-4 py-2 text-center">
               삭제
             </th>
@@ -38,6 +60,20 @@ const AdminProjectList: React.FC<ListProps<ProjectType>> = ({
               </td>
               <td className="border border-gray-300 px-4 py-2 truncate max-w-xs">
                 {item.description}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {formatDateTime(item.createdAt)}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {formatDateTime(item.updatedAt)}
+              </td>
+              <td className="border border-gray-300 px-4 py-2 text-center">
+                <button
+                  onClick={() => onEdit?.(item)}
+                  className="text-blue-600 hover:text-blue-800"
+                >
+                  수정
+                </button>
               </td>
               <td className="border border-gray-300 px-4 py-2 text-center">
                 <button
@@ -62,6 +98,7 @@ const AdminProjectList: React.FC<ListProps<ProjectType>> = ({
             className="border rounded px-2 py-1"
           >
             <option value="created_at">생성일</option>
+            <option value="updated_at">수정일</option>
             <option value="title">제목</option>
             <option value="category">카테고리</option>
           </select>

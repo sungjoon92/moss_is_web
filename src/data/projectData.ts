@@ -20,6 +20,8 @@ export const projectData: ProjectType[] = [
       "https://cdn.prod.website-files.com/67e4d1523dd414300ed0cc40/6820cde672d31971c124675d_%EB%B3%B5%EC%9B%90%20%EB%B9%84%EA%B5%90%EC%82%AC%EC%A7%84_%EC%A0%84.JPG",
       "https://cdn.prod.website-files.com/67e4d1523dd414300ed0cc40/6820cd5f8310dc81b9451fd1_%EB%B3%B5%EC%9B%90%20%EB%B9%84%EA%B5%90%EC%82%AC%EC%A7%84_%ED%9B%84.JPG",
     ],
+    createdAt: "1",
+    updatedAt: "1",
   },
   {
     id: 1,
@@ -39,6 +41,8 @@ export const projectData: ProjectType[] = [
       "https://cdn.prod.website-files.com/67e4d1523dd414300ed0cc40/6820d3e072e43ce739c89c2b_KakaoTalk_20241107_144136387_29.jpg",
       "https://cdn.prod.website-files.com/67e4d1523dd414300ed0cc40/6820d1c3c822177c9cebcd81_KakaoTalk_20241107_144136387_30.jpg",
     ],
+    createdAt: "1",
+    updatedAt: "1",
   },
   {
     id: 2,
@@ -58,6 +62,8 @@ export const projectData: ProjectType[] = [
       "https://cdn.prod.website-files.com/67e4d1523dd414300ed0cc40/6821dc7eda56e8ff57bed869_technology-img13.jpg",
       "https://cdn.prod.website-files.com/67e4d1523dd414300ed0cc40/6821dcbd3fd498450ed6db73_technology-img14.jpg",
     ],
+    createdAt: "1",
+    updatedAt: "1",
   },
   {
     id: 3,
@@ -77,5 +83,7 @@ export const projectData: ProjectType[] = [
     contentImages: [
       "https://cdn.prod.website-files.com/67e4d1523dd414300ed0cc40/67ff6fba1792c333db19c42e_restoration%20project_jeju.png",
     ],
+    createdAt: "1",
+    updatedAt: "1",
   },
 ];

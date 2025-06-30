@@ -1,33 +1,36 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { SolutionCreateInput, SolutionType } from "@/types";
+import { ProjectType, ProjectCreateInput } from "@/types";
 import Image from "next/image";
-import "react-quill-new/dist/quill.snow.css";
-import { DynamicReactQuill } from "@/utils/DynamicReactQuill";
+
 interface Props {
   mode: "create" | "edit";
-  data: SolutionType | null;
+  data: ProjectType | null;
   onClose: () => void;
   onSubmit: (
-    data: SolutionCreateInput | SolutionType,
+    data: ProjectCreateInput | ProjectType,
     imageFile: File | null
   ) => void;
 }
 
-const SolutionFormModal: React.FC<Props> = ({
+const ProjectFormModal: React.FC<Props> = ({
   mode,
   data,
   onClose,
   onSubmit,
 }) => {
-  const [form, setForm] = useState<SolutionCreateInput | SolutionType>({
-    categoryTag: "",
+  const [form, setForm] = useState<ProjectCreateInput | ProjectType>({
     category: "",
     title: "",
-    content: "",
-    imageUrl: "",
+    description: "",
+    location: "",
+    date: "",
     link: "",
+    imageUrl: "",
+    contentTitle: "",
+    contentText: "",
+    contentImages: [],
     createdAt: "",
     updatedAt: "",
   });
@@ -39,12 +42,16 @@ const SolutionFormModal: React.FC<Props> = ({
       setForm(data);
     } else {
       setForm({
-        categoryTag: "",
         category: "",
         title: "",
-        content: "",
-        imageUrl: "",
+        description: "",
+        location: "",
+        date: "",
         link: "",
+        imageUrl: "",
+        contentTitle: "",
+        contentText: "",
+        contentImages: [],
         createdAt: "",
         updatedAt: "",
       });
@@ -64,7 +71,6 @@ const SolutionFormModal: React.FC<Props> = ({
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // 로컬 미리보기용 URL 생성
     const localUrl = URL.createObjectURL(file);
     setImageFile(file);
     setForm((prev) => ({ ...prev, imageUrl: localUrl }));
@@ -82,34 +88,18 @@ const SolutionFormModal: React.FC<Props> = ({
         className="w-full max-w-2xl bg-white rounded-2xl p-6 space-y-6 shadow-lg"
       >
         <h2 className="text-xl font-bold text-gray-800">
-          {mode === "create" ? "솔루션 등록" : "솔루션 수정"}
+          {mode === "create" ? "프로젝트 등록" : "프로젝트 수정"}
         </h2>
-        <div className="space-y-1">
-          <label className="text-sm font-medium text-gray-700">
-            카테고리 태그
-          </label>
-          <input
-            name="categoryTag"
-            value={form.categoryTag}
-            onChange={handleChange}
-            placeholder="예: 도시 녹화 솔루션"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
-          />
-        </div>
 
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">카테고리</label>
-          <select
+          <input
             name="category"
             value={form.category}
             onChange={handleChange}
+            placeholder="예: 도시 재생"
             className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
-          >
-            <option value="">카테고리 선택</option>
-            <option value="녹화시스템">녹화시스템</option>
-            <option value="산림복원">산림복원</option>
-            <option value="이끼정원">이끼정원</option>
-          </select>
+          />
         </div>
 
         <div className="space-y-1">
@@ -118,24 +108,20 @@ const SolutionFormModal: React.FC<Props> = ({
             name="title"
             value={form.title}
             onChange={handleChange}
-            placeholder="예: 모스비"
+            placeholder="프로젝트 제목"
             className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
           />
         </div>
 
         <div className="space-y-1">
-          <label className="text-sm font-medium text-gray-700">내용</label>
-          <div className="border border-gray-300 rounded-lg">
-            <DynamicReactQuill
-              theme="snow"
-              value={form.content}
-              onChange={(value) =>
-                setForm((prev) => ({ ...prev, content: value }))
-              }
-              className="rounded-lg"
-              placeholder="솔루션 설명을 입력하세요"
-            />
-          </div>
+          <label className="text-sm font-medium text-gray-700">요약 설명</label>
+          <textarea
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            placeholder="간단한 설명"
+            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
+          />
         </div>
 
         <div className="space-y-1">
@@ -160,6 +146,17 @@ const SolutionFormModal: React.FC<Props> = ({
         </div>
 
         <div className="space-y-1">
+          <label className="text-sm font-medium text-gray-700">날짜</label>
+          <input
+            type="date"
+            name="date"
+            value={form.date}
+            onChange={handleChange}
+            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
+          />
+        </div>
+
+        <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">
             링크 (슬러그)
           </label>
@@ -167,7 +164,7 @@ const SolutionFormModal: React.FC<Props> = ({
             name="link"
             value={form.link}
             onChange={handleChange}
-            placeholder="예: mosby"
+            placeholder="예: urban-green"
             className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
           />
         </div>
@@ -192,4 +189,4 @@ const SolutionFormModal: React.FC<Props> = ({
   );
 };
 
-export default SolutionFormModal;
+export default ProjectFormModal;

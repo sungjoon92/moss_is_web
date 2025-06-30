@@ -1,10 +1,12 @@
 import axios from "@/lib/axios";
 import { PaginationParams, ProjectCreateInput, ProjectType } from "@/types";
 import { toSnakeCase } from "@/utils/caseConverter";
+import { removeTimestamps } from "@/utils/removeTimestamps";
 
 // 생성
 export const createProject = (data: ProjectCreateInput) => {
-  const payload = toSnakeCase(data);
+  const cleanedData = removeTimestamps(data); // createdAt, updatedAt 제거
+  const payload = toSnakeCase(cleanedData);
   return axios.post("/project", payload, { withCredentials: true });
 };
 
@@ -30,11 +32,9 @@ export const getProject = (id: number | string) => {
 };
 
 // 수정
-export const updateProject = (
-  id: number | string,
-  data: Partial<ProjectType>
-) => {
-  return axios.patch(`/project/${id}`, data, { withCredentials: true });
+export const updateProject = (id: number, data: Partial<ProjectType>) => {
+  const payload = toSnakeCase(data);
+  return axios.patch(`/project`, { id, ...payload }, { withCredentials: true });
 };
 
 // 삭제

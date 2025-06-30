@@ -14,6 +14,8 @@ export const NewsData: NewsType[] = [
     pageUrl: "https://www.unicornfactory.co.kr/article/2024090317081673607",
     videoUrl: "https://www.youtube.com/embed/Xk3JKCIFWwo?si=yj6P0MkbY73O3YqG",
     isMainNews: true,
+    createdAt: "1",
+    updatedAt: "1",
   },
   {
     id: 2,
@@ -28,6 +30,8 @@ export const NewsData: NewsType[] = [
     pageUrl: "https://www.linkedin.com/company/code-of-nature/",
     videoUrl: "",
     isMainNews: false,
+    createdAt: "1",
+    updatedAt: "1",
   },
   {
     id: 3,
@@ -42,6 +46,8 @@ export const NewsData: NewsType[] = [
     pageUrl: "https://www.linkedin.com/company/code-of-nature/",
     videoUrl: "https://www.youtube.com/embed/gipQORVeTEc?si=SWFnv1yUUoOnQwJF",
     isMainNews: false,
+    createdAt: "1",
+    updatedAt: "1",
   },
   {
     id: 4,
@@ -56,5 +62,7 @@ export const NewsData: NewsType[] = [
     pageUrl: "https://www.linkedin.com/company/code-of-nature/",
     videoUrl: "",
     isMainNews: false,
+    createdAt: "1",
+    updatedAt: "1",
   },
 ];

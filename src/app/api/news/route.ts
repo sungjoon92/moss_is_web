@@ -42,9 +42,14 @@ export async function PATCH(request: Request) {
   if (!id)
     return NextResponse.json({ error: "id is required" }, { status: 400 });
 
+  const updateData = {
+    ...updates,
+    updated_at: new Date().toISOString(), // 현재 시간으로 수정
+  };
+
   const { data, error } = await supabase
     .from("t_news")
-    .update(updates)
+    .update(updateData)
     .eq("id", id);
   if (error)
     return NextResponse.json({ error: error.message }, { status: 500 });

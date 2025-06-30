@@ -33,6 +33,7 @@ export const getSolutions = ({
 export const getSolution = (id: number) => {
   return axios.get(`/solution`, { data: { id }, withCredentials: true });
 };
+
 // 수정
 export const updateSolution = (id: number, data: Partial<SolutionType>) => {
   const payload = toSnakeCase(data);

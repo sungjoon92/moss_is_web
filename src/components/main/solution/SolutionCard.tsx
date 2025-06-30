@@ -1,17 +1,19 @@
-// components/MosbyCard.tsx
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { SolutionType } from "@/types";
+import { sanitizeHtmlClient } from "@/utils/sanitizeHtmlClient";
 
 interface props {
   data: SolutionType[];
 }
 export const SolutionCard: React.FC<props> = ({ data }) => {
+  console.log(data);
+
   return (
     <div className="space-y-10">
       {data.map((item, index) => {
-        const { categoryTag, title, content, imageUrl, link } = item;
+        const { id, categoryTag, title, content, imageUrl } = item;
         return (
           <div
             key={index}
@@ -22,15 +24,20 @@ export const SolutionCard: React.FC<props> = ({ data }) => {
               <div className="w-full flex flex-col justify-between space-y-4">
                 <span className="text-sm text-gray-500">{categoryTag}</span>
                 <Link
-                  href={`/solution/${link}`}
+                  href={`/solution/${id}`}
                   className="text-xl font-semibold"
                 >
                   {title}
                 </Link>
-                <p className="text-gray-700 leading-relaxed">{content}</p>
+                <div
+                  className="text-gray-700 leading-relaxed"
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizeHtmlClient(content),
+                  }}
+                ></div>
               </div>
               <Link
-                href={`/solution/${link}`}
+                href={`/solution/${id}`}
                 className="text-green-400 hover:underline"
               >
                 더 알아보기 →
@@ -39,7 +46,7 @@ export const SolutionCard: React.FC<props> = ({ data }) => {
 
             {/* 이미지 영역 */}
             <div className="w-full md:w-[30%] h-[300px] relative min-w-[300px]">
-              <Link href={`/solution/${link}`}>
+              <Link href={`/solution/${id}`}>
                 <Image
                   src={imageUrl}
                   alt={title}

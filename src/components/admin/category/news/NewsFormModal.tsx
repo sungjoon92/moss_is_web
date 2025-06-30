@@ -8,7 +8,7 @@ interface Props {
   mode: "create" | "edit";
   data: NewsType | null;
   onClose: () => void;
-  onSubmit: (data: NewsCreateInput | NewsType) => void;
+  onSubmit: (data: NewsCreateInput | NewsType, imageFile: File | null) => void;
 }
 
 const NewsFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
@@ -25,6 +25,8 @@ const NewsFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
     createdAt: "",
     updatedAt: "",
   });
+
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   useEffect(() => {
     if (mode === "edit" && data) {
@@ -65,13 +67,14 @@ const NewsFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
     const file = e.target.files?.[0];
     if (file) {
       const localUrl = URL.createObjectURL(file);
+      setImageFile(file);
       setForm((prev) => ({ ...prev, imageUrl: localUrl }));
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(form);
+    onSubmit(form, imageFile);
   };
 
   return (

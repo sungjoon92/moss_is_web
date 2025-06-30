@@ -11,8 +11,15 @@ const ProjectCard: React.FC<Props> = ({ data }) => {
   return (
     <div className="space-y-10">
       {data.map((item, index) => {
-        const { category, title, description, imageUrl, location, date, link } =
-          item;
+        const {
+          id,
+          category,
+          title,
+          description,
+          imageUrl,
+          location,
+          startDate,
+        } = item;
         return (
           <div
             key={index}
@@ -24,7 +31,7 @@ const ProjectCard: React.FC<Props> = ({ data }) => {
                 {category}
               </span>
               <Link
-                href={`/project/${link}`}
+                href={`/project/${id}`}
                 className="text-3xl font-semibold leading-snug whitespace-pre-line"
               >
                 {title}
@@ -35,10 +42,10 @@ const ProjectCard: React.FC<Props> = ({ data }) => {
               <div className="flex items-center text-xs text-gray-500 space-x-3">
                 <span>{location}</span>
                 <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
-                <span>{date}</span>
+                <span>{startDate}</span>
               </div>
               <Link
-                href={`/project/${link}`}
+                href={`/project/${id}`}
                 className="text-green-600 text-sm font-semibold hover:underline flex items-center gap-1"
               >
                 더 알아보기 →
@@ -47,7 +54,7 @@ const ProjectCard: React.FC<Props> = ({ data }) => {
 
             {/* 이미지 영역 */}
             <Link
-              href={`/project/${link}`}
+              href={`/project/${id}`}
               className="w-full md:w-1/3 block rounded-lg overflow-hidden shadow-lg"
             >
               <Image

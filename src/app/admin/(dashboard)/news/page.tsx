@@ -11,6 +11,7 @@ import {
   deleteNews,
   updateNews,
 } from "@/lib/api/news";
+import { uploadImage } from "@/lib/supabase/upload";
 
 const AdminNewsPage: React.FC = () => {
   const [newsList, setNewsList] = useState<NewsType[]>([]);
@@ -40,14 +41,26 @@ const AdminNewsPage: React.FC = () => {
   }, [fetchNews]);
 
   // 생성 또는 수정
-  const handleSubmit = async (data: NewsCreateInput | NewsType) => {
-    console.log(data);
-
+  const handleSubmit = async (
+    data: NewsCreateInput | NewsType,
+    imageFile: File | null
+  ) => {
     try {
+      let imageUrl = data.imageUrl;
+
+      if (imageFile) {
+        imageUrl = await uploadImage(imageFile, {
+          bucket: "moss-is-bucket",
+          folder: "news-images",
+        });
+      }
+
+      // 업로드된 이미지 URL로 데이터 생성/수정
+      const submitData = { ...data, imageUrl };
       if (editMode === "create") {
-        await createNews(data);
+        await createNews(submitData);
       } else if (editMode === "edit" && "id" in data) {
-        await updateNews(data.id, data);
+        await updateNews(data.id, submitData);
       }
       setModalOpen(false);
       await fetchNews();

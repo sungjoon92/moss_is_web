@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { ProjectType, ProjectCreateInput } from "@/types";
 import Image from "next/image";
+import { DynamicReactQuill } from "@/utils/DynamicReactQuill";
+import "react-quill-new/dist/quill.snow.css";
 
 interface Props {
   mode: "create" | "edit";
@@ -25,8 +27,7 @@ const ProjectFormModal: React.FC<Props> = ({
     title: "",
     description: "",
     location: "",
-    date: "",
-    link: "",
+    startDate: "",
     imageUrl: "",
     contentTitle: "",
     contentText: "",
@@ -46,8 +47,7 @@ const ProjectFormModal: React.FC<Props> = ({
         title: "",
         description: "",
         location: "",
-        date: "",
-        link: "",
+        startDate: "",
         imageUrl: "",
         contentTitle: "",
         contentText: "",
@@ -115,7 +115,7 @@ const ProjectFormModal: React.FC<Props> = ({
 
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">요약 설명</label>
-          <textarea
+          <input
             name="description"
             value={form.description}
             onChange={handleChange}
@@ -146,11 +146,13 @@ const ProjectFormModal: React.FC<Props> = ({
         </div>
 
         <div className="space-y-1">
-          <label className="text-sm font-medium text-gray-700">날짜</label>
+          <label className="text-sm font-medium text-gray-700">
+            프로젝트 시작일
+          </label>
           <input
             type="date"
-            name="date"
-            value={form.date}
+            name="startDate"
+            value={form.startDate}
             onChange={handleChange}
             className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
           />
@@ -158,15 +160,31 @@ const ProjectFormModal: React.FC<Props> = ({
 
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">
-            링크 (슬러그)
+            디테일 페이지 제목
           </label>
           <input
-            name="link"
-            value={form.link}
+            name="contentTitle"
+            value={form.contentTitle}
             onChange={handleChange}
-            placeholder="예: urban-green"
+            placeholder="디테일 페이지 제목"
             className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
           />
+        </div>
+        <div className="space-y-1">
+          <label className="text-sm font-medium text-gray-700">
+            디테일 페이지 본문
+          </label>
+          <div className="border border-gray-300 rounded-lg">
+            <DynamicReactQuill
+              theme="snow"
+              value={form.contentText}
+              onChange={(value) =>
+                setForm((prev) => ({ ...prev, contentText: value }))
+              }
+              className="rounded-lg"
+              placeholder="솔루션 설명을 입력하세요"
+            />
+          </div>
         </div>
 
         <div className="flex justify-end space-x-2 pt-4">

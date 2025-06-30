@@ -29,7 +29,6 @@ export interface SolutionType {
   title: string;
   content: string;
   imageUrl: string;
-  link: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -41,8 +40,7 @@ export interface ProjectType {
   title: string;
   description: string;
   location: string;
-  date: string;
-  link: string;
+  startDate: string;
   imageUrl: string;
   contentTitle?: string;
   contentText?: string;

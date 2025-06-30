@@ -28,7 +28,7 @@ export const getProjects = ({
 
 // 단일 아이템 조회용
 export const getProject = (id: number | string) => {
-  return axios.get(`/project`, { data: { id }, withCredentials: true });
+  return axios.get(`/project/${id}`, { withCredentials: true });
 };
 
 // 수정

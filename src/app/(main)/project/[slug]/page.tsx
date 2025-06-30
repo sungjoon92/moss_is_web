@@ -6,13 +6,14 @@ import { ProjectType } from "@/types";
 
 interface Props {
   params: {
-    slug: string;
+    id: string;
   };
 }
 
 export default function ProjectDetailPage({ params }: Props) {
+  const paramsId = parseInt(params.id)
   const project: ProjectType | undefined = projectData.find(
-    (item) => item.link === params.slug
+    (item) => item.id === paramsId
   );
 
   if (!project) return notFound();

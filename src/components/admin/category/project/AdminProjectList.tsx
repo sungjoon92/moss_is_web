@@ -56,7 +56,7 @@ const AdminProjectList: React.FC<Props> = ({
                 {item.category}
               </td>
               <td className="border border-gray-300 px-4 py-2 text-blue-600 hover:underline">
-                <Link href={`/project/${item.link}`}>{item.title}</Link>
+                <Link href={`/project/${item.id}`}>{item.title}</Link>
               </td>
               <td className="border border-gray-300 px-4 py-2 truncate max-w-xs">
                 {item.description}

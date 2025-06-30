@@ -10,6 +10,11 @@ export const createSolution = (data: SolutionCreateInput) => {
   return axios.post("/solution", payload, { withCredentials: true });
 };
 
+// 단일 솔루션 조회
+export const getSolution = (id: number) => {
+  return axios.get(`/solution/${id}`, { withCredentials: true });
+};
+
 // 전체 리스트 조회용
 export const getSolutions = ({
   page = 1,
@@ -27,11 +32,6 @@ export const getSolutions = ({
   return axios.get(`/solution?${params.toString()}`, {
     withCredentials: true,
   });
-};
-
-// 단일 아이템 조회용
-export const getSolution = (id: number) => {
-  return axios.get(`/solution`, { data: { id }, withCredentials: true });
 };
 
 // 수정

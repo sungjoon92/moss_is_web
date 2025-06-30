@@ -41,7 +41,7 @@ const AdminSolutionPage: React.FC = () => {
     fetchSolutions();
   }, [fetchSolutions]);
 
-  // 생성 또는 수정
+  // 등록/수정 처리
   const handleSubmit = async (
     data: SolutionCreateInput | SolutionType,
     imageFile: File | null
@@ -51,7 +51,7 @@ const AdminSolutionPage: React.FC = () => {
 
       if (imageFile) {
         imageUrl = await uploadImage(imageFile, {
-          bucket: "solution",
+          bucket: "moss-is-bucket",
           folder: "solution-images",
         });
       }

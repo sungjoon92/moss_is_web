@@ -1,18 +1,44 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@/components/Container";
 import SolutionCard from "@/components/main/solution/SolutionCard";
-import { solutionData } from "@/data/solutionData";
+import { SolutionType } from "@/types";
+import { getSolutions } from "@/lib/api/solution";
+import { toCamelCase } from "@/utils/caseConverter";
 const category = ["전체", "녹화시스템", "산림복원", "이끼정원"];
 
 const SolutionPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState("전체");
+  const [solutions, setSolutions] = useState<SolutionType[]>([]);
+
+  // 나중에 페이지네이션, 정렬 사용하게 되면 활성화
+  // const [page, setPage] = useState(1);
+  // const [limit] = useState(10);
+  // const [sort, setSort] = useState("created_at");
+  // const [order, setOrder] = useState<"asc" | "desc">("desc");
+
+  // 솔루션 데이터 불러오기
+  const fetchSolutions = React.useCallback(async () => {
+    try {
+      const response = await getSolutions({});
+      const data = response.data.map(toCamelCase);
+      console.log(data);
+
+      setSolutions(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchSolutions();
+  }, [fetchSolutions]);
 
   // 필터링 로직
   const filterData =
     activeCategory === "전체"
-      ? solutionData
-      : solutionData.filter((item) => item.category === activeCategory);
+      ? solutions
+      : solutions.filter((item) => item.category === activeCategory);
 
   return (
     <Container>

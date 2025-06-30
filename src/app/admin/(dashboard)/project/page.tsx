@@ -11,6 +11,7 @@ import {
   updateProject,
 } from "@/lib/api/project";
 import { toCamelCase } from "@/utils/caseConverter";
+import { uploadImage } from "@/lib/supabase/upload";
 
 const AdminProjectPage: React.FC = () => {
   const [projects, setProjects] = useState<ProjectType[]>([]);
@@ -39,14 +40,27 @@ const AdminProjectPage: React.FC = () => {
   }, [fetchProjects]);
 
   // 등록/수정 처리
-  const handleSubmit = async (data: ProjectCreateInput | ProjectType) => {
-    console.log(data);
-
+  const handleSubmit = async (
+    data: ProjectCreateInput | ProjectType,
+    imageFile: File | null
+  ) => {
     try {
+      let imageUrl = data.imageUrl;
+
+      if (imageFile) {
+        imageUrl = await uploadImage(imageFile, {
+          bucket: "moss-is-bucket",
+          folder: "project-images",
+        });
+      }
+
+      // 업로드된 이미지 URL로 데이터 생성/수정
+      const submitData = { ...data, imageUrl };
+
       if (editMode === "create") {
-        await createProject(data);
+        await createProject(submitData);
       } else if (editMode === "edit" && "id" in data) {
-        await updateProject(data.id, data);
+        await updateProject(data.id, submitData);
       }
       setModalOpen(false);
       await fetchProjects();

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { SolutionType, ListProps } from "@/types";
 import { formatDateTime } from "@/utils/formatDate";
-
+import { sanitizeHtmlClient } from "@/utils/sanitizeHtmlClient";
 interface Props extends ListProps<SolutionType> {
   onEdit?: (solution: SolutionType) => void;
 }
@@ -58,7 +58,12 @@ const AdminSolutionList: React.FC<Props> = ({
                 <Link href={`/solution/${item.id}`}>{item.title}</Link>
               </td>
               <td className="border border-gray-300 px-4 py-2 truncate max-w-xs">
-                {item.content}
+                <div
+                  className="line-clamp-1 overflow-hidden"
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizeHtmlClient(item.content),
+                  }}
+                />
               </td>
               <td className="border border-gray-300 px-4 py-2">
                 {formatDateTime(item.createdAt)}
@@ -111,7 +116,6 @@ const AdminSolutionList: React.FC<Props> = ({
             <option value="asc">오름차순</option>
           </select>
         </div>
-
         <div className="flex items-center gap-2">
           <button
             onClick={() => onPageChange(Math.max(1, page - 1))}

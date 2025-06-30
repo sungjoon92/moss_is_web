@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { SolutionCreateInput, SolutionType } from "@/types";
 import Image from "next/image";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 interface Props {
   mode: "create" | "edit";
@@ -125,14 +127,17 @@ const SolutionFormModal: React.FC<Props> = ({
 
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">내용</label>
-          <textarea
-            name="content"
-            value={form.content}
-            onChange={handleChange}
-            rows={4}
-            placeholder="솔루션 설명을 입력하세요"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400 resize-none"
-          />
+          <div className="border border-gray-300 rounded-lg">
+            <ReactQuill
+              theme="snow"
+              value={form.content}
+              onChange={(value) =>
+                setForm((prev) => ({ ...prev, content: value }))
+              }
+              className="rounded-lg"
+              placeholder="솔루션 설명을 입력하세요"
+            />
+          </div>
         </div>
 
         <div className="space-y-1">

@@ -1,10 +1,9 @@
-// app/layout.tsx
-
 import "./globals.css";
 import "./reset.css";
 import { Manrope, Source_Sans_3 } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { siteDetails } from "@/data/siteDetails";
+<script type="text/javascript" src="dist/purify.js"></script>;
 
 const manrope = Manrope({ subsets: ["latin"] });
 const sourceSans = Source_Sans_3({ subsets: ["latin"] });

@@ -3,9 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { SolutionCreateInput, SolutionType } from "@/types";
 import Image from "next/image";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-
+import "react-quill-new/dist/quill.snow.css";
+import { DynamicReactQuill } from "@/utils/DynamicReactQuill";
 interface Props {
   mode: "create" | "edit";
   data: SolutionType | null;
@@ -128,7 +127,7 @@ const SolutionFormModal: React.FC<Props> = ({
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">내용</label>
           <div className="border border-gray-300 rounded-lg">
-            <ReactQuill
+            <DynamicReactQuill
               theme="snow"
               value={form.content}
               onChange={(value) =>

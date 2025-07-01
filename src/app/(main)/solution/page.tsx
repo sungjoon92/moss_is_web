@@ -22,7 +22,6 @@ const SolutionPage: React.FC = () => {
     try {
       const response = await getSolutions({});
       const data = response.data.map(toCamelCase);
-      console.log(data);
 
       setSolutions(data);
     } catch (error) {

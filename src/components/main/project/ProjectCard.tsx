@@ -19,6 +19,7 @@ const ProjectCard: React.FC<Props> = ({ data }) => {
           imageUrl,
           location,
           startDate,
+          endDate,
         } = item;
         return (
           <div
@@ -43,6 +44,7 @@ const ProjectCard: React.FC<Props> = ({ data }) => {
                 <span>{location}</span>
                 <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
                 <span>{startDate}</span>
+                <span>{endDate}</span>
               </div>
               <Link
                 href={`/project/${id}`}

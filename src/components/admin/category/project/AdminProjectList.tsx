@@ -36,6 +36,12 @@ const AdminProjectList: React.FC<Props> = ({
             <th className="border border-gray-300 px-4 py-2 text-left">제목</th>
             <th className="border border-gray-300 px-4 py-2 text-left">요약</th>
             <th className="border border-gray-300 px-4 py-2 text-left">
+              프로젝트 시작일
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left">
+              프로젝트 종료일
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left">
               생성일
             </th>
             <th className="border border-gray-300 px-4 py-2 text-left">
@@ -60,6 +66,12 @@ const AdminProjectList: React.FC<Props> = ({
               </td>
               <td className="border border-gray-300 px-4 py-2 truncate max-w-xs">
                 {item.description}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {formatDateTime(item.startDate)}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {formatDateTime(item.endDate)}
               </td>
               <td className="border border-gray-300 px-4 py-2">
                 {formatDateTime(item.createdAt)}

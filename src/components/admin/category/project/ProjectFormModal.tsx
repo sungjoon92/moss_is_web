@@ -28,6 +28,7 @@ const ProjectFormModal: React.FC<Props> = ({
     description: "",
     location: "",
     startDate: "",
+    endDate: "",
     imageUrl: "",
     contentTitle: "",
     contentText: "",
@@ -48,6 +49,7 @@ const ProjectFormModal: React.FC<Props> = ({
         description: "",
         location: "",
         startDate: "",
+        endDate: "",
         imageUrl: "",
         contentTitle: "",
         contentText: "",
@@ -153,6 +155,19 @@ const ProjectFormModal: React.FC<Props> = ({
             type="date"
             name="startDate"
             value={form.startDate}
+            onChange={handleChange}
+            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
+          />
+        </div>
+
+        <div className="space-y-1">
+          <label className="text-sm font-medium text-gray-700">
+            프로젝트 종료일
+          </label>
+          <input
+            type="date"
+            name="endDate"
+            value={form.endDate}
             onChange={handleChange}
             className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
           />

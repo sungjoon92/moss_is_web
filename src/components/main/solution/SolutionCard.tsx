@@ -8,8 +8,6 @@ interface props {
   data: SolutionType[];
 }
 export const SolutionCard: React.FC<props> = ({ data }) => {
-  console.log(data);
-
   return (
     <div className="space-y-10">
       {data.map((item, index) => {

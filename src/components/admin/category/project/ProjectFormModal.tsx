@@ -12,8 +12,12 @@ interface Props {
   onClose: () => void;
   onSubmit: (
     data: ProjectCreateInput | ProjectType,
-    imageFile: File | null
+    imageFile: File | null,
+    detailImageFiles: File[],
+    removedImageUrls: string[]
   ) => void;
+  detailImageFiles: File[];
+  setDetailImageFiles: React.Dispatch<React.SetStateAction<File[]>>;
 }
 
 const ProjectFormModal: React.FC<Props> = ({
@@ -21,6 +25,8 @@ const ProjectFormModal: React.FC<Props> = ({
   data,
   onClose,
   onSubmit,
+  detailImageFiles,
+  setDetailImageFiles,
 }) => {
   const [form, setForm] = useState<ProjectCreateInput | ProjectType>({
     category: "",
@@ -38,10 +44,21 @@ const ProjectFormModal: React.FC<Props> = ({
   });
 
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [previewImages, setPreviewImages] = useState<string[]>([]);
+  const allImages = [...(form.contentImages || []), ...previewImages];
+  const [removedImageUrls, setRemovedImageUrls] = useState<string[]>([]);
 
   useEffect(() => {
     if (mode === "edit" && data) {
-      setForm(data);
+      setForm({
+        ...data,
+        contentImages:
+          typeof data.contentImages === "string"
+            ? JSON.parse(data.contentImages)
+            : data.contentImages || [],
+      });
+      // previewImages는 초기화
+      setPreviewImages([]);
     } else {
       setForm({
         category: "",
@@ -57,9 +74,11 @@ const ProjectFormModal: React.FC<Props> = ({
         createdAt: "",
         updatedAt: "",
       });
+      setPreviewImages([]);
     }
   }, [mode, data]);
 
+  // input 데이터 변경값
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -69,6 +88,7 @@ const ProjectFormModal: React.FC<Props> = ({
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  // 프로젝트 본문 이미지
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -78,13 +98,36 @@ const ProjectFormModal: React.FC<Props> = ({
     setForm((prev) => ({ ...prev, imageUrl: localUrl }));
   };
 
+  // 프로젝트 디테일 페이지 이미지
+  const handleDetailImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    setDetailImageFiles((prev) => [...prev, ...Array.from(files)]);
+
+    const newPreviewUrls = Array.from(files).map((file) =>
+      URL.createObjectURL(file)
+    );
+    setPreviewImages((prev) => [...prev, ...newPreviewUrls]);
+  };
+
+  // 이미지 삭제
+  const handleRemoveImage = (url: string) => {
+    setRemovedImageUrls((prev) => [...prev, url]);
+    setForm((prev) => ({
+      ...prev,
+      contentImages: prev.contentImages.filter((img) => img !== url),
+    }));
+  };
+
+  // form 제출시 onsubmit 상위 컴포넌트로 props전달
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(form, imageFile);
+    onSubmit(form, imageFile, detailImageFiles, removedImageUrls);
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center overflow-auto">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-2xl bg-white rounded-2xl p-6 space-y-6 shadow-lg"
@@ -116,12 +159,12 @@ const ProjectFormModal: React.FC<Props> = ({
         </div>
 
         <div className="space-y-1">
-          <label className="text-sm font-medium text-gray-700">요약 설명</label>
+          <label className="text-sm font-medium text-gray-700">주소</label>
           <input
             name="description"
             value={form.description}
             onChange={handleChange}
-            placeholder="간단한 설명"
+            placeholder="예: 강원특별자치도 강릉시, 대한민국"
             className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
           />
         </div>
@@ -199,6 +242,48 @@ const ProjectFormModal: React.FC<Props> = ({
               className="rounded-lg"
               placeholder="솔루션 설명을 입력하세요"
             />
+          </div>
+        </div>
+
+        <div className="space-y-1">
+          <label className="text-sm font-medium text-gray-700">
+            디테일 페이지 이미지 업로드
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleDetailImageUpload}
+            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
+          />
+          <div className="flex flex-wrap gap-2">
+            {allImages.map((item, index) => {
+              const isPreview = item.startsWith("blob:");
+              const isRemoved = removedImageUrls.includes(item);
+
+              if (isRemoved) return null;
+
+              return (
+                <div key={index} className="relative">
+                  <Image
+                    width={1000}
+                    height={1000}
+                    src={item}
+                    alt={`이미지 ${index + 1}`}
+                    className="mt-2 w-20 max-w-xs rounded border"
+                  />
+                  {!isPreview && (
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(item)}
+                      className="absolute top-0 right-0 bg-red-500 text-white text-xs px-1 rounded-bl"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 

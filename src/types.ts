@@ -43,9 +43,9 @@ export interface ProjectType {
   startDate: string;
   endDate: string;
   imageUrl: string;
-  contentTitle?: string;
-  contentText?: string;
-  contentImages?: string[];
+  contentTitle: string;
+  contentText: string;
+  contentImages: string[];
   createdAt: string;
   updatedAt: string;
 }

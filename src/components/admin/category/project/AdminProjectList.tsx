@@ -34,7 +34,7 @@ const AdminProjectList: React.FC<Props> = ({
               카테고리
             </th>
             <th className="border border-gray-300 px-4 py-2 text-left">제목</th>
-            <th className="border border-gray-300 px-4 py-2 text-left">요약</th>
+            <th className="border border-gray-300 px-4 py-2 text-left">주소</th>
             <th className="border border-gray-300 px-4 py-2 text-left">
               프로젝트 시작일
             </th>

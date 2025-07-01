@@ -1,60 +1,52 @@
 import React from "react";
 import Link from "next/link";
-import { NewsType } from "@/types";
 import Image from "next/image";
+import { NewsType } from "@/types";
 
 interface Props {
-  data: NewsType[];
+  item: NewsType;
 }
 
-const NewsCard: React.FC<Props> = ({ data }) => {
-  return (
-    <div className="w-full space-y-10">
-      {data.map((item) => {
-        const { id, category, title, imageUrl, date, link } = item;
-        return (
-          <div
-            key={id}
-            className="m-auto flex flex-col justify-between lg:flex-row items-start bg-white rounded-lg shadow-sm"
-          >
-            {/* 텍스트 영역 */}
-            <div className="flex flex-col lg:w-1/2 space-y-4">
-              <span className="inline-block bg-green-400 text-white text-xs font-semibold rounded-full px-3 py-1 w-max">
-                {category}
-              </span>
-              <Link
-                href={`/news/${link}`}
-                className="text-2xl font-semibold leading-snug whitespace-pre-line"
-              >
-                {title}
-              </Link>
-              <div className="flex items-center text-xs text-gray-500 space-x-3">
-                <span>{date}</span>
-              </div>
-              <Link
-                href={`/news/${link}`}
-                className="text-green-400 text-sm font-semibold hover:underline flex items-center gap-1"
-              >
-                더 알아보기 →
-              </Link>
-            </div>
+const NewsCard: React.FC<Props> = ({ item }) => {
+  const { id, category, title, imageUrl, date } = item;
 
-            {/* 이미지 영역 */}
-            <Link
-              href={`/news/${link}`}
-              className="w-full min-w-[250px] lg:w-1/3 block rounded-lg overflow-hidden shadow-lg"
-            >
-              <Image
-                src={imageUrl}
-                alt={title}
-                width={1000}
-                height={1000}
-                className="w-full h-64 object-cover rounded-lg"
-              />
-            </Link>
-          </div>
-        );
-      })}
+  return (
+    <div className="flex flex-col justify-between md:flex-row items-start bg-white rounded-md">
+      {/* 텍스트 영역 */}
+      <div className="flex flex-col md:w-1/2 space-y-4">
+        <span className="inline-block bg-green-500 text-white text-xs font-semibold rounded-full px-3 py-1 w-max">
+          {category}
+        </span>
+        <Link
+          href={`/news/${id}`}
+          className="text-3xl font-semibold leading-snug whitespace-pre-line"
+        >
+          {title}
+        </Link>
+        <div className="flex items-center text-xs text-gray-500 space-x-3">
+          <span>{date}</span>
+        </div>
+        <Link
+          href={`/news/${id}`}
+          className="text-green-600 text-sm font-semibold hover:underline flex items-center gap-1"
+        >
+          더 알아보기 →
+        </Link>
+      </div>
+
+      {/* 이미지 영역 */}
+      <Link
+        href={`/news/${id}`}
+        className="w-full md:w-1/3 block rounded-lg overflow-hidden shadow-lg"
+      >
+        <Image
+          src={imageUrl}
+          alt={title}
+          width={1000}
+          height={1000}
+          className="w-full h-64 object-cover rounded-lg"
+        />
+      </Link>
     </div>
   );
 };

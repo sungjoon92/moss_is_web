@@ -27,7 +27,7 @@ const MainNewsCard: React.FC<Props> = ({ data }) => {
               />
               {/* 텍스트 오버레이 */}
               <div className="absolute top-6 left-6 md:top-10 md:left-10 right-6">
-                <h2 className="text-white text-xl md:text-4xl drop-shadow-lg leading-tight max-w-[90%]">
+                <h2 className="text-white text-stroke  drop-shadow-[0_0_1px_black] text-xl md:text-4xl leading-tight max-w-[90%]">
                   {title}
                 </h2>
               </div>

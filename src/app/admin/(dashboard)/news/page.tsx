@@ -69,7 +69,7 @@ const AdminNewsPage: React.FC = () => {
     }
   };
 
-  // 솔루션 삭제
+  // 삭제
   const handleDelete = async (id: number) => {
     if (confirm("정말 삭제하시겠습니까?")) {
       await deleteNews(id);

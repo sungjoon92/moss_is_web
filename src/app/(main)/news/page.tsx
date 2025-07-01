@@ -1,18 +1,36 @@
 "use client";
 import Container from "@/components/Container";
 import MainNewsCard from "@/components/main/news/MainNewsCard ";
-import NewsCard from "@/components/main/news/NewsCard";
-import { NewsData } from "@/data/newsData";
-import { useState } from "react";
+import NewsList from "@/components/main/news/NewsList";
+import { getNewsList } from "@/lib/api/news";
+import { NewsType } from "@/types";
+import { toCamelCase } from "@/utils/caseConverter";
+import { useEffect, useState } from "react";
 
 const category = ["전체", "미디어", "언론보도", "보도자료"];
 
 const NewsPage = () => {
+  const [data, setData] = useState<NewsType[]>([]);
   const [activeCategory, setActiveCategory] = useState("전체");
+  console.log(data);
+
+  const fetchNews = async () => {
+    try {
+      const response = await getNewsList();
+      setData(response.data.map(toCamelCase));
+    } catch (err) {
+      console.error("뉴스 데이터 가져오기 오류:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchNews();
+  }, []);
+
   const filteredData =
     activeCategory === "전체"
-      ? NewsData
-      : NewsData.filter((item) => item.category === activeCategory);
+      ? data
+      : data.filter((item) => item.category === activeCategory);
 
   return (
     <Container className=" flex flex-col items-center">
@@ -46,7 +64,7 @@ const NewsPage = () => {
           </button>
         ))}
       </div>
-      <NewsCard data={filteredData}></NewsCard>
+      <NewsList data={filteredData}></NewsList>
     </Container>
   );
 };

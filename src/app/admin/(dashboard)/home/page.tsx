@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
 import {
   getHomeList,
   createHome,
@@ -10,11 +9,18 @@ import {
 } from "@/lib/api/home"; // API 함수들
 import HomeFormModal from "@/components/admin/category/home/HomeFormModal";
 import { HomeCreateInput, HomeType } from "@/types";
-import Link from "next/link";
 import { toCamelCase } from "@/utils/caseConverter";
+import AdminHomeList from "@/components/admin/category/home/AdminHomeList ";
 
 const AdminHomePage: React.FC = () => {
   const [homeList, setHomeList] = useState<HomeType[]>([]);
+
+  const [page, setPage] = useState(1);
+  const [limit] = useState(10);
+  const [sort, setSort] = useState("created_at");
+  const [order, setOrder] = useState<"asc" | "desc">("desc");
+
+  // 모달 상태
   const [modalOpen, setModalOpen] = useState(false);
   const [editMode, setEditMode] = useState<"create" | "edit">("create");
   const [editData, setEditData] = useState<HomeType | null>(null);
@@ -22,7 +28,7 @@ const AdminHomePage: React.FC = () => {
   // 데이터 불러오기
   const fetchHomeList = async () => {
     try {
-      const response = await getHomeList();
+      const response = await getHomeList({ page, limit, sort, order });
       setHomeList(response.data.map(toCamelCase));
       console.log(response.data);
     } catch (error) {
@@ -32,7 +38,7 @@ const AdminHomePage: React.FC = () => {
 
   useEffect(() => {
     fetchHomeList();
-  }, []);
+  }, [page, limit, sort, order]);
 
   // 등록/수정 처리
   const handleSubmit = async (data: HomeType | HomeCreateInput) => {
@@ -114,7 +120,7 @@ const AdminHomePage: React.FC = () => {
   };
 
   return (
-    <div className=" space-y-6">
+    <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold">홈 영상 관리</h1>
         <button
@@ -125,71 +131,18 @@ const AdminHomePage: React.FC = () => {
         </button>
       </div>
 
-      <table className="w-full border-collapse border border-gray-300">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="text-center px-2">메인</th>
-            <th className="border border-gray-300 px-4 py-2">영상 URL</th>
-            <th className="border border-gray-300 px-4 py-2">링크 URL</th>
-            <th className="border border-gray-300 px-4 py-2">미리보기</th>
-            <th className="border border-gray-300 px-4 py-2 text-center">
-              수정
-            </th>
-            <th className="border border-gray-300 px-4 py-2 text-center">
-              삭제
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {homeList.map((item) => (
-            <tr key={item.id} className="hover:bg-gray-50">
-              <td className="text-center">
-                <input
-                  type="checkbox"
-                  checked={item.isMain}
-                  onChange={() => handleMainCheck(item.id)}
-                />
-              </td>
-              <td className="border border-gray-300 px-4 py-2 align-middle break-all">
-                {item.videoUrl}
-              </td>
-              <td className="border border-gray-300 px-4 py-2 align-middle break-all">
-                {item.linkUrl}
-              </td>
-              <td className="border border-gray-300 px-4 py-2 align-middle">
-                <Link
-                  href={item.linkUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <ReactPlayer
-                    src={item.videoUrl}
-                    controls
-                    width="100%"
-                    height="100%"
-                  />
-                </Link>
-              </td>
-              <td className="border border-gray-300 px-4 py-2 align-middle text-center">
-                <button
-                  className="text-blue-600 hover:text-blue-800"
-                  onClick={() => handleEdit(item)}
-                >
-                  수정
-                </button>
-              </td>
-              <td className="border border-gray-300 px-4 py-2 align-middle text-center">
-                <button
-                  className="text-red-600 hover:text-red-800"
-                  onClick={() => handleDelete(item.id)}
-                >
-                  삭제
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <AdminHomeList
+        data={homeList}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        onMainCheck={handleMainCheck}
+        page={page}
+        onPageChange={setPage}
+        sort={sort}
+        order={order}
+        onSortChange={setSort}
+        onOrderChange={setOrder}
+      />
 
       {modalOpen && (
         <HomeFormModal

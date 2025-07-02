@@ -14,7 +14,10 @@ import {
 import { uploadImage } from "@/lib/supabase/upload";
 
 const AdminNewsPage: React.FC = () => {
+  // fetchNews api로 부른 데이터들
   const [newsList, setNewsList] = useState<NewsType[]>([]);
+
+  // 페이징 정렬
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
   const [sort, setSort] = useState("created_at");
@@ -57,6 +60,20 @@ const AdminNewsPage: React.FC = () => {
 
       // 업로드된 이미지 URL로 데이터 생성/수정
       const submitData = { ...data, imageUrl };
+
+      // isMainNews 체크 처리
+      if (submitData.isMainNews) {
+        for (const news of newsList) {
+          if (
+            news.isMainNews &&
+            news.id !== ("id" in submitData ? submitData.id : null)
+          ) {
+            await updateNews(news.id, { ...news, isMainNews: false });
+          }
+        }
+      }
+
+      // 생성 버튼 누를시 생성
       if (editMode === "create") {
         await createNews(submitData);
       } else if (editMode === "edit" && "id" in data) {
@@ -66,6 +83,24 @@ const AdminNewsPage: React.FC = () => {
       await fetchNews();
     } catch (error) {
       console.error(error);
+    }
+  };
+  const handleMainCheck = async (selectedId: number) => {
+    try {
+      // 전체 비디오 리스트를 순회하며
+      for (const video of newsList) {
+        const isMainNews = video.id === selectedId;
+        if (video.isMainNews !== isMainNews) {
+          await updateNews(video.id, {
+            ...video,
+            isMainNews,
+          });
+        }
+      }
+
+      await fetchNews(); // 다시 불러와서 갱신
+    } catch (err) {
+      console.error("메인 체크 실패:", err);
     }
   };
 
@@ -106,6 +141,7 @@ const AdminNewsPage: React.FC = () => {
         <AdminNewsList
           data={newsList}
           onDelete={handleDelete}
+          onMainCheck={handleMainCheck}
           onEdit={handleEdit}
           page={page}
           onPageChange={setPage}

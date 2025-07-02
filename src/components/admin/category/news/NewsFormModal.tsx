@@ -190,20 +190,22 @@ const NewsFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
         </div>
 
         <div className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            id="isMainNews"
-            name="isMainNews"
-            checked={form.isMainNews}
-            onChange={handleChange}
-            className="h-4 w-4 text-green-600"
-          />
           <label
             htmlFor="isMainNews"
             className="text-sm font-medium text-gray-700"
           >
             메인 뉴스 여부
           </label>
+          <input
+            type="checkbox"
+            id="isMainNews"
+            name="isMainNews"
+            checked={form.isMainNews}
+            onChange={(e) => {
+              setForm((prev) => ({ ...prev, isMainNews: e.target.checked }));
+            }}
+            className="h-4 w-4 text-green-600"
+          />
         </div>
 
         <div className="flex justify-end space-x-2 pt-4">

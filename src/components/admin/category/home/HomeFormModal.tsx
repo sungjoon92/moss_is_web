@@ -4,19 +4,14 @@ import { HomeCreateInput, HomeType } from "@/types";
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 
-interface HomeProps {
+interface Props {
   mode: "create" | "edit";
   data: HomeType | null;
   onClose: () => void;
   onSubmit: (data: HomeType | HomeCreateInput) => void;
 }
 
-const HomeFormModal: React.FC<HomeProps> = ({
-  mode,
-  data,
-  onClose,
-  onSubmit,
-}) => {
+const HomeFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
   const [form, setForm] = useState<HomeType | HomeCreateInput>({
     linkUrl: "",
     videoUrl: "",

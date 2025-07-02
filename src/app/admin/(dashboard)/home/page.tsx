@@ -13,8 +13,10 @@ import { toCamelCase } from "@/utils/caseConverter";
 import AdminHomeList from "@/components/admin/category/home/AdminHomeList ";
 
 const AdminHomePage: React.FC = () => {
+  // fetchHomeList api로 부른 데이터들
   const [homeList, setHomeList] = useState<HomeType[]>([]);
 
+  // 페이징 정렬
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
   const [sort, setSort] = useState("created_at");
@@ -26,7 +28,7 @@ const AdminHomePage: React.FC = () => {
   const [editData, setEditData] = useState<HomeType | null>(null);
 
   // 데이터 불러오기
-  const fetchHomeList = async () => {
+  const fetchHomeList = React.useCallback(async () => {
     try {
       const response = await getHomeList({ page, limit, sort, order });
       setHomeList(response.data.map(toCamelCase));
@@ -34,11 +36,11 @@ const AdminHomePage: React.FC = () => {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [page, limit, sort, order]);
 
   useEffect(() => {
     fetchHomeList();
-  }, [page, limit, sort, order]);
+  }, [fetchHomeList]);
 
   // 등록/수정 처리
   const handleSubmit = async (data: HomeType | HomeCreateInput) => {
@@ -88,7 +90,7 @@ const AdminHomePage: React.FC = () => {
 
   const handleMainCheck = async (selectedId: number) => {
     try {
-      // 1. 전체 비디오 리스트를 순회하며
+      // 전체 비디오 리스트를 순회하며
       for (const video of homeList) {
         const isMain = video.id === selectedId;
         if (video.isMain !== isMain) {

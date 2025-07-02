@@ -22,6 +22,16 @@ export interface AwardsType {
   highlight?: boolean;
 }
 
+export interface HomeType {
+  id: number;
+  linkUrl: string;
+  videoUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  isMain: boolean;
+}
+export type HomeCreateInput = Omit<HomeType, "id">;
+
 export interface SolutionType {
   id: number;
   categoryTag: string;

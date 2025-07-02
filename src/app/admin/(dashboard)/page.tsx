@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import AdminVideoSettings from "@/components/admin/category/home/AdminVideoSettings";
 import { useRouter, usePathname } from "next/navigation";
 import { checkAuth } from "@/lib/api/auth";
 import { useAutoLogout } from "@/hooks/AutoLogout";
@@ -9,6 +8,7 @@ import AutoLogoutModal from "@/hooks/AutoLogoutModal";
 import AdminProjectPage from "./project/page";
 import AdminNewsPage from "./news/page";
 import AdminSolutionPage from "./solution/page";
+import AdminHomePage from "./home/page";
 
 export default function AdminPage() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -45,7 +45,7 @@ export default function AdminPage() {
       <main className="flex-1 p-8 bg-gray-50">
         <h1 className="text-3xl font-bold text-lime-700 mb-4"></h1>
         <div className="bg-white shadow rounded-lg p-6 min-h-[300px]">
-          {pathname.startsWith("/admin/home") && <AdminVideoSettings />}
+          {pathname.startsWith("/admin/home") && <AdminHomePage />}
           {pathname.startsWith("/admin/solution") && <AdminSolutionPage />}
           {pathname.startsWith("/admin/project") && <AdminProjectPage />}
           {pathname.startsWith("/admin/news") && <AdminNewsPage />}

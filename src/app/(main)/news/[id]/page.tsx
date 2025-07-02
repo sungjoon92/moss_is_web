@@ -5,7 +5,7 @@ import { sanitizeHtmlServer } from "@/utils/sanitizeHtmlServer";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { formatDateTime } from "@/utils/formatDate";
-
+import ReactPlayer from "react-player";
 interface Props {
   params: {
     id: string;
@@ -74,13 +74,7 @@ export default async function NewsDetailPage({ params }: Props) {
 
           {category === "미디어" && videoUrl ? (
             <div className="aspect-video w-full overflow-hidden rounded-lg shadow-md">
-              <iframe
-                src={videoUrl}
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              ></iframe>
+              <ReactPlayer src={videoUrl} width="100%" height="100%" controls />
             </div>
           ) : (
             <div className="max-w-none leading-relaxed text-gray-800 text-base">

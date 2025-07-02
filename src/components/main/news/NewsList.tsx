@@ -17,3 +17,4 @@ const NewsList: React.FC<Props> = ({ data }) => {
 };
 
 export default NewsList;
+  

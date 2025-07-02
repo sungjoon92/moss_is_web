@@ -89,12 +89,17 @@ const NewsFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
 
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">카테고리</label>
-          <input
+          <select
             name="category"
             value={form.category}
             onChange={handleChange}
-            className="w-full rounded-lg border border-gray-300 px-4 py-2"
-          />
+            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
+          >
+            <option value="">카테고리 선택</option>
+            <option value="미디어">미디어</option>
+            <option value="언론보도">언론보도</option>
+            <option value="보도자료">보도자료</option>
+          </select>
         </div>
 
         <div className="space-y-1">

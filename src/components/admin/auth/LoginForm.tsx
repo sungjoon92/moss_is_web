@@ -20,7 +20,7 @@ export function LoginForm({ onLoginSuccess }: LoginFormProps): JSX.Element {
     }
 
     try {
-      const response = await login(email, password);
+      await login(email, password);
       setError("");
       onLoginSuccess?.();
     } catch (error) {

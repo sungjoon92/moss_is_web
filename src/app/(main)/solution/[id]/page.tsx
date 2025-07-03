@@ -39,11 +39,11 @@ export default async function SolutionDetailPage({ params }: Props) {
     const sanitizedContent = sanitizeHtmlServer(data.content);
 
     return (
-      <Container className="flex flex-col items-start">
-        <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
+      <Container className="flex flex-col items-center text-center font-sans">
+        <h1 className="text-3xl mb-4">{data.title}</h1>
         <span className="text-sm text-gray-500 mb-4">{data.category_tag}</span>
         <div
-          className="text-gray-700 mb-6"
+          className="mb-6 whitespace-pre-line ql-editor"
           dangerouslySetInnerHTML={{ __html: sanitizedContent }}
         ></div>
         {data.image_url && (

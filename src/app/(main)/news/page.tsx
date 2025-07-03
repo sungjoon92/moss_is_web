@@ -12,7 +12,6 @@ const category = ["전체", "미디어", "언론보도", "보도자료"];
 const NewsPage = () => {
   const [data, setData] = useState<NewsType[]>([]);
   const [activeCategory, setActiveCategory] = useState("전체");
-  console.log(data);
 
   const fetchNews = async () => {
     try {

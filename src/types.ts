@@ -83,6 +83,20 @@ export interface AdminCategoryType {
   path: string;
 }
 
+export interface ConsultationType {
+  id: number;
+  companyName: string;
+  managerName: string;
+  tel: string;
+  message: string;
+  referrer: string;
+  agreePrivacy: boolean;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+export type ConsultationCreateInput = Omit<ConsultationType, "id">;
+
 export interface PaginationParams {
   page?: number;
   limit?: number;

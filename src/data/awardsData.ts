@@ -1,10 +1,12 @@
 import { AwardsType } from "@/types";
 export const awardsData: AwardsType[] = [
   {
+    id: 1,
     year: 2024,
     items: ["경남창경 주최 동남권 혁신기관 공동 IR 데모데이 대상"],
   },
   {
+    id: 2,
     year: 2023,
     items: [
       "EQT 파운데이션 주최 (IMPACT QUEST) 우승",
@@ -12,6 +14,7 @@ export const awardsData: AwardsType[] = [
     ],
   },
   {
+    id: 3,
     year: 2022,
     items: [
       "환경복원기술학회 추계학술대회 최우수 발표자상",
@@ -21,6 +24,7 @@ export const awardsData: AwardsType[] = [
     ],
   },
   {
+    id: 4,
     year: 2021,
     items: [
       "소셜벤처임팩트 IR 대상 (중소벤처기업부장관상)",
@@ -28,6 +32,7 @@ export const awardsData: AwardsType[] = [
     ],
   },
   {
+    id: 5,
     year: 2020,
     items: [
       "산림분야 청년창업경진대회 대상 (농림축산식품부장관상)",

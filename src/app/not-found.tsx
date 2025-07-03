@@ -1,8 +1,8 @@
-"use client";
 import Link from "next/link";
+
 export default function NotFoundPage() {
   return (
-    <div className="min-h-[60vh] flex flex-col justify-center items-center bg-white px-4 text-center">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-white px-4 text-center">
       <h1 className="text-6xl font-bold text-green-600">404</h1>
       <p className="mt-4 text-gray-600 text-xl">페이지를 찾을 수 없습니다.</p>
       <p className="text-sm text-gray-400 mt-1">

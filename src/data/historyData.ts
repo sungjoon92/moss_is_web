@@ -2,6 +2,7 @@ import { HistoryType } from "@/types";
 
 export const historyData: HistoryType[] = [
   {
+    id: 1,
     year: 2021,
     title: "복원의 시작을 알리다",
     descriptions: [
@@ -16,6 +17,7 @@ export const historyData: HistoryType[] = [
     highlights: ["제주도 도너리 오름 복원: Mosby를 통한 첫 복원 완료"],
   },
   {
+    id: 2,
     year: 2022,
     title: "복원의 가능성을 넓히다",
     descriptions: [
@@ -27,6 +29,7 @@ export const historyData: HistoryType[] = [
     highlights: ["충남 태안 간척지: Mosby를 통한 두번째 복원 완료"],
   },
   {
+    id: 3,
     year: 2023,
     title: "복원의 기준을 다지다",
     descriptions: [
@@ -43,6 +46,7 @@ export const historyData: HistoryType[] = [
     highlights: ["코드오브네이처 첫 미생물 신품종 등록 완료"],
   },
   {
+    id: 4,
     year: 2024,
     title: "복원의 지평을 열다",
     descriptions: [

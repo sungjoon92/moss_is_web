@@ -1,0 +1,112 @@
+import { NextResponse } from "next/server";
+import { supabase } from "@/lib/supabase/supabaseClient";
+
+// 홈 데이터 조회
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+
+  const page = parseInt(searchParams.get("page") || "1", 10);
+  const limit = parseInt(searchParams.get("limit") || "10", 10);
+  const sort = searchParams.get("sort") || "id";
+  const order = searchParams.get("order") || "desc";
+
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  const { data, error } = await supabase
+    .from("t_home")
+    .select("*")
+    .order(sort, { ascending: order === "asc" })
+    .range(from, to);
+
+  if (error)
+    return NextResponse.json(
+      { error: "홈 영상 목록 조회 중 오류가 발생했습니다." },
+      { status: 500 }
+    );
+
+  return NextResponse.json(data);
+}
+
+// 홈 데이터 생성
+export async function POST(request: Request) {
+  const body = await request.json();
+
+  if (!body.title) {
+    return NextResponse.json(
+      { error: "제목은 필수 항목입니다." },
+      { status: 400 }
+    );
+  }
+
+  if (!body.video_url) {
+    return NextResponse.json(
+      { error: "영상 URL은 필수 항목입니다." },
+      { status: 400 }
+    );
+  }
+
+  const { data, error } = await supabase.from("t_home").insert([body]).select();
+
+  if (error)
+    return NextResponse.json(
+      { error: "홈 영상 등록 중 오류가 발생했습니다." },
+      { status: 500 }
+    );
+
+  return NextResponse.json(data, { status: 201 });
+}
+
+// 홈 데이터 수정
+export async function PATCH(request: Request) {
+  const body = await request.json();
+  const { id, ...updates } = body;
+
+  if (!id) {
+    return NextResponse.json(
+      { error: "수정할 항목의 ID가 필요합니다." },
+      { status: 400 }
+    );
+  }
+
+  const updateData = {
+    ...updates,
+    updated_at: new Date().toISOString(),
+  };
+
+  const { data, error } = await supabase
+    .from("t_home")
+    .update(updateData)
+    .eq("id", id);
+
+  if (error)
+    return NextResponse.json(
+      { error: "홈 영상 수정 중 오류가 발생했습니다." },
+      { status: 500 }
+    );
+
+  return NextResponse.json(data);
+}
+
+// 홈 데이터 삭제
+export async function DELETE(request: Request) {
+  const body = await request.json();
+  const { id } = body;
+
+  if (!id) {
+    return NextResponse.json(
+      { error: "삭제할 항목의 ID가 필요합니다." },
+      { status: 400 }
+    );
+  }
+
+  const { data, error } = await supabase.from("t_home").delete().eq("id", id);
+
+  if (error)
+    return NextResponse.json(
+      { error: "홈 영상 삭제 중 오류가 발생했습니다." },
+      { status: 500 }
+    );
+
+  return NextResponse.json(data);
+}

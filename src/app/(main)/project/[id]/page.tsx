@@ -42,14 +42,12 @@ export default async function ProjectDetailPage({ params }: Props) {
     const sanitizedContent = sanitizeHtmlServer(project.contentText);
 
     return (
-      <Container className="max-w-6xl mx-auto text-gray-900">
+      <Container className="max-w-6xl mx-auto text-gray-900 flex flex-col items-center justify-center">
         {/* 제목 */}
-        <h1 className="text-3xl md:text-5xl font-semibold text-center mb-12 leading-tight">
-          {project.title}
-        </h1>
+        <h1 className="text-3xl text-center mb-12">{project.title}</h1>
 
         {/* 본문 상세 이미지들 */}
-        <div className="space-y-8">
+        <div className="space-y-8 w-full mb-12 flex flex-col items-center justify-center">
           {project.contentImages?.map((img, index) => (
             <Image
               key={index}
@@ -57,19 +55,22 @@ export default async function ProjectDetailPage({ params }: Props) {
               alt={`${project.title} 상세 이미지 ${index + 1}`}
               width={1000}
               height={1000}
-              className="rounded-lg object-cover w-full"
+              className="rounded-lg w-[70%] h-auto max-h-[500px] "
               priority={index === 0}
             />
           ))}
         </div>
 
         {/* 본문 내용 */}
-        <div className="my-8 text-center text-[1.5rem] font-semibold">
+        <div className="w-[70%] my-8 text-center text-[1.5rem] font-semibold">
           {project.contentTitle}
         </div>
+
         <div
-          className="mb-12 whitespace-pre-line text-gray-800"
-          dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+          className="w-[70%] mb-12 whitespace-pre-line ql-editor"
+          dangerouslySetInnerHTML={{
+            __html: sanitizedContent ?? "",
+          }}
         ></div>
       </Container>
     );

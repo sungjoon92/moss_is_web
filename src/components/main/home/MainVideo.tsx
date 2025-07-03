@@ -48,8 +48,9 @@ const MainVideo: React.FC = () => {
 
               <div className="absolute left-4 right-4 bottom-4 md:left-10 md:bottom-5 text-white text-center md:text-left flex flex-col gap-2 md:gap-3">
                 <h2 className="text-sm md:mb-3 md:text-[1.5rem] font-semibold">
-                  For our next generation
+                  {item.title}
                 </h2>
+                {/* 이안에 콘텐츠 넣을지? */}
                 <p className="text-base md:text-[2rem] font-semibold">
                   전 세계 어디라도 복원할 땅이 있는 곳이라면
                 </p>

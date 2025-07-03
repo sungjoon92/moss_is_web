@@ -4,7 +4,6 @@ import Link from "next/link";
 import { SolutionType, ListProps } from "@/types";
 import { formatDateTime } from "@/utils/formatDate";
 import { sanitizeHtmlClient } from "@/utils/sanitizeHtmlClient";
-import RenderHtml from "@/components/RenderHtml";
 interface Props extends ListProps<SolutionType> {
   onEdit?: (solution: SolutionType) => void;
 }

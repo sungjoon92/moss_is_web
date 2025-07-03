@@ -55,7 +55,7 @@ const ConsultationFormModal: React.FC<Props> = ({
     if (type === "checkbox") {
       setForm((prev) => ({
         ...prev,
-        [name]: (e.target as HTMLInputElement).checked,
+        [name]: value,
       }));
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));
@@ -171,14 +171,12 @@ const ConsultationFormModal: React.FC<Props> = ({
             onChange={handleChange}
           />
           <label htmlFor="agreePrivacy" className="text-sm select-none">
-            개인정보 수집 및 이용에 동의합니다.{" "}
+            개인정보 수집 및 이용에 동의합니다.
           </label>
         </div>
 
         <div>
-          <label className="block font-medium mb-1">
-            문의 상태 <span className="text-red-500">*</span>
-          </label>
+          <label className="block font-medium mb-1">문의 상태</label>
           <select
             name="status"
             value={form.status}

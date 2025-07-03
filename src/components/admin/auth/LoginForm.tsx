@@ -21,7 +21,6 @@ export function LoginForm({ onLoginSuccess }: LoginFormProps): JSX.Element {
 
     try {
       const response = await login(email, password);
-      console.log("로그인 성공:", response.data);
       setError("");
       onLoginSuccess?.();
     } catch (error) {

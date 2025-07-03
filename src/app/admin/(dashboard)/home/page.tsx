@@ -32,7 +32,6 @@ const AdminHomePage: React.FC = () => {
     try {
       const response = await getHomeList({ page, limit, sort, order });
       setHomeList(response.data.map(toCamelCase));
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }

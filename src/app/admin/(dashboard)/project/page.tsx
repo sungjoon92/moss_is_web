@@ -100,7 +100,6 @@ const AdminProjectPage: React.FC = () => {
         removedImageUrls.map(async (url) => {
           try {
             const path = getImagePathFromUrl(url, "moss-is-bucket");
-            console.log("삭제할 이미지 경로(path):", path);
             await deleteImage({
               bucket: "moss-is-bucket",
               path,

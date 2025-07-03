@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MainVideo from "@/components/main/home/MainVideo";
 import FloatingButton from "@/components/FloatingButton";
-
+import "react-quill-new/dist/quill.snow.css";
 export default function MainLayout({
   children,
 }: {

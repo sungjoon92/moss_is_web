@@ -91,7 +91,7 @@ const ConsultationFormModal: React.FC<Props> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
       <form
         onSubmit={handleSubmit}
         className="max-w-lg w-full bg-white rounded-md shadow-lg p-6 space-y-4 overflow-y-auto max-h-[90vh]"

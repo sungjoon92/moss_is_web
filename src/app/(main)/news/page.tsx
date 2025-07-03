@@ -42,7 +42,7 @@ const NewsPage = () => {
       </div>
 
       {/* 대표 이미지 */}
-      <MainNewsCard data={filteredData} />
+      <MainNewsCard data={data} />
 
       {/* 카테고리 버튼 */}
       <div className="flex gap-2 mb-10">

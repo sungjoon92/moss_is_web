@@ -20,11 +20,11 @@ export default function SolutionList({ initialData }: Props) {
 
   return (
     <>
-      <div className="flex flex-wrap gap-2 mb-10">
+      <div className="flex flex-wrap gap-0 mb-10 sm:gap-2 justify-around sm:justify-start">
         {category.map((category) => (
           <button
             key={category}
-            className={`min-w-28 px-4 py-2 rounded-full border text-sm font-medium ${
+            className={`sm:min-w-28 px-4 sm:px-2 py-2 rounded-full border text-sm font-medium ${
               activeCategory === category
                 ? "bg-green-400 text-white"
                 : "bg-white text-gray-400 border-gray-300"

@@ -107,7 +107,7 @@ const SolutionFormModal: React.FC<Props> = ({
     onSubmit(form, imageFile);
   };
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center overflow-y-auto">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-2xl bg-white rounded-2xl p-6 space-y-6 shadow-lg"

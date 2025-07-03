@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase/supabaseClient";
 
-// 데이터 조회
+// 프로젝트 데이터 조회
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
@@ -19,58 +19,110 @@ export async function GET(request: Request) {
     .order(sort, { ascending: order === "asc" })
     .range(from, to);
 
-  if (error)
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) {
+    return NextResponse.json(
+      { error: "프로젝트 목록 조회 중 오류가 발생했습니다." },
+      { status: 500 }
+    );
+  }
+
   return NextResponse.json(data);
 }
 
-// 데이터 생성
+// 프로젝트 데이터 생성
 export async function POST(request: Request) {
   const body = await request.json();
+  if (!body.title) {
+    return NextResponse.json(
+      { error: "제목을 입력해 주세요." },
+      { status: 400 }
+    );
+  }
+
+  if (!body.description) {
+    return NextResponse.json(
+      { error: "내용을 입력해 주세요." },
+      { status: 400 }
+    );
+  }
+
+  if (!body.category) {
+    return NextResponse.json(
+      { error: "카테고리를 선택해 주세요." },
+      { status: 400 }
+    );
+  }
+
   const { data, error } = await supabase
     .from("t_project")
     .insert([body])
     .select();
 
-  if (error)
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) {
+    return NextResponse.json(
+      { error: "프로젝트 등록 중 오류가 발생했습니다." },
+      { status: 500 }
+    );
+  }
 
   return NextResponse.json(data, { status: 201 });
 }
 
-// 데이터 수정
+// 프로젝트 데이터 수정
 export async function PATCH(request: Request) {
   const body = await request.json();
   const { id, ...updates } = body;
-  if (!id)
-    return NextResponse.json({ error: "id is required" }, { status: 400 });
+
+  if (!id) {
+    return NextResponse.json(
+      { error: "수정할 프로젝트의 ID가 필요합니다." },
+      { status: 400 }
+    );
+  }
 
   const updateData = {
     ...updates,
-    updated_at: new Date().toISOString(), // 현재 시간으로 수정
+    updated_at: new Date().toISOString(),
   };
 
   const { data, error } = await supabase
     .from("t_project")
     .update(updateData)
     .eq("id", id);
-  if (error)
-    return NextResponse.json({ error: error.message }, { status: 500 });
+
+  if (error) {
+    return NextResponse.json(
+      { error: "프로젝트 수정 중 오류가 발생했습니다." },
+      { status: 500 }
+    );
+  }
+
   return NextResponse.json(data);
 }
 
-// 데이터 삭제
+// 프로젝트 데이터 삭제
 export async function DELETE(request: Request) {
   const body = await request.json();
   const { id } = body;
-  if (!id)
-    return NextResponse.json({ error: "id is required" }, { status: 400 });
+
+  if (!id) {
+    return NextResponse.json(
+      { error: "삭제할 프로젝트의 ID가 필요합니다." },
+      { status: 400 }
+    );
+  }
 
   const { data, error } = await supabase
     .from("t_project")
     .delete()
     .eq("id", id);
-  if (error)
-    return NextResponse.json({ error: error.message }, { status: 500 });
+
+  if (error) {
+    return NextResponse.json(
+      { error: "프로젝트 삭제 중 오류가 발생했습니다." },
+      { status: 500 }
+    );
+  }
+
   return NextResponse.json(data);
 }

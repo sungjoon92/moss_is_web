@@ -24,6 +24,7 @@ export interface AwardsType {
 
 export interface HomeType {
   id: number;
+  title: string;
   linkUrl: string;
   videoUrl: string;
   createdAt: string;

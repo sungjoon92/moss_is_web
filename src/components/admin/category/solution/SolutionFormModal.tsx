@@ -71,9 +71,41 @@ const SolutionFormModal: React.FC<Props> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // 유효성 검사
+    if (!form.categoryTag.trim()) {
+      alert("카테고리 태그를 입력해 주세요.");
+      return;
+    }
+
+    if (!form.category.trim()) {
+      alert("카테고리를 선택해 주세요.");
+      return;
+    }
+
+    if (!form.title.trim()) {
+      alert("제목을 입력해 주세요.");
+      return;
+    }
+
+    if (!form.content.trim() || form.content === "<p><br></p>") {
+      alert("내용을 입력해 주세요.");
+      return;
+    }
+
+    if (!form.imageUrl && !imageFile) {
+      alert("대표 이미지를 업로드해 주세요.");
+      return;
+    } else if (imageFile && !imageFile.type.startsWith("image/")) {
+      alert("이미지 파일만 업로드할 수 있습니다.");
+      return;
+    } else if (imageFile && imageFile.size > 50 * 1024 * 1024) {
+      alert("이미지 파일 크기는 50MB 이하로 업로드해 주세요.");
+      return;
+    }
+
     onSubmit(form, imageFile);
   };
-
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center">
       <form

@@ -57,8 +57,9 @@ const ProjectFormModal: React.FC<Props> = ({
             ? JSON.parse(data.contentImages)
             : data.contentImages || [],
       });
-      // previewImages는 초기화
       setPreviewImages([]);
+      setRemovedImageUrls([]);
+      setImageFile(null);
     } else {
       setForm({
         category: "",
@@ -75,10 +76,11 @@ const ProjectFormModal: React.FC<Props> = ({
         updatedAt: "",
       });
       setPreviewImages([]);
+      setRemovedImageUrls([]);
+      setImageFile(null);
     }
   }, [mode, data]);
 
-  // input 데이터 변경값
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -88,20 +90,43 @@ const ProjectFormModal: React.FC<Props> = ({
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // 프로젝트 본문 이미지
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  // 대표 이미지 업로드
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    // 이미지 타입 검사
+    if (!file.type.startsWith("image/")) {
+      alert("대표 이미지는 이미지 파일만 업로드할 수 있습니다.");
+      return;
+    }
+    // 용량 검사 (50MB)
+    if (file.size > 50 * 1024 * 1024) {
+      alert("대표 이미지 파일 크기는 50MB 이하로 업로드해 주세요.");
+      return;
+    }
 
     const localUrl = URL.createObjectURL(file);
     setImageFile(file);
     setForm((prev) => ({ ...prev, imageUrl: localUrl }));
   };
 
-  // 프로젝트 디테일 페이지 이미지
+  // 디테일 이미지 업로드 (여러개)
   const handleDetailImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
+
+    // 이미지 타입 & 용량 검사
+    Array.from(files).forEach((file) => {
+      if (!file.type.startsWith("image/")) {
+        alert("디테일 이미지는 이미지 파일만 업로드할 수 있습니다.");
+        return;
+      }
+      if (file.size > 50 * 1024 * 1024) {
+        alert("디테일 이미지 파일 크기는 50MB 이하로 업로드해 주세요.");
+        return;
+      }
+    });
 
     setDetailImageFiles((prev) => [...prev, ...Array.from(files)]);
 
@@ -118,11 +143,46 @@ const ProjectFormModal: React.FC<Props> = ({
       ...prev,
       contentImages: prev.contentImages.filter((img) => img !== url),
     }));
+    setPreviewImages((prev) => prev.filter((img) => img !== url));
   };
 
-  // form 제출시 onsubmit 상위 컴포넌트로 props전달
+  // 제출 유효성 검사 포함
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!form.category.trim()) {
+      alert("카테고리를 입력해 주세요.");
+      return;
+    }
+    if (!form.title.trim()) {
+      alert("제목을 입력해 주세요.");
+      return;
+    }
+    if (!form.description.trim()) {
+      alert("설명을 입력해 주세요.");
+      return;
+    }
+    if (!form.imageUrl && !imageFile) {
+      alert("대표 이미지를 업로드해 주세요.");
+      return;
+    }
+    if (!form.startDate.trim()) {
+      alert("시작일을 입력해 주세요.");
+      return;
+    }
+    if (!form.endDate.trim()) {
+      alert("종료일을 입력해 주세요.");
+      return;
+    }
+    if (!form.contentTitle.trim()) {
+      alert("디테일 페이지 제목을 입력해 주세요.");
+      return;
+    }
+    if (!form.contentText.trim() || form.contentText === "<p><br></p>") {
+      alert("디테일 페이지 본문을 입력해 주세요.");
+      return;
+    }
+
     onSubmit(form, imageFile, detailImageFiles, removedImageUrls);
   };
 
@@ -159,19 +219,19 @@ const ProjectFormModal: React.FC<Props> = ({
         </div>
 
         <div className="space-y-1">
-          <label className="text-sm font-medium text-gray-700">주소</label>
+          <label className="text-sm font-medium text-gray-700">설명</label>
           <input
             name="description"
             value={form.description}
             onChange={handleChange}
-            placeholder="예: 강원특별자치도 강릉시, 대한민국"
+            placeholder="프로젝트 설명"
             className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
           />
         </div>
 
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">
-            이미지 업로드
+            대표 이미지 업로드
           </label>
           <input
             type="file"
@@ -228,6 +288,7 @@ const ProjectFormModal: React.FC<Props> = ({
             className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
           />
         </div>
+
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">
             디테일 페이지 본문
@@ -240,7 +301,7 @@ const ProjectFormModal: React.FC<Props> = ({
                 setForm((prev) => ({ ...prev, contentText: value }))
               }
               className="rounded-lg"
-              placeholder="솔루션 설명을 입력하세요"
+              placeholder="프로젝트 상세 설명을 입력하세요"
             />
           </div>
         </div>
@@ -260,9 +321,7 @@ const ProjectFormModal: React.FC<Props> = ({
             {allImages.map((item, index) => {
               const isPreview = item.startsWith("blob:");
               const isRemoved = removedImageUrls.includes(item);
-
               if (isRemoved) return null;
-
               return (
                 <div key={index} className="relative">
                   <Image

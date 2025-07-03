@@ -13,6 +13,7 @@ interface Props {
 
 const HomeFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
   const [form, setForm] = useState<HomeType | HomeCreateInput>({
+    title: "",
     linkUrl: "",
     videoUrl: "",
     createdAt: "",
@@ -25,6 +26,7 @@ const HomeFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
       setForm(data);
     } else {
       setForm({
+        title: "",
         linkUrl: "",
         videoUrl: "",
         createdAt: "",
@@ -41,6 +43,28 @@ const HomeFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // 유효성 검사
+    if (!form.title.trim()) {
+      alert("영상 제목을 입력해 주세요.");
+      return;
+    }
+    if (!form.videoUrl.trim()) {
+      alert("영상 URL을 입력해 주세요.");
+      return;
+    } else if (!/^https?:\/\/.+/.test(form.videoUrl)) {
+      alert("유효한 영상 URL을 입력해 주세요.");
+      return;
+    }
+
+    if (!form.linkUrl.trim()) {
+      alert("링크 URL을 입력해 주세요.");
+      return;
+    } else if (!/^https?:\/\/.+/.test(form.linkUrl)) {
+      alert("유효한 링크 URL을 입력해 주세요.");
+      return;
+    }
+
     onSubmit(form);
   };
 
@@ -53,6 +77,17 @@ const HomeFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
         <h2 className="text-xl font-bold text-gray-800">
           {mode === "create" ? "홈 영상 등록" : "홈 영상 수정"}
         </h2>
+
+        <div className="space-y-1">
+          <label className="text-sm font-medium text-gray-700">영상 제목</label>
+          <input
+            name="title"
+            value={form.title}
+            onChange={handleChange}
+            placeholder="예: 우리의 비전"
+            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
+          />
+        </div>
 
         <div className="space-y-1">
           <label className="text-sm font-medium text-gray-700">영상 URL</label>

@@ -45,6 +45,7 @@ const NewsFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
         createdAt: "",
         updatedAt: "",
       });
+      setImageFile(null);
     }
   }, [mode, data]);
 
@@ -54,7 +55,6 @@ const NewsFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
     >
   ) => {
     const { name, value, type } = e.target;
-
     if (type === "checkbox") {
       const target = e.target as HTMLInputElement;
       setForm((prev) => ({ ...prev, [name]: target.checked }));
@@ -65,20 +65,62 @@ const NewsFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const localUrl = URL.createObjectURL(file);
-      setImageFile(file);
-      setForm((prev) => ({ ...prev, imageUrl: localUrl }));
+    if (!file) return;
+
+    // 이미지 파일 타입 체크
+    if (!file.type.startsWith("image/")) {
+      alert("이미지 파일만 업로드할 수 있습니다.");
+      return;
     }
+    // 용량 체크 50MB 이하
+    if (file.size > 50 * 1024 * 1024) {
+      alert("이미지 파일 크기는 50MB 이하로 업로드해 주세요.");
+      return;
+    }
+
+    const localUrl = URL.createObjectURL(file);
+    setImageFile(file);
+    setForm((prev) => ({ ...prev, imageUrl: localUrl }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // 필수 입력 체크
+    if (!form.category.trim()) {
+      alert("카테고리를 선택해 주세요.");
+      return;
+    }
+    if (!form.title.trim()) {
+      alert("제목을 입력해 주세요.");
+      return;
+    }
+    if (!form.content.trim()) {
+      alert("내용을 입력해 주세요.");
+      return;
+    }
+    if (!form.date.trim()) {
+      alert("날짜를 입력해 주세요.");
+      return;
+    }
+
+    // 이미지 or 기존 이미지 url 있어야 함
+    if (!form.imageUrl && !imageFile) {
+      alert("이미지를 업로드해 주세요.");
+      return;
+    }
+
+    // videoUrl 유효성 검사 (빈 문자열이면 무시)
+    if (form.videoUrl && !/^https?:\/\/.+/.test(form.videoUrl)) {
+      alert("비디오 URL이 올바른 형식이 아닙니다.");
+      return;
+    }
+
     onSubmit(form, imageFile);
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center overflow-auto">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-2xl bg-white rounded-2xl p-6 space-y-6 shadow-lg"
@@ -201,9 +243,9 @@ const NewsFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
             id="isMainNews"
             name="isMainNews"
             checked={form.isMainNews}
-            onChange={(e) => {
-              setForm((prev) => ({ ...prev, isMainNews: e.target.checked }));
-            }}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, isMainNews: e.target.checked }))
+            }
             className="h-4 w-4 text-green-600"
           />
         </div>

@@ -39,6 +39,9 @@ const AdminHomeList: React.FC<AdminHomeListProps> = ({
               메인
             </th>
             <th className="border border-gray-300 px-4 py-2 align-middle text-center">
+              제목
+            </th>
+            <th className="border border-gray-300 px-4 py-2 align-middle text-center">
               영상 URL
             </th>
             <th className="border border-gray-300 px-4 py-2 align-middle text-center">
@@ -67,6 +70,9 @@ const AdminHomeList: React.FC<AdminHomeListProps> = ({
                     className="w-5 h-5"
                   />
                 </div>
+              </td>
+              <td className="border border-gray-300 px-4 py-2 align-middle break-all">
+                {item.title}
               </td>
               <td className="border border-gray-300 px-4 py-2 align-middle break-all">
                 {item.videoUrl}

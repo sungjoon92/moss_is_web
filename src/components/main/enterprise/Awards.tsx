@@ -18,14 +18,16 @@ const Awards: React.FC<Props> = ({ data }) => {
             key={year}
             onMouseEnter={() => setHoveredYear(year)}
             onMouseLeave={() => setHoveredYear(null)}
-            className={`p-4 rounded-md transition duration-300 border-b-4  ${
+            className={`p-4 rounded-md transition duration-300 border-b-4 mb-4 ${
               hoveredYear === year ? "bg-green-400 text-white" : ""
             }`}
           >
             <div className="flex justify-between items-start">
               <ul className="space-y-1">
                 {items.map((item, index) => (
-                  <li key={index}>＊ {item}</li>
+                  <li key={index} className="mb-2 leading-tight">
+                    ＊ {item}
+                  </li>
                 ))}
               </ul>
               <span className="min-w-[3rem] text-right">{year}</span>

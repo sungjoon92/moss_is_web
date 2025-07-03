@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SolutionType, ListProps } from "@/types";
 import { formatDateTime } from "@/utils/formatDate";
 import { sanitizeHtmlClient } from "@/utils/sanitizeHtmlClient";
+import RenderHtml from "@/components/RenderHtml";
 interface Props extends ListProps<SolutionType> {
   onEdit?: (solution: SolutionType) => void;
 }
@@ -65,6 +66,7 @@ const AdminSolutionList: React.FC<Props> = ({
                     __html: sanitizeHtmlClient(item.content),
                   }}
                 />
+                {/* <RenderHtml html={item.content} isServer={false}></RenderHtml> */}
               </td>
               <td className="border border-gray-300 px-4 py-2">
                 {formatDateTime(item.createdAt)}

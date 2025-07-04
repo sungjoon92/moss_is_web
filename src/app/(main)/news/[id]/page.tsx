@@ -4,7 +4,7 @@ import { supabase } from "@/lib/supabase/supabaseClient";
 import { sanitizeHtmlServer } from "@/utils/sanitizeHtmlServer";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { formatDateTime } from "@/utils/formatDate";
+import { formatDate } from "@/utils/formatDate";
 import ReactPlayer from "react-player";
 interface Props {
   params: {
@@ -63,32 +63,29 @@ export default async function NewsDetailPage({ params }: Props) {
         {/* Right - 본문 */}
         <div className="flex-1">
           <div className="text-sm text-gray-400 text-right mb-2">
-            {formatDateTime(date)}
+            {formatDate(date)}
           </div>
 
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
             {title}
           </h2>
-
-          <hr className="my-4" />
-
+          <div
+            className="whitespace-pre-line mb-6 text-gray-800 text-base md:text-lg"
+            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+          />
           {category === "미디어" && videoUrl ? (
-            <div className="aspect-video w-full overflow-hidden rounded-lg shadow-md">
+            <div className="aspect-video w-full overflow-hidden rounded-lg ">
               <ReactPlayer src={videoUrl} width="100%" height="100%" controls />
             </div>
           ) : (
-            <div className="max-w-none leading-relaxed text-gray-800 text-base">
-              <div
-                className="whitespace-pre-line"
-                dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-              />
+            <div>
               {imageUrl && (
                 <Image
                   width={1000}
                   height={1000}
                   src={imageUrl}
                   alt={title}
-                  className="w-full rounded-xl mt-6 shadow-md"
+                  className="w-full rounded-xl shadow-md"
                 />
               )}
             </div>

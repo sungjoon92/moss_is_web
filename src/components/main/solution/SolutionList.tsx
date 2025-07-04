@@ -18,6 +18,8 @@ export default function SolutionList({ initialData }: Props) {
       ? initialData
       : initialData.filter((item) => item.category === activeCategory);
 
+  console.log(filterData);
+
   return (
     <>
       <div className="flex flex-wrap mb-10 gap-2 sm:gap-1 justify-start">
@@ -35,8 +37,11 @@ export default function SolutionList({ initialData }: Props) {
           </button>
         ))}
       </div>
-
-      <SolutionCard data={filterData} />
+      <div className="space-y-10">
+        {filterData.map((item) => {
+          return <SolutionCard key={item.id} data={item} />;
+        })}
+      </div>
     </>
   );
 }

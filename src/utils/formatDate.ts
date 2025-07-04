@@ -12,3 +12,16 @@ export const formatDateTime = (date?: string | Date | null): string => {
 
   return `${year}. ${month}. ${day}. ${hour}:${minute}`;
 };
+
+export const formatDate = (date?: string | Date | null): string => {
+  if (!date) return "-";
+
+  const d = new Date(date);
+  if (isNaN(d.getTime())) return "-";
+
+  const year = d.getFullYear();
+  const month = d.getMonth() + 1;
+  const day = d.getDate();
+
+  return `${year}. ${month}. ${day}`;
+};

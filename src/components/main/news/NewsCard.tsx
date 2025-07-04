@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { NewsType } from "@/types";
+import { formatDate } from "@/utils/formatDate";
 
 interface Props {
   item: NewsType;
@@ -14,18 +15,20 @@ const NewsCard: React.FC<Props> = ({ item }) => {
     <div className="flex flex-col justify-between md:flex-row items-start bg-white rounded-md">
       {/* 텍스트 영역 */}
       <div className="flex flex-col md:w-1/2 space-y-4">
-        <span className="inline-block bg-green-500 text-white text-xs font-semibold rounded-full px-3 py-1 w-max">
-          {category}
-        </span>
+        <div className="flex items-center text-xs text-gray-500 space-x-2 w-full">
+          <div className="flex-1 h-px bg-gray-300"></div>
+          <span className="text-gray-700 font-medium text-xl">{category}</span>
+          <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+          <span className="text-xl">{formatDate(date)}</span>
+          <div className="flex-1 h-px bg-gray-300"></div>
+        </div>
         <Link
           href={`/news/${id}`}
           className="text-3xl font-semibold leading-snug whitespace-pre-line"
         >
           {title}
         </Link>
-        <div className="flex items-center text-xs text-gray-500 space-x-3">
-          <span>{date}</span>
-        </div>
+
         <Link
           href={`/news/${id}`}
           className="text-green-600 text-sm font-semibold hover:underline flex items-center"

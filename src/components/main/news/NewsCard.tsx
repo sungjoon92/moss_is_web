@@ -28,7 +28,7 @@ const NewsCard: React.FC<Props> = ({ item }) => {
         </div>
         <Link
           href={`/news/${id}`}
-          className="text-green-600 text-sm font-semibold hover:underline flex items-center gap-1"
+          className="text-green-600 text-sm font-semibold hover:underline flex items-center"
         >
           더 알아보기 →
         </Link>

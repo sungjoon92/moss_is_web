@@ -18,8 +18,6 @@ export default function SolutionList({ initialData }: Props) {
       ? initialData
       : initialData.filter((item) => item.category === activeCategory);
 
-  console.log(filterData);
-
   return (
     <>
       <div className="flex flex-wrap mb-10 gap-2 sm:gap-1 justify-start">

@@ -44,7 +44,7 @@ export const updateConsultation = (
   id: number,
   data: Partial<ConsultationType>
 ) => {
-  const payload = toSnakeCase(data);
+  const payload = toSnakeCase(data) as ConsultationCreateInput;
   return axios.patch(
     `/consultations`,
     { id, ...payload },

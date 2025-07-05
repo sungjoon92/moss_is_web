@@ -36,7 +36,7 @@ export const getHomeList = ({
 
 // 수정
 export const updateHome = (id: number, data: Partial<HomeType>) => {
-  const payload = toSnakeCase(data);
+  const payload = toSnakeCase(data) as HomeCreateInput
   return axios.patch(`/home`, { id, ...payload }, { withCredentials: true });
 };
 

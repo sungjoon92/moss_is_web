@@ -30,7 +30,7 @@ export default async function ProjectDetailPage({ params }: Props) {
       return notFound();
     }
 
-    const projectData = toCamelCase(data);
+    const projectData = toCamelCase(data) as ProjectType;
     const project = {
       ...projectData,
       contentImages:

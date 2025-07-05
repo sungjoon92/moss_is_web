@@ -33,7 +33,7 @@ export const getNews = (id: number | string) => {
 
 // 수정
 export const updateNews = (id: number | string, data: Partial<NewsType>) => {
-  const payload = toSnakeCase(data);
+  const payload = toSnakeCase(data) as NewsCreateInput;
   return axios.patch(`/news`, { id, ...payload }, { withCredentials: true });
 };
 

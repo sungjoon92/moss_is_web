@@ -6,7 +6,7 @@ import Media from "@/components/main/home/Media";
 import Partner from "@/components/main/home/Partner";
 import MainVideo from "@/components/main/home/MainVideo";
 
-const HomePage: React.FC = () => {
+export default async function HomePage()  {
   return (
     <>
       <Container className="items-center">
@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+
 // SSR 페이지로 설정
 // export const dynamic = "force-dynamic";
 

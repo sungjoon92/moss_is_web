@@ -16,11 +16,6 @@ export const siteMetadata = {
   robots: "index, follow",
   // 검색 엔진 크롤러에게 이 페이지를 색인(index)하고, 링크를 따라가도 된다는 지시를 내림.
 
-  viewport: "width=device-width, initial-scale=1",
-  // 반응형 웹을 위한 설정. 모바일 디바이스에서도 레이아웃이 잘 보이도록 함.
-
-  themeColor: "#1a1a1a",
-  // 브라우저 툴바 색상 지정 (특히 모바일에서 주소창 배경색 등). PWA나 Android 홈화면 아이콘에서도 반영됨.
 
   openGraph: {
     title, // Open Graph 제목. Facebook, Kakao 등에서 링크 공유 시 사용됨.
@@ -53,3 +48,12 @@ export const siteMetadata = {
   metadataBase: new URL(siteUrl),
   // 메타데이터에서 사용하는 절대 URL 경로의 기준(base). Next.js에서 자동 URL 구성 시 필요
 };
+
+// 반응형 웹을 위한 설정. 모바일 디바이스에서도 레이아웃이 잘 보이도록 함.
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
+// 브라우저 툴바 색상 지정 (특히 모바일에서 주소창 배경색 등). PWA나 Android 홈화면 아이콘에서도 반영됨.
+export const themeColor = "#1a1a1a";

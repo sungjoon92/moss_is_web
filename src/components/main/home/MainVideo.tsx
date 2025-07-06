@@ -1,32 +1,25 @@
-"use client";
-
-import { getHomeList } from "@/lib/api/home";
+import { supabase } from "@/lib/supabase/supabaseClient";
 import { HomeType } from "@/types";
 import { toCamelCase } from "@/utils/caseConverter";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
-const MainVideo: React.FC = () => {
-  const pathname = usePathname();
-  const [homeData, setHomeData] = useState<HomeType[]>([]);
+export default async function MainVideo(){
 
-  const fetchHomeList = async () => {
-    const response = await getHomeList();
-    const data = response.data.map(toCamelCase);
-    setHomeData(data);
-  };
+   const {data, error} = await supabase
+    .from("t_home")
+    .select("*");
 
-  useEffect(() => {
-    fetchHomeList();
-  }, []);
+    if (error) {
+    console.error("서버에서 데이터 가져오기 오류:", error.message);
+    return <div>데이터를 불러오는 데 실패했습니다.</div>;
+  }
+  if (!data) return <div>데이터가 없습니다.</div>;
 
-  // 홈이 아니면 null 반환 (렌더링 안 함)
-  if (pathname !== "/") return null;
+  const camelCaseData = data.map((item) => toCamelCase(item) as HomeType);
 
   return (
     <section className="mt-[72px] md:mt-0 w-full aspect-video max-h-[50vh] min-h-[300px] sm:min-h-[250px] md:min-h-[300px] relative overflow-hidden">
-      {homeData.map((item) => {
+      {camelCaseData.map((item) => {
         return (
           item.isMain && (
             <Link
@@ -50,6 +43,7 @@ const MainVideo: React.FC = () => {
                 <h2 className="text-sm md:mb-3 md:text-[1.5rem] font-semibold">
                   {item.title}
                 </h2>
+
                 {/* 이안에 콘텐츠 넣을지? */}
                 <p className="text-base md:text-[2rem] font-semibold">
                   전 세계 어디라도 복원할 땅이 있는 곳이라면
@@ -63,4 +57,4 @@ const MainVideo: React.FC = () => {
   );
 };
 
-export default MainVideo;
+export const dynamic = "force-dynamic";

@@ -18,7 +18,6 @@ export default async function MainVideo() {
   if (!data) return <div>데이터가 없습니다.</div>;
 
   const camelCaseData = data?.[0] ? toCamelCase(data[0]) as HomeType : null;
-console.log("camelCaseData:", camelCaseData);
 
   if (!camelCaseData) {
     return null;

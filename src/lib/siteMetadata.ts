@@ -16,7 +16,6 @@ export const siteMetadata = {
   robots: "index, follow",
   // 검색 엔진 크롤러에게 이 페이지를 색인(index)하고, 링크를 따라가도 된다는 지시를 내림.
 
-
   openGraph: {
     title, // Open Graph 제목. Facebook, Kakao 등에서 링크 공유 시 사용됨.
     description, // Open Graph 설명. SNS 미리보기 설명에 표시됨.
@@ -50,10 +49,10 @@ export const siteMetadata = {
 };
 
 // 반응형 웹을 위한 설정. 모바일 디바이스에서도 레이아웃이 잘 보이도록 함.
-export const viewport = {
+export const exportedViewport = {
   width: "device-width",
   initialScale: 1,
-};
+  themeColor: "#1a1a1a",
+  // 브라우저 툴바 색상 지정 (특히 모바일에서 주소창 배경색 등). PWA나 Android 홈화면 아이콘에서도 반영됨.
 
-// 브라우저 툴바 색상 지정 (특히 모바일에서 주소창 배경색 등). PWA나 Android 홈화면 아이콘에서도 반영됨.
-export const themeColor = "#1a1a1a";
+};

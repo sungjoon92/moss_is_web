@@ -22,3 +22,9 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
+// SSR 페이지로 설정
+// export const dynamic = "force-dynamic";
+
+// ISR 설정
+// 페이지를 30초마다 재빌드하여 최신 데이터를 반영
+export const revalidate = 10;

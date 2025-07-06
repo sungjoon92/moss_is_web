@@ -11,7 +11,6 @@ export default function MainLayout({
   return (
     <>
       <Header />
-      <MainVideo />
       <main className="max-w-[1280px] mx-auto">{children}</main>
       <Footer />
       <FloatingButton />

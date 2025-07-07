@@ -110,7 +110,7 @@ const SolutionFormModal: React.FC<Props> = ({
     <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center overflow-y-auto">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-2xl bg-white rounded-2xl p-6 space-y-6 shadow-lg"
+        className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl p-6 space-y-6 shadow-lg"
       >
         <h2 className="text-xl font-bold text-gray-800">
           {mode === "create" ? "솔루션 등록" : "솔루션 수정"}

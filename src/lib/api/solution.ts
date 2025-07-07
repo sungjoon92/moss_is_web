@@ -36,7 +36,7 @@ export const getSolutions = ({
 
 // 수정
 export const updateSolution = (id: number, data: Partial<SolutionType>) => {
-  const payload = toSnakeCase(data);
+  const payload = toSnakeCase(data) as SolutionCreateInput;
   return axios.patch(
     `/solution`,
     { id, ...payload },

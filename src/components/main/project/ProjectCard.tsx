@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ProjectType } from "@/types";
+import { formatDate } from "@/utils/formatDate";
 
 interface Props {
   item: ProjectType;
@@ -38,12 +39,14 @@ const ProjectCard: React.FC<Props> = ({ item }) => {
         <div className="flex items-center text-xs text-gray-500 space-x-3">
           <span>{location}</span>
           <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
-          <span>{startDate}</span>
-          <span>{endDate}</span>
+          <span>
+            {formatDate(startDate)} ~ {formatDate(endDate)}
+          </span>
+          <span></span>
         </div>
         <Link
           href={`/project/${id}`}
-          className="text-green-600 text-sm font-semibold hover:underline flex items-center gap-1"
+          className="text-green-600 text-sm font-semibold hover:underline flex items-center pb-6"
         >
           더 알아보기 →
         </Link>

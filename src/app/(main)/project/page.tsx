@@ -1,29 +1,27 @@
-"use client";
-import React, { useEffect, useState } from "react";
 import Container from "@/components/Container";
-import { getProjects } from "@/lib/api/project";
 import { toCamelCase } from "@/utils/caseConverter";
 import ProjectList from "@/components/main/project/ProjectLIst";
+import { supabase } from "@/lib/supabase/supabaseClient";
+import { ProjectType } from "@/types";
 
-export default function ProjectPage() {
-  const [data, setData] = useState([]);
+export default async function ProjectPage() {
+  const { data, error } = await supabase
+    .from("t_project")
+    .select("*");
 
-  const fetchProject = async () => {
-    try {
-      const response = await getProjects();
-      setData(response.data.map(toCamelCase));
-    } catch (error) {
-      console.error("데이터를 불러오는 중 오류 발생:", error);
-    }
-  };
+  if (error) {
+    console.error("서버에서 데이터 가져오기 오류:", error.message);
+    return <div>데이터를 불러오는 데 실패했습니다.</div>;
+  }
+  if (!data) return <div>데이터가 없습니다.</div>;
 
-  useEffect(() => {
-    fetchProject();
-  }, []);
+  const camelCaseData = data.map((item) => toCamelCase(item) as ProjectType);
 
   return (
     <Container className="t-[80px] md:mt-0 ">
-      <ProjectList initialData={data} />
+      <ProjectList initialData={camelCaseData} />
     </Container>
   );
 }
+
+export const dynamic = "force-dynamic";

@@ -1,30 +1,12 @@
+import { exportedViewport, siteMetadata } from "@/lib/siteMetadata";
 import "./globals.css";
 import "./reset.css";
 import { Manrope, Source_Sans_3 } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import { siteDetails } from "@/data/siteDetails";
-
 const manrope = Manrope({ subsets: ["latin"] });
 const sourceSans = Source_Sans_3({ subsets: ["latin"] });
 
-export const metadata = {
-  title: siteDetails.metadata.title,
-  description: siteDetails.metadata.description,
-  openGraph: {
-    title: siteDetails.metadata.title,
-    description: siteDetails.metadata.description,
-    url: siteDetails.siteUrl,
-    type: "website",
-    images: [
-      {
-        url: "/images/moss-is-logo.png",
-        width: 1200,
-        height: 675,
-        alt: siteDetails.siteName,
-      },
-    ],
-  },
-};
+export const metadata = siteMetadata;
+export const viewport = exportedViewport;
 
 export default function RootLayout({
   children,
@@ -36,10 +18,6 @@ export default function RootLayout({
       <body
         className={`${manrope.className} ${sourceSans.className} antialiased`}
       >
-        {/* Google Analytics */}
-        {siteDetails.googleAnalyticsId && (
-          <GoogleAnalytics gaId={siteDetails.googleAnalyticsId} />
-        )}
         {children}
       </body>
     </html>

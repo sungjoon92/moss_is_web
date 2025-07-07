@@ -35,8 +35,11 @@ export default function SolutionList({ initialData }: Props) {
           </button>
         ))}
       </div>
-
-      <SolutionCard data={filterData} />
+      <div className="space-y-10">
+        {filterData.map((item) => {
+          return <SolutionCard key={item.id} data={item} />;
+        })}
+      </div>
     </>
   );
 }

@@ -10,7 +10,7 @@ import Container from "@/components/Container";
 
 export default function EnterprisePage() {
   return (
-    <Container className="">
+    <Container>
       <IntroSection />
       <Mission />
       <Vision />

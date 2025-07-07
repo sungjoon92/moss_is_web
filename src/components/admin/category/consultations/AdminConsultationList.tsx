@@ -28,37 +28,37 @@ const AdminConsultationList: React.FC<Props> = ({
   };
   return (
     <div className="space-y-4">
-      <table className="w-full table-auto border-collapse border border-gray-200">
+      <table className="w-full table-auto border-collapse border border-gray-200 text-center">
         <thead>
           <tr className="bg-gray-100">
-            <th className="border border-gray-300 px-4 py-2 text-center">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               문의상태
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               회사명
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               담당자
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               연락처
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               문의사항
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               알게된 경로
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               생성일
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               수정일
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               수정
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               삭제
             </th>
           </tr>
@@ -66,7 +66,7 @@ const AdminConsultationList: React.FC<Props> = ({
         <tbody>
           {data?.map((item) => (
             <tr key={item.id} className="hover:bg-gray-50">
-              <td className="border border-gray-300 text-center">
+              <td className="border border-gray-300 align-middle">
                 <select
                   value={item.status}
                   onChange={(e) => handleSelectStatus(item.id, e.target.value)}
@@ -79,31 +79,31 @@ const AdminConsultationList: React.FC<Props> = ({
                   ))}
                 </select>
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border border-gray-300 px-4 py-2 align-middle ">
                 {item.companyName}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border border-gray-300 px-4 py-2 align-middle ">
                 {item.managerName}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border border-gray-300 px-4 py-2 align-middle ">
                 {item.tel}
               </td>
               <td
-                className="border border-gray-300 px-4 py-2 truncate max-w-xs text-center"
+                className="border border-gray-300 px-4 py-2 align-middle max-w-xs text-left"
                 title={item.message}
               >
                 {item.message}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border border-gray-300 px-4 py-2 align-middle">
                 {item.referrer}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border border-gray-300 px-4 py-2 align-middle">
                 {formatDateTime(item.createdAt)}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border border-gray-300 px-4 py-2 align-middle">
                 {formatDateTime(item.updatedAt)}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border border-gray-300 px-4 py-2 align-middle">
                 <button
                   onClick={() => onEdit?.(item)}
                   className="text-blue-600 hover:text-blue-800"
@@ -111,7 +111,7 @@ const AdminConsultationList: React.FC<Props> = ({
                   수정
                 </button>
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border border-gray-300 px-4 py-2 align-middle">
                 <button
                   onClick={() => onDelete(item.id)}
                   className="text-red-600 hover:text-red-800"

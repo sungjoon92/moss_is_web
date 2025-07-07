@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow /admin
+
+Sitemap: https://moss-is-web.vercel.app/sitemap.xml

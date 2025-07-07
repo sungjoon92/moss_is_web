@@ -30,7 +30,10 @@ const NewsFormModal: React.FC<Props> = ({ mode, data, onClose, onSubmit }) => {
 
   useEffect(() => {
     if (mode === "edit" && data) {
-      setForm(data);
+      setForm({
+        ...data,
+        date: data.date ? new Date(data.date).toISOString().split("T")[0] : "",
+      });
     } else {
       setForm({
         category: "",

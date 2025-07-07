@@ -52,6 +52,12 @@ const ProjectFormModal: React.FC<Props> = ({
     if (mode === "edit" && data) {
       setForm({
         ...data,
+        startDate: data.startDate
+          ? new Date(data.startDate).toISOString().split("T")[0]
+          : "",
+        endDate: data.endDate
+          ? new Date(data.endDate).toISOString().split("T")[0]
+          : "",
         contentImages:
           typeof data.contentImages === "string"
             ? JSON.parse(data.contentImages)
@@ -190,7 +196,7 @@ const ProjectFormModal: React.FC<Props> = ({
     <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center overflow-auto">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-2xl bg-white rounded-2xl p-6 space-y-6 shadow-lg"
+        className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl p-6 space-y-6 shadow-lg"
       >
         <h2 className="text-xl font-bold text-gray-800">
           {mode === "create" ? "프로젝트 등록" : "프로젝트 수정"}

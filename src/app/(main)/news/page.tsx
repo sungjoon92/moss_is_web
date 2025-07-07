@@ -1,35 +1,25 @@
-"use client";
 import Container from "@/components/Container";
 import MainNewsCard from "@/components/main/news/MainNewsCard ";
 import NewsList from "@/components/main/news/NewsList";
-import { getNewsList } from "@/lib/api/news";
+import { supabase } from "@/lib/supabase/supabaseClient";
 import { NewsType } from "@/types";
 import { toCamelCase } from "@/utils/caseConverter";
-import { useEffect, useState } from "react";
 
 const category = ["전체", "미디어", "언론보도", "보도자료"];
 
-const NewsPage = () => {
-  const [data, setData] = useState<NewsType[]>([]);
-  const [activeCategory, setActiveCategory] = useState("전체");
+export default async function NewsPage() {
 
-  const fetchNews = async () => {
-    try {
-      const response = await getNewsList();
-      setData(response.data.map(toCamelCase));
-    } catch (err) {
-      console.error("뉴스 데이터 가져오기 오류:", err);
-    }
-  };
+  const { data, error } = await supabase
+    .from("t_news")
+    .select("*");
 
-  useEffect(() => {
-    fetchNews();
-  }, []);
+  if (error) {
+    console.error("서버에서 데이터 가져오기 오류:", error.message);
+    return <div>데이터를 불러오는 데 실패했습니다.</div>;
+  }
+  if (!data) return <div>데이터가 없습니다.</div>;
 
-  const filteredData =
-    activeCategory === "전체"
-      ? data
-      : data.filter((item) => item.category === activeCategory);
+  const camelCaseData = data.map((item) => toCamelCase(item) as NewsType);
 
   return (
     <Container className=" flex flex-col items-center">
@@ -42,30 +32,11 @@ const NewsPage = () => {
       </div>
 
       {/* 대표 이미지 */}
-      <MainNewsCard data={data} />
-
-      {/* 카테고리 버튼 */}
-      <div className="flex gap-2 mb-10">
-        {category.map((category) => (
-          <button
-            key={category}
-            onClick={(e) => {
-              e.preventDefault();
-              setActiveCategory(category);
-            }}
-            className={`px-4 py-2 rounded-full border text-sm font-medium ${
-              activeCategory === category
-                ? "bg-green-400 text-white"
-                : "bg-white text-gray-400 border-gray-300"
-            }`}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-      <NewsList data={filteredData}></NewsList>
+      <MainNewsCard data={camelCaseData} />
+   
+      <NewsList data={camelCaseData} category={category} ></NewsList>
     </Container>
   );
 };
 
-export default NewsPage;
+export const dynamic = "force-dynamic";

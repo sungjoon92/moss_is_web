@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { NewsType, ListProps } from "@/types";
-import { formatDateTime } from "@/utils/formatDate";
+import { formatDate, formatDateTime } from "@/utils/formatDate";
 
 interface Props extends ListProps<NewsType> {
   onEdit?: (news: NewsType) => void;
@@ -24,31 +24,31 @@ const AdminNewsList: React.FC<Props> = ({
 }) => {
   return (
     <div className="space-y-4">
-      <table className="w-full table-auto border-collapse border border-gray-200">
+      <table className="w-full table-auto border-collapse border border-gray-200 text-center">
         <thead>
           <tr className="bg-gray-100">
-            <th className="border border-gray-300 px-4 py-2 text-center align-middle">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               메인
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center align-middle">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               카테고리
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center align-middle">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               제목
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center align-middle">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               기사 날짜
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center align-middle">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               생성일
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center align-middle">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               수정일
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center align-middle">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               수정
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-center align-middle">
+            <th className="border border-gray-300 px-4 py-2 align-middle">
               삭제
             </th>
           </tr>
@@ -56,27 +56,29 @@ const AdminNewsList: React.FC<Props> = ({
         <tbody>
           {data?.map((item) => (
             <tr key={item.id} className="hover:bg-gray-50">
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border border-gray-300 px-4 py-2">
                 <input
                   type="checkbox"
                   checked={item.isMainNews}
                   onChange={() => onMainCheck(item.id)}
                 />
               </td>
-              <td className="border border-gray-300 px-4 py-2">
+              <td className="border border-gray-300 px-4 py-2 align-middle">
                 {item.category}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-blue-600 hover:underline">
+              <td className="border border-gray-300 px-4 py-2 text-blue-600 hover:underline text-left align-middle">
                 <Link href={`/news/${item.id}`}>{item.title}</Link>
               </td>
-              <td className="border border-gray-300 px-4 py-2">{item.date}</td>
-              <td className="border border-gray-300 px-4 py-2">
+              <td className="border border-gray-300 px-4 py-2 align-middle">
+                {formatDate(item.date)}
+              </td>
+              <td className="border border-gray-300 px-4 py-2 align-middle">
                 {formatDateTime(item.createdAt)}
               </td>
-              <td className="border border-gray-300 px-4 py-2">
+              <td className="border border-gray-300 px-4 py-2 align-middle">
                 {formatDateTime(item.updatedAt)}
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border border-gray-300 px-4 py-2 align-middle">
                 <button
                   onClick={() => onEdit?.(item)}
                   className="text-blue-600 hover:text-blue-800"
@@ -84,7 +86,7 @@ const AdminNewsList: React.FC<Props> = ({
                   수정
                 </button>
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+              <td className="border border-gray-300 px-4 py-2 ">
                 <button
                   onClick={() => onDelete(item.id)}
                   className="text-red-600 hover:text-red-800"

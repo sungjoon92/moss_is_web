@@ -33,7 +33,7 @@ export const getProject = (id: number | string) => {
 
 // 수정
 export const updateProject = (id: number, data: Partial<ProjectType>) => {
-  const payload = toSnakeCase(data);
+  const payload = toSnakeCase(data) as ProjectCreateInput;
   return axios.patch(`/project`, { id, ...payload }, { withCredentials: true });
 };
 

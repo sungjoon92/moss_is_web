@@ -1,5 +1,6 @@
 import { NewsType } from "@/types";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
   data: NewsType[];
@@ -13,8 +14,9 @@ const MainNewsCard: React.FC<Props> = ({ data }) => {
         .map((item) => {
           const { id, imageUrl, title } = item;
           return (
-            <div
+            <Link
               key={id}
+              href={`/news/${id}`}
               className="w-full mx-auto relative overflow-hidden aspect-[16/9] mb-[5rem]"
             >
               <Image
@@ -31,7 +33,7 @@ const MainNewsCard: React.FC<Props> = ({ data }) => {
                   {title}
                 </h2>
               </div>
-            </div>
+            </Link>
           );
         })}
     </>

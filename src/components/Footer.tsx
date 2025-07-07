@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="m-auto max-w-[1280px] border-t mt-20 text-sm text-gray-800 px-4 md:px-0">
+    <footer className="m-auto max-w-[1280px] border-t mt-20 text-sm text-gray-800 px-4 xl:px-0">
       {/* 상단 정보 영역 */}
       <div className="w-full py-8 flex flex-col md:flex-row justify-between text-center md:text-left space-y-6 md:space-y-0">
         <div className="w-full md:w-auto">
@@ -25,7 +25,7 @@ const Footer = () => {
       </div>
 
       {/* 하단 정보 영역 */}
-      <div className="w-full  py-6 text-center md:text-left text-xs space-y-1 md:space-y-0 flex flex-col md:flex-row justify-between items-center md:items-start">
+      <div className="w-full py-6 text-center md:text-left text-xs space-y-1 md:space-y-0 flex flex-col md:flex-row justify-between items-center md:items-start">
         <div className="space-y-1">
           <p>대표자 : 박재홍</p>
           <p>사업자등록번호 : 817-86-02036</p>

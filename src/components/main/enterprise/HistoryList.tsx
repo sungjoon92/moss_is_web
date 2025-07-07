@@ -7,7 +7,7 @@ interface Props {
 
 const HistoryList: React.FC<Props> = ({ data }) => {
   return (
-    <section className="w-full mt-16 mb-16 px-4">
+    <section className="w-full mt-16 mb-16">
       <h2 className="w-full mb-12 text-center text-3xl sm:text-4xl font-medium leading-tight">
         모스이즈가
         <br />

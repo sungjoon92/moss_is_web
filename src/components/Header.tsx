@@ -26,7 +26,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="w-full max-w-[1280px] md:pb-[50px] m-auto fixed md:static top-0 left-0 z-50 bg-white p-4">
+    <header className="w-full max-w-[1280px] md:pb-[50px] m-auto fixed md:static top-0 left-0 z-50 bg-white p-4 md:p-0">
       <div className="w-full flex justify-between flex-row md:flex md:flex-col items-center">
         <Link
           href="/"
@@ -34,7 +34,7 @@ const Header: React.FC = () => {
           className="flex items-center justify-center "
         >
           <Image
-            src="/images/moss_is_logo.png"
+            src="/images/moss-is-logo.png"
             width={128}
             height={128}
             alt="로고"

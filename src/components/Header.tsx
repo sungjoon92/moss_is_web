@@ -34,7 +34,7 @@ const Header: React.FC = () => {
           className="flex items-center justify-center "
         >
           <Image
-            src="/images/moss_is_logo.png"
+            src="/images/moss-is-logo.png"
             width={128}
             height={128}
             alt="로고"

@@ -3,7 +3,7 @@ import { IMenuItem } from "@/types";
 export const menuItems: IMenuItem[] = [
   {
     text: "홈",
-    url: "/",
+    url: "/home",
   },
   {
     text: "기업소개",

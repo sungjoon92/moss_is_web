@@ -33,7 +33,7 @@ export default async function SolutionPage() {
   // }, []);
   return (
     <Container>
-      <SolutionList initialData={camelCaseData} />
+      <SolutionList data={camelCaseData} />
     </Container>
   );
 }

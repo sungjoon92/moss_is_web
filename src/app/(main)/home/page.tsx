@@ -1,26 +1,26 @@
-import Introduction from "@/components/main/home/Introduction";
 import Container from "@/components/Container";
-import WhatWeDo from "@/components/main/home/WhatWeDo";
-import OurSolutions from "@/components/main/home/OurSolutions";
-import Media from "@/components/main/home/Media";
-import Partner from "@/components/main/home/Partner";
 import MainVideo from "@/components/main/home/MainVideo";
+import WhyStarted from "@/components/main/home/WhyStarted";
+import WhyMoss from "@/components/main/home/WhyMoss";
+import OurPath from "@/components/main/home/OurPath";
+import Campaign from "@/components/main/home/Campaign";
+import History from "@/components/main/home/History";
+import { historyData } from "@/data/historyData";
 
-export default async function HomePage()  {
+export default async function HomePage() {
   return (
     <>
-      <Container className="items-center">
+      <Container className="w-full px-4 md:px-10 lg:px-20 py-16 space-y-24">
         <MainVideo />
-        <Introduction />
-        <WhatWeDo />
-        <OurSolutions />
-        <Media />
-        <Partner />
+        <WhyStarted />
+        <WhyMoss />
+        <OurPath />
+        <Campaign />
+        <History data={historyData} />
       </Container>
     </>
   );
-};
-
+}
 
 // SSR 페이지로 설정
 // export const dynamic = "force-dynamic";

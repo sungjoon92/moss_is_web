@@ -41,7 +41,7 @@ const Header: React.FC = () => {
             className="text-foreground min-w-fit w-10 h-10 md:w-32 md:h-32 "
           />
         </Link>
-        <nav className="md:p-0 md:w-[70%] bg-white md:bg-transparent   items-center">
+        <nav className="md:p-0 md:w-[70%] bg-white md:bg-transparent items-center font-semibold text-lg flex justify-between">
           {/* Logo */}
 
           {/* Desktop Menu */}

@@ -33,7 +33,7 @@ const ProjectCard: React.FC<Props> = ({ item }) => {
         >
           {title}
         </Link>
-        <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+        <p className="text-md text-gray-700 leading-relaxed whitespace-pre-line">
           {description}
         </p>
         <div className="flex items-center text-xs text-gray-500 space-x-3">
@@ -42,11 +42,10 @@ const ProjectCard: React.FC<Props> = ({ item }) => {
           <span>
             {formatDate(startDate)} ~ {formatDate(endDate)}
           </span>
-          <span></span>
         </div>
         <Link
           href={`/project/${id}`}
-          className="text-green-600 text-sm font-semibold hover:underline flex items-center pb-6"
+          className="text-green-600 text-sm font-semibold hover:underline flex items-center pb-6 md:pt-10"
         >
           더 알아보기 →
         </Link>

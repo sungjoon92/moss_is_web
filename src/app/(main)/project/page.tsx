@@ -1,13 +1,12 @@
-import Container from "@/components/Container";
-import { toCamelCase } from "@/utils/caseConverter";
-import ProjectList from "@/components/main/project/ProjectLIst";
 import { supabase } from "@/lib/supabase/supabaseClient";
+import { toCamelCase } from "@/utils/caseConverter";
 import { ProjectType } from "@/types";
+import Container from "@/components/Container";
+import CategoryTabs from "@/components/main/project/CategoryTabs";
+import ProjectList from "@/components/main/project/ProjectLIst";
 
 export default async function ProjectPage() {
-  const { data, error } = await supabase
-    .from("t_project")
-    .select("*");
+  const { data, error } = await supabase.from("t_project").select("*");
 
   if (error) {
     console.error("서버에서 데이터 가져오기 오류:", error.message);
@@ -18,7 +17,8 @@ export default async function ProjectPage() {
   const camelCaseData = data.map((item) => toCamelCase(item) as ProjectType);
 
   return (
-    <Container className="t-[80px] md:mt-0 ">
+    <Container className="mt-[80px] md:mt-0">
+      <CategoryTabs categories={["project", "news"]} />
       <ProjectList initialData={camelCaseData} />
     </Container>
   );

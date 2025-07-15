@@ -5,9 +5,9 @@ interface Props {
   data: HistoryType[];
 }
 
-const HistoryList: React.FC<Props> = ({ data }) => {
+const History: React.FC<Props> = ({ data }) => {
   return (
-    <section className="w-full mt-16 mb-16">
+    <section className="w-full my-16">
       <h2 className="w-full mb-12 text-center text-3xl sm:text-4xl font-medium leading-tight">
         모스이즈가
         <br />
@@ -26,7 +26,7 @@ const HistoryList: React.FC<Props> = ({ data }) => {
             </div>
 
             {/* 내용 */}
-            <div className="flex-1 border-l-2 border-gray-300 pl-4 sm:pl-6">
+            <div className="flex-1 border-l-2 sm:pl-6">
               <h3 className="text-lg sm:text-xl font-semibold mb-3">{title}</h3>
               <div className="space-y-1">
                 {descriptions.map((desc, index) => (
@@ -50,4 +50,4 @@ const HistoryList: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default HistoryList;
+export default History;

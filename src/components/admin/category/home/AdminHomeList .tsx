@@ -81,18 +81,12 @@ const AdminHomeList: React.FC<AdminHomeListProps> = ({
                 {item.linkUrl}
               </td>
               <td className="border border-gray-300 px-4 py-2 align-middle">
-                <Link
-                  href={item.linkUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <ReactPlayer
-                    src={item.videoUrl}
-                    controls
-                    width="100%"
-                    height="100%"
-                  />
-                </Link>
+                <ReactPlayer
+                  src={item.videoUrl}
+                  controls
+                  width="100%"
+                  height="100%"
+                />
               </td>
               <td className="w-[100px] border border-gray-300  py-2 align-middle text-center">
                 <button

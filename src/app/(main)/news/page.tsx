@@ -31,7 +31,7 @@ export default async function NewsPage() {
       </div>
 
       {/* 대표 이미지 */}
-      <MainNewsCard data={camelCaseData} />
+      {/* <MainNewsCard data={camelCaseData} /> */}
 
       <NewsList data={camelCaseData} category={category}></NewsList>
     </Container>

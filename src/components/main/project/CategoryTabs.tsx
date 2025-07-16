@@ -11,7 +11,7 @@ const CategoryTabs: React.FC<Props> = ({ categories }) => {
   const router = useRouter();
   const pathname = usePathname();
   return (
-    <div className="flex gap-3 mb-6">
+    <div className="flex gap-3 mb-6 text-center m-auto">
       {categories.map((item) => (
         <button
           key={item}

@@ -1,23 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import { HiOutlineXMark, HiBars3 } from "react-icons/hi2";
 import { menuItems } from "@/data/menuItems";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 
 const Header: React.FC = () => {
   // 메뉴 상태 관리
   const router = useRouter();
+  const [active, setActive] = useState<number | null>(null);
+  const pathname = usePathname();
+
+  // 새로고침시에도 현재 패스를 확인하여 메뉴상태 보전
+  useEffect(() => {
+    const currentIndex = menuItems.findIndex((item) => item.url === pathname);
+    if (currentIndex !== -1) {
+      setActive(currentIndex);
+    }
+  }, [pathname]);
 
   // 모바일 메뉴의 열림/닫힘 상태를 관리하는 useState 훅
   const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-  const [active, setActive] = useState(0);
 
   // 메뉴 아이템 클릭 핸들러
   const handleClickChangeMenu = (url: string, index: number) => {
@@ -49,11 +58,10 @@ const Header: React.FC = () => {
             {menuItems.map((item, index) => (
               <li
                 key={item.text}
-                className={`w-[20%] cursor-pointer transition-colors ${
-                  active === index
-                    ? "border-b-2 border-black font-semibold"
-                    : ""
-                }`}
+                className={`w-[20%] cursor-pointer transition-colors ${active === index
+                  ? "border-b-2 border-black font-semibold"
+                  : ""
+                  }`}
               >
                 <Link
                   href={item.url}

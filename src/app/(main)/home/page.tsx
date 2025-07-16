@@ -10,7 +10,7 @@ import { historyData } from "@/data/historyData";
 export default async function HomePage() {
   return (
     <>
-      <Container className="w-full px-4 md:px-10 lg:px-20 py-16 space-y-24">
+      <Container className="w-full px-4 md:px-10 lg:px-20 space-y-24">
         <MainVideo />
         <WhyStarted />
         <WhyMoss />

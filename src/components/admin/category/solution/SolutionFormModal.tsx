@@ -137,9 +137,10 @@ const SolutionFormModal: React.FC<Props> = ({
             className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-green-400"
           >
             <option value="">카테고리 선택</option>
-            <option value="녹화시스템">녹화시스템</option>
-            <option value="산림복원">산림복원</option>
-            <option value="이끼정원">이끼정원</option>
+            <option value="이끼재배">이끼재배</option>
+            <option value="벽면녹화">벽면녹화</option>
+            <option value="모쏘일">모쏘일</option>
+            <option value="테라리움">테라리움</option>
           </select>
         </div>
 

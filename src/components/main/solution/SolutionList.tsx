@@ -4,23 +4,24 @@ import React, { useState } from "react";
 import SolutionCard from "./SolutionCard";
 import { SolutionType } from "@/types";
 
-const category = ["전체", "녹화시스템", "산림복원", "이끼정원"];
+const category = ["이끼재배", "벽면녹화", "모쏘일", "테라리움"];
 
 interface Props {
-  initialData: SolutionType[];
+  data: SolutionType[];
 }
 
-export default function SolutionList({ initialData }: Props) {
+export default function SolutionList({ data }: Props) {
   const [activeCategory, setActiveCategory] = useState("전체");
 
   const filterData =
     activeCategory === "전체"
-      ? initialData
-      : initialData.filter((item) => item.category === activeCategory);
+      ? data
+      : data.filter((item) => item.category === activeCategory);
 
   return (
     <>
-      <div className="flex flex-wrap mb-10 gap-2 sm:gap-1 justify-start">
+      {/* 솔루션에서 카테고리 사용시 아래 코드 이용 */}
+      {/*   <div className="flex flex-wrap mb-10 gap-2 sm:gap-1 justify-start">
         {category.map((category) => (
           <button
             key={category}
@@ -34,7 +35,7 @@ export default function SolutionList({ initialData }: Props) {
             {category}
           </button>
         ))}
-      </div>
+      </div> */}
       <div className="space-y-10">
         {filterData.map((item) => {
           return <SolutionCard key={item.id} data={item} />;

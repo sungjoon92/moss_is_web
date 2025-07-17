@@ -2,23 +2,23 @@ import { IMenuItem } from "@/types";
 
 export const menuItems: IMenuItem[] = [
   {
-    text: "홈",
-    url: "/",
+    text: "Home",
+    url: "/home",
   },
   {
-    text: "기업소개",
+    text: "About Us",
     url: "/enterprise",
   },
   {
-    text: "솔루션",
+    text: "Product & Service",
     url: "/solution",
   },
   {
-    text: "프로젝트",
+    text: "Project",
     url: "/project",
   },
   {
-    text: "소식",
-    url: "/news",
+    text: "Contact Us",
+    url: "/contactus",
   },
 ];

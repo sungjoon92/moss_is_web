@@ -25,12 +25,12 @@ const SolutionCard: React.FC<Props> = ({ data }) => {
           {title}
         </Link>
         <div
-          className="text-sm text-gray-700 leading-relaxed whitespace-pre-line"
+          className="text-md font-sans text-gray-700 leading-relaxed whitespace-pre-line"
           dangerouslySetInnerHTML={{ __html: sanitizeHtmlClient(content) }}
         />
         <Link
           href={`/solution/${id}`}
-          className="text-green-600 text-sm font-semibold hover:underline flex items-center pb-6"
+          className="text-green-600 text-sm font-semibold hover:underline flex items-center pb-6 md:pt-10"
         >
           더 알아보기 →
         </Link>

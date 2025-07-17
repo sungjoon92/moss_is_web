@@ -98,6 +98,15 @@ export interface ConsultationType {
 }
 export type ConsultationCreateInput = Omit<ConsultationType, "id">;
 
+export interface ContactUsType {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+}
+export type ContactUsCreateInput = Omit<ContactUsType, "id">;
+
 export interface PaginationParams {
   page?: number;
   limit?: number;

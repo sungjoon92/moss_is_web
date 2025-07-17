@@ -9,7 +9,7 @@ export default function NotFoundPage() {
         주소가 잘못되었거나 삭제된 페이지입니다.
       </p>
       <Link
-        href="/"
+        href="/home"
         className="mt-6 inline-block px-6 py-2 bg-green-500 text-white rounded-full shadow hover:bg-green-600 transition"
       >
         홈으로 돌아가기

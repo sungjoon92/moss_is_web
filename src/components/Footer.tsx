@@ -8,13 +8,7 @@ const Footer = () => {
       <div className="w-full py-8 flex flex-col md:flex-row justify-between text-center md:text-left space-y-6 md:space-y-0">
         <div className="w-full md:w-auto">
           <p className="text-xs text-gray-500 mb-1">Email Us</p>
-          <p className="font-semibold">codeofnature@c-of-n.com</p>
-        </div>
-        <div className="w-full md:w-auto">
-          <p className="text-xs text-gray-500 mb-1">Yangsan Office</p>
-          <p className="font-semibold">
-            경남 양산시 물금읍 부산대학로 <strong>144, 209호</strong>
-          </p>
+          <p className="font-semibold">mossis0731@naver.com</p>
         </div>
         <div className="w-full md:w-auto">
           <p className="text-xs text-gray-500 mb-1">Seoul Office</p>
@@ -28,8 +22,8 @@ const Footer = () => {
       <div className="w-full py-6 text-center md:text-left text-xs space-y-1 md:space-y-0 flex flex-col md:flex-row justify-between items-center md:items-start">
         <div className="space-y-1">
           <p>대표자 : 박재홍</p>
-          <p>사업자등록번호 : 817-86-02036</p>
-          <p>개인정보 처리방침</p>
+          <p>문의 연락처 : 010-2491-0322</p>
+          <p>사업자등록번호 : 000-00-000000</p>
         </div>
 
         <div className="flex flex-col items-center md:items-end mt-4 md:mt-0 text-center md:text-right">

@@ -23,9 +23,9 @@ export default async function NewsPage() {
     <Container>
       <CategoryTabs categories={["project", "news"]} />
       <div className="w-full text-center">
-        <h1 className="text-4xl font-medium mb-5">COFN 뉴스룸</h1>
+        <h1 className="text-4xl font-medium mb-5">모스이즈 뉴스룸</h1>
         <p className="text-gray-600 mb-10">
-          코드오브네이처의 새로운 소식들을 <br />
+          모스이즈의 새로운 소식들을 <br />
           한눈에 살펴보세요.
         </p>
       </div>

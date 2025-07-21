@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 export default function LandingPage() {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
-
   useEffect(() => {
     const timeout = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timeout);
@@ -17,26 +16,29 @@ export default function LandingPage() {
   };
 
   return (
+    // 비디오가 랜더링중이면 /images/landing.png 완료되면 /videos/landing.mp4
     <div className="relative w-full h-screen overflow-hidden">
-      {/* 배경 비디오 */}
       <video
-        src="/videos/landing.mp4"
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+        poster="/images/landing.png"
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity `}
+      >
+        <source src="/videos/landing.mp4" type="video/mp4" />
+      </video>
 
       {/* 오버레이 및 CTA */}
       <div
-        className={`absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-white transition-opacity duration-1000 ${isLoaded ? "opacity-100" : "opacity-0"
-          }`}
+        className={`absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-white transition-opacity duration-1000 ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
       >
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-6 leading-snug">
-          작은 식물, 큰 가치<br />
+          작은 식물, 큰 가치
+          <br />
           이끼로 자연을 지키다
         </h1>
         <button

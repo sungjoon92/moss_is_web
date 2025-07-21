@@ -8,8 +8,8 @@ const Greeting = () => {
       <div className="flex-1 space-y-6 text-gray-800">
         <h2 className="text-green-700 text-lg font-semibold">＊ GREETING</h2>
         <p className="text-2xl md:text-3xl font-bold leading-snug">
-          “맑은 공기와 건강한 자연은 <br className="hidden md:block" />
-          다음 세대를 위한 가장 소중한 선물입니다.”
+          맑은 공기와 건강한 자연은 <br className="hidden md:block" />
+          다음 세대를 위한 가장 소중한 선물입니다.
         </p>
         <p className="text-base md:text-lg leading-relaxed">
           moss is는 자연을 복원하고 생명을 되살리는 것을 최우선 가치로 두고

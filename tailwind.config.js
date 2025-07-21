@@ -7,9 +7,18 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    // tailwind.config.js
     extend: {
-      fontFamily: {
-        sans: ["'Manrope'", "'Source Sans 3'", "sans-serif"],
+      keyframes: {
+        "zoom-in": {
+          "0%": { transform: "scale(1) translateX(0)" },
+          "25%": { transform: "scale(1.5) translateX(-5%)" },
+          "75%": { transform: "scale(1.7) translateX(5%)" },
+          "100%": { transform: "scale(1) translateX(0)" },
+        },
+      },
+      animation: {
+        "zoom-in": "zoom-in 60s ease-in-out forwards infinite alternate",
       },
     },
   },

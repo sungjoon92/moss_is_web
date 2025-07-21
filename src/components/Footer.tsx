@@ -27,7 +27,7 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-col items-center md:items-end mt-4 md:mt-0 text-center md:text-right">
-          <p className="text-green-600 font-semibold">Code of {`{Nature.}`}</p>
+          <p className="text-green-600 font-semibold">moss is</p>
           <p className="text-gray-400 text-[11px]">
             Copyright © Code of Nature. All Rights Reserved.
           </p>

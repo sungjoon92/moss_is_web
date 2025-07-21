@@ -8,7 +8,7 @@ export default async function ContactUsPage() {
     .from("t_contactus")
     .select("*")
     .order("id", { ascending: false }) // 최신순 예시
-    .range(0, 8); // 첫 페이지 분량만 (limit=6이면 0~5)
+    .range(0, 9); // 첫 페이지 분량만 (limit=6이면 0~5)
 
   if (error) {
     console.error("서버에서 데이터 가져오기 오류:", error.message);

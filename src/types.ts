@@ -112,6 +112,8 @@ export interface PaginationParams {
   limit?: number;
   sort?: string;
   order?: "asc" | "desc";
+  keyword?: string;
+  searchField?: string;
 }
 
 export interface ListProps<T> {

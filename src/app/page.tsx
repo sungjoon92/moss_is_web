@@ -46,17 +46,19 @@ export default function LandingPage() {
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
         >
-          <h1 className="text-4xl md:text-6xl font-extrabold text-center mb-6 leading-relaxed tracking-tight drop-shadow-xl transition-all duration-2000">
-            작은 식물, 큰 가치
-            <br />
-            <span className="text-green-400 md:text-green-500 animate-pulse">
-              이끼
-            </span>
-            로 자연을 지키다
+          <h1 className="flex flex-col gap-5 text-4xl md:text-6xl font-bold text-center mb-6 leading-relaxed tracking-tight drop-shadow-xl transition-all duration-2000">
+            <p> 작은 식물, 큰 가치</p>
+
+            <div>
+              <span className="text-green-400 md:text-green-500 animate-pulse font-extrabold">
+                이끼
+              </span>
+              <span> 로 자연을 지키다</span>
+            </div>
           </h1>
           <button
             onClick={handleClick}
-            className="mt-6 px-8 py-3 bg-green-600 hover:bg-green-700 text-lg rounded-full transition shadow-lg"
+            className="px-8 py-3 bg-green-600 hover:bg-green-700 text-lg rounded-full transition shadow-lg"
           >
             모스이즈와 함께하기
           </button>

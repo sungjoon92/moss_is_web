@@ -21,7 +21,6 @@ const AdminContactUsList: React.FC<Props> = ({
   onSortChange,
   onOrderChange,
 }) => {
-
   return (
     <div className="space-y-4">
       <table className="w-full table-auto border-collapse border border-gray-200 text-center">
@@ -53,10 +52,12 @@ const AdminContactUsList: React.FC<Props> = ({
               <td className="border border-gray-300 px-4 py-2 align-middle">
                 {item.title}
               </td>
-              <td className="border border-gray-300 px-4 py-2 align-middle" >
-                <div dangerouslySetInnerHTML={{
-                  __html: sanitizeHtmlClient(item.content),
-                }}/>
+              <td className="border border-gray-300 px-4 py-2 align-middle">
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizeHtmlClient(item.content),
+                  }}
+                />
               </td>
               <td className="border border-gray-300 px-4 py-2 align-middle">
                 {formatDateTime(item.createdAt)}
@@ -96,7 +97,6 @@ const AdminContactUsList: React.FC<Props> = ({
           >
             <option value="created_at">생성일</option>
             <option value="updated_at">수정일</option>
-            <option value="company_name">회사명</option>
           </select>
 
           <select

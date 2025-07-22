@@ -34,7 +34,9 @@ const ContactUsForm: React.FC<Props> = ({ onClose, onsubmit }) => {
     onsubmit?.(form);
   };
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="relative w-full max-w-xl bg-white rounded-md shadow-lg p-6 max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
@@ -53,6 +55,7 @@ const ContactUsForm: React.FC<Props> = ({ onClose, onsubmit }) => {
               name="title"
               value={form.title}
               onChange={handleChange}
+              autoFocus
               className="w-full border rounded px-3 py-2 mt-1"
             />
           </div>

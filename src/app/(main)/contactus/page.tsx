@@ -1,23 +1,44 @@
-import ContactUsList from "@/components/main/contactus/ContactUsList";
 import { supabase } from "@/lib/supabase/supabaseClient";
-import { ContactUsType } from "@/types";
 import { toCamelCase } from "@/utils/caseConverter";
+import ContactUsList from "@/components/main/contactus/ContactUsList";
+import { ContactUsType } from "@/types";
 
-export default async function ContactUsPage() {
-  const { data, error } = await supabase
+interface Props {
+  searchParams: { [key: string]: string | undefined };
+}
+
+export default async function ContactUsPage({ searchParams }: Props) {
+  const page = parseInt(searchParams.page ?? "1", 10);
+  const limit = parseInt(searchParams.limit ?? "10", 10);
+  const sort = searchParams.sort ?? "id";
+  const order = searchParams.order === "asc" ? "asc" : "desc";
+
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  const { data, error, count } = await supabase
     .from("t_contactus")
-    .select("*")
-    .order("id", { ascending: false }) // 최신순 예시
-    .range(0, 9); // 첫 페이지 분량만 (limit=6이면 0~5)
+    .select("*", { count: "exact" })
+    .order(sort, { ascending: order === "asc" })
+    .range(from, to);
 
   if (error) {
-    console.error("서버에서 데이터 가져오기 오류:", error.message);
-    return <div>데이터를 불러오는 데 실패했습니다.</div>;
+    console.error("데이터 로딩 실패:", error.message);
+    return <div>에러 발생</div>;
   }
-  if (!data) return <div>데이터가 없습니다.</div>;
 
   const camelCaseData = data.map((item) => toCamelCase(item) as ContactUsType);
-  return <ContactUsList initialContactData={camelCaseData} />;
+
+  return (
+    <ContactUsList
+      initialContactData={camelCaseData}
+      initialTotal={count ?? 0}
+      initialPage={page}
+      initialLimit={limit}
+      initialSort={sort}
+      initialOrder={order}
+    />
+  );
 }
 
 export const dynamic = "force-dynamic";

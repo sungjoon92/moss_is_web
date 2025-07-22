@@ -9,37 +9,23 @@ export async function GET(request: Request) {
   const limit = parseInt(searchParams.get("limit") || "10", 10);
   const sort = searchParams.get("sort") || "id";
   const order = searchParams.get("order") || "desc";
-  const keyword = searchParams.get("keyword") || "";
-  const category = searchParams.get("category") || "";
-  const searchField = searchParams.get("searchField") || "title";
 
   const from = (page - 1) * limit;
   const to = from + limit - 1;
 
-  let query = supabase.from("t_contactus").select("*");
-
-  // 검색 필드 및 키워드가 있을 경우
-  if (keyword && searchField) {
-    query = query.like(searchField, `%${keyword}%`);
-  }
-
-  // 카테고리 필터 (전체가 아니면 필터 적용)
-  if (category && category !== "전체") {
-    query = query.eq("category", category);
-  }
-
-  const { data, error } = await query
+  const { data, error, count } = await supabase
+    .from("t_contactus")
+    .select("*", { count: "exact" })
     .order(sort, { ascending: order === "asc" })
     .range(from, to);
 
-  if (error) {
+  if (error)
     return NextResponse.json(
       { error: "질문 목록 조회 중 오류가 발생했습니다." },
       { status: 500 }
     );
-  }
 
-  return NextResponse.json(data);
+  return NextResponse.json({ data, total: count });
 }
 
 // 질문 데이터 생성

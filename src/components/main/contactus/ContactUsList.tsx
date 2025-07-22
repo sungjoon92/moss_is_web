@@ -1,101 +1,98 @@
 "use client";
 
-import { ContactUsCreateInput, ContactUsType } from "@/types";
 import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ContactUsType, ContactUsCreateInput } from "@/types";
+import { getContactUsList, createContactUs } from "@/lib/api/contactus";
 import ContactUsForm from "./ContactUsForm";
-import { createContactUs, getContactUsList } from "@/lib/api/contactus";
-import "react-quill-new/dist/quill.snow.css";
 import ContactUsDetailModal from "./ContactUsDetailModal";
 import Container from "@/components/Container";
 import { toCamelCase } from "@/utils/caseConverter";
 import { formatDateTime } from "@/utils/formatDate";
 import { AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 interface Props {
   initialContactData: ContactUsType[];
+  initialTotal: number;
+  initialPage: number;
+  initialLimit: number;
+  initialSort: string;
+  initialOrder: "asc" | "desc";
 }
 
-export default function ContactUsList({ initialContactData }: Props) {
-  // SSR로 받은 첫번쨰 데이터만로 첫페이지 랜더링한 후에 페이지네이션시에 axios 호출
-  const [contactData, setContactData] =
-    useState<ContactUsType[]>(initialContactData);
-  // form 모달
+export default function ContactUsList({
+  initialContactData,
+  initialTotal,
+  initialPage,
+  initialLimit,
+  initialSort,
+  initialOrder,
+}: Props) {
+  const [contactData, setContactData] = useState(initialContactData);
+  const [totalItems, setTotalItems] = useState(initialTotal);
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const page = parseInt(searchParams.get("page") ?? String(initialPage), 10);
+  const limit = parseInt(searchParams.get("limit") ?? String(initialLimit), 10);
+  const sort = searchParams.get("sort") ?? initialSort;
+  const order = (searchParams.get("order") as "asc" | "desc") ?? initialOrder;
+
   const [isOpenModal, setIsOpenModal] = useState(false);
-  // 클릭한 카드 디테일 모달
   const [selectedItem, setSelectedItem] = useState<ContactUsType | null>(null);
-  // 페이지네이션
-  const [page, setPage] = useState(1);
-  const [limit] = useState(10);
-  const [sort, setSort] = useState("id");
-  const [order, setOrder] = useState<"asc" | "desc">("desc");
+  const totalPages = Math.ceil(totalItems / limit);
 
-  // 첫페이지 렌더링 여부확인
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
-
-  // 데이터 조회
   useEffect(() => {
-    // 초기 렌더링 데이터는 SSR 데이터라 판단 후 스킵
-    if (page === 1 && isInitialLoad) {
-      setIsInitialLoad(false);
-      return;
-    }
-
     const fetchPage = async () => {
-      try {
-        const response = await getContactUsList({
-          page,
-          limit,
-          sort,
-          order,
-        });
-
-        const data = response.data.map(toCamelCase);
-        setContactData(data);
-      } catch (e) {
-        console.error(e);
-      }
+      const response = await getContactUsList({ page, limit, sort, order });
+      const camelData = response.data.data.map(toCamelCase);
+      setContactData(camelData);
+      setTotalItems(response.data.total);
     };
 
-    if (page === 1 && isInitialLoad) {
-      setIsInitialLoad(false);
-      return;
-    }
-
     fetchPage();
-  }, [page, sort, order]);
+  }, [page, limit, sort, order]);
 
-  // 데이터 생성
+  const updateParams = (updates: Record<string, string | number>) => {
+    const params = new URLSearchParams(searchParams.toString());
+    Object.entries(updates).forEach(([key, value]) => {
+      params.set(key, String(value));
+    });
+    router.push(`/contactus?${params.toString()}`);
+  };
+
+  const onPageChange = (newPage: number) => {
+    updateParams({ page: newPage });
+  };
+
   const handleSubmit = async (data: ContactUsCreateInput) => {
     try {
       await createContactUs(data);
-    } catch (error) {
-      console.error("데이터 저장 중 오류 발생:", error);
+      setIsOpenModal(false);
+      updateParams({ page: 1 }); // 새 글 작성 시 1페이지로 이동
+    } catch (e) {
+      console.error(e);
     }
-    setIsOpenModal(false);
   };
-  console.log(contactData);
+
+  const getPageNumbers = () => {
+    const maxButtons = 5;
+    const half = Math.floor(maxButtons / 2);
+    let start = Math.max(1, page - half);
+    let end = Math.min(totalPages, page + half);
+    if (end - start + 1 < maxButtons) {
+      if (start === 1) end = Math.min(totalPages, start + maxButtons - 1);
+      else if (end === totalPages) start = Math.max(1, end - maxButtons + 1);
+    }
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  };
+
   return (
     <Container className="max-w-7xl mx-auto px-4">
-      {/* 게시글 리스트 - 카드형
-      <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {contactData.map((item) => (
-          <motion.div
-          layout
-            layoutId={`contact-${item.id}`} // 클릭한 카드와 모달이 공유할 ID
-            key={item.id}
-            onClick={() => setSelectedItem(item)}
-            className="cursor-pointer"
-          >
-            <ContactUsCard item={item} />
-          </motion.div>
-        ))}
-      </div> */}
-
-      {/* 게시글 리스트 - 리스트형 */}
-
+      {/* 헤더 + 글쓰기 */}
       <div className="flex justify-between mb-5">
-        {/* 제목 */}
         <h1 className="text-xl font-bold">질문게시판</h1>
-        {/* 글쓰기 버튼 */}
         <button
           onClick={() => setIsOpenModal(true)}
           className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded"
@@ -128,13 +125,9 @@ export default function ContactUsList({ initialContactData }: Props) {
                   onClick={() => setSelectedItem(item)}
                   className="hover:bg-gray-50 cursor-pointer border-b"
                 >
-                  <td className="text-center py-3">
-                    {(page - 1) * limit + idx + 1}
-                  </td>
+                  <td className="text-center py-3">{(page - 1) * limit + idx + 1}</td>
                   <td className="py-3 px-4 truncate">{item.title}</td>
-                  <td className="text-center py-3">
-                    {formatDateTime(item.createdAt)}
-                  </td>
+                  <td className="text-center py-3">{formatDateTime(item.createdAt)}</td>
                 </tr>
               ))
             )}
@@ -142,52 +135,75 @@ export default function ContactUsList({ initialContactData }: Props) {
         </table>
       </div>
 
+
       {/* 페이지네이션 */}
       <div className="flex justify-center mt-6 gap-1">
+        {/* 맨 처음 */}
         <button
-          onClick={() => setPage(1)}
+          onClick={() => onPageChange(1)}
           disabled={page === 1}
-          className="border px-2 py-1 disabled:opacity-50"
+          className={`border px-2 py-1 rounded flex items-center justify-center w-8 h-8
+      ${page === 1 ? "text-gray-400 border-gray-300 cursor-not-allowed bg-gray-300" : "hover:bg-gray-100"}
+    `}
         >
-          ≪
+          <ChevronsLeft size={16} />
         </button>
+
+        {/* 이전 */}
         <button
-          onClick={() => setPage((p) => Math.max(1, p - 1))}
+          onClick={() => onPageChange(page - 1)}
           disabled={page === 1}
-          className="border px-2 py-1 disabled:opacity-50"
+          className={`border px-2 py-1 rounded flex items-center justify-center w-8 h-8
+      ${page === 1 ? "text-gray-400 border-gray-300 cursor-not-allowed bg-gray-300" : "hover:bg-gray-100"}
+    `}
         >
-          &lt;
+          <ChevronLeft size={16} />
         </button>
-        <span className="border px-3 py-1 bg-black text-white">{page}</span>
+
+        {/* 숫자 버튼 */}
+        {getPageNumbers().map((p) => (
+          <button
+            key={p}
+            onClick={() => onPageChange(p)}
+            className={`border px-3 py-1 rounded w-8 h-8 flex items-center justify-center
+        ${p === page ? "bg-black text-white" : "hover:bg-gray-100"}
+      `}
+          >
+            {p}
+          </button>
+        ))}
+
+        {/* 다음 */}
         <button
-          onClick={() => setPage((p) => p + 1)}
-          className="border px-2 py-1"
+          onClick={() => onPageChange(page + 1)}
+          disabled={page === totalPages}
+          className={`border px-2 py-1 rounded flex items-center justify-center w-8 h-8
+      ${page === totalPages ? "text-gray-400 border-gray-300 cursor-not-allowed bg-gray-300" : "hover:bg-gray-100"}
+    `}
         >
-          &gt;
+          <ChevronRight size={16} />
         </button>
+
+        {/* 맨 끝 */}
         <button
-          onClick={() => setPage((p) => p + 10)}
-          className="border px-2 py-1"
+          onClick={() => onPageChange(totalPages)}
+          disabled={page === totalPages}
+          className={`border px-2 py-1 rounded flex items-center justify-center w-8 h-8
+      ${page === totalPages ? "text-gray-400 border-gray-300 cursor-not-allowed bg-gray-300" : "hover:bg-gray-100"}
+    `}
         >
-          ≫
+          <ChevronsRight size={16} />
         </button>
       </div>
 
       {/* 모달 */}
       <AnimatePresence>
         {selectedItem && (
-          <ContactUsDetailModal
-            item={selectedItem}
-            onClose={() => setSelectedItem(null)}
-          />
+          <ContactUsDetailModal item={selectedItem} onClose={() => setSelectedItem(null)} />
         )}
       </AnimatePresence>
-
       {isOpenModal && (
-        <ContactUsForm
-          onsubmit={(e) => handleSubmit(e)}
-          onClose={() => setIsOpenModal(false)}
-        />
+        <ContactUsForm onsubmit={handleSubmit} onClose={() => setIsOpenModal(false)} />
       )}
     </Container>
   );

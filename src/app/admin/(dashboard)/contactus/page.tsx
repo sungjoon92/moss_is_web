@@ -3,7 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { ContactUsCreateInput, ContactUsType } from "@/types";
 import { toCamelCase } from "@/utils/caseConverter";
-import { createContactUs, deleteContactUs, getContactUsList, updateContactUs } from "@/lib/api/contactus";
+import {
+  createContactUs,
+  deleteContactUs,
+  getContactUsList,
+  updateContactUs,
+} from "@/lib/api/contactus";
 import AdminContactUsList from "@/components/admin/category/contactus/AdminContactUsList";
 import ContactUsFormModal from "@/components/admin/category/contactus/ContactUsFormModal";
 
@@ -24,8 +29,9 @@ const AdminContactUsPage: React.FC = () => {
   const fetchContactUs = React.useCallback(async () => {
     try {
       const response = await getContactUsList({ page, limit, sort, order });
-      const data = response.data.map(toCamelCase);
+      const data = response.data.data.map(toCamelCase);
       setConsultations(data);
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
@@ -36,9 +42,7 @@ const AdminContactUsPage: React.FC = () => {
   }, [fetchContactUs]);
 
   // 등록/수정 처리
-  const handleSubmit = async (
-    data: ContactUsCreateInput | ContactUsType
-  ) => {
+  const handleSubmit = async (data: ContactUsCreateInput | ContactUsType) => {
     try {
       if (editMode === "create") {
         await createContactUs(data as ContactUsCreateInput);

@@ -27,7 +27,7 @@ const AdminProjectList: React.FC<Props> = ({
 }) => {
   return (
     <div className="space-y-4">
-      <table className="w-full table-auto border-collapse border border-gray-200 text-center">
+      <table className="w-full table-fixed border-collapse border border-gray-200 text-center">
         <thead>
           <tr className="bg-gray-100">
             <th className="border border-gray-300 px-4 py-2 align-middle">
